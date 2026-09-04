@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   BRIDAL MAKEUP ARTIST - LUXURY DESIGN SYSTEM & STYLES
+   ========================================================================== */
+
+:root {
+  /* Color System - Warm Luxury Neutral & Dusty Rose / Gold Palette */
+  --bg-primary: #FAF8F5;          /* Ivory / Soft warm white */
+  --bg-secondary: #F4EFEA;        /* Warm Beige Nude */
+  --bg-card: #FFFFFF;             /* Pure White for crisp cards */
+  --bg-card-alt: #FDFBF7;         /* Soft Cream */
+  --bg-dark: #1F1917;             /* Warm Charcoal Dark Mode / Footer */
+  --bg-dark-accent: #2A2220;
+
+  --text-primary: #2C221E;        /* Espresso Dark Charcoal */
+  --text-secondary: #6E655F;      /* Muted Taupe Gray */
+  --text-muted: #9A918A;          /* Light Muted Gray */
+  --text-inverse: #FFFFFF;        /* White text for dark sections */
+
+  --accent-rose: #9B4B5A;         /* Dusty Rose / Primary Accent */
+  --accent-rose-hover: #7E3845;   /* Darker Rose Hover */
+  --accent-rose-light: #F7EFF1;   /* Soft Rose Tint */
+  
+  --accent-gold: #C5A059;         /* Champagne Metallic Gold */
+  --accent-gold-hover: #AA8541;   /* Richer Gold */
+  --accent-gold-light: #FAF5EB;   /* Warm Gold Glow */
+
+  --border-light: #E8E2DA;        /* Light Divider Border */
+  --border-medium: #D8CEC3;       /* Medium Card Border */
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Elevation & Shadows */
+  --shadow-sm: 0 2px 8px rgba(44, 34, 30, 0.04);
+  --shadow-md: 0 8px 24px rgba(44, 34, 30, 0.07);
+  --shadow-lg: 0 16px 40px rgba(44, 34, 30, 0.12);
+  --shadow-gold: 0 10px 30px rgba(197, 160, 89, 0.18);
+  --shadow-rose: 0 10px 30px rgba(155, 75, 90, 0.2);
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+}
+
+/* Reset & Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+  padding-bottom: 72px; /* Space for mobile sticky bottom bar */
+}
+
+@media (min-width: 769px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+/* Eyebrow / Category Badge */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-rose);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background-color: var(--accent-gold);
+}
+
+.eyebrow-no-line::before,
+.eyebrow-no-line::after {
+  display: none;
+}
+
+/* Custom Component Button Utilities */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--accent-rose);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-rose);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-rose-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(155, 75, 90, 0.3);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-primary);
+  background-color: rgba(44, 34, 30, 0.04);
+  transform: translateY(-2px);
+}
+
+.btn-gold {
+  background-color: var(--accent-gold);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-gold:hover {
+  background-color: var(--accent-gold-hover);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.8rem;
+}
+
+.btn-lg {
+  padding: 1.05rem 2.2rem;
+  font-size: 0.925rem;
+}
+
+/* Container Structure */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Section Common */
+.section {
+  padding: 4.5rem 0;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 6.5rem 0;
+  }
+}
+
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 3rem;
+  }
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+/* Cards & Panels */
+.luxury-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-medium);
+}
+
+/* Horizontal Scroll Bar Customization for Mobile Carousel */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #D5CBC0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-rose);
+}
