@@ -11,7 +11,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative sm:min-h-[90vh] pt-[72px] pb-8 sm:pt-24 sm:pb-16 lg:pt-32 lg:pb-24 overflow-hidden flex items-start sm:items-center bg-[#FAF8F5]">
+    <section id="hero" className="relative pt-[100px] pb-12 lg:pt-[130px] lg:pb-24 overflow-hidden bg-[#FAF8F5]">
       {/* Background Glow */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-[#F7EFF1] rounded-full blur-3xl opacity-60 pointer-events-none -translate-x-1/2" />
       <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-[#FAF5EB] rounded-full blur-3xl opacity-50 pointer-events-none" />
