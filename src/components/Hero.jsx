@@ -17,25 +17,25 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative min-h-[calc(100vh-70px)] flex items-center py-12 sm:py-16 lg:py-20 overflow-hidden bg-[#FAF8F5]">
-      {/* Full-width Background Image: Bride with Professional Makeup Kit (30% Visibility) */}
+    <section id="hero" className="relative min-h-[calc(100vh-70px)] flex items-center py-10 sm:py-14 md:py-16 lg:py-20 overflow-hidden bg-[#FAF8F5]">
+      {/* Full-width Background Image: Bride with Professional Makeup Kit */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
         <img
           src={heroBrideImg}
           alt="Bride with professional bridal makeup kit"
-          className="w-full h-full object-cover object-[center_35%] md:object-[right_30%] lg:object-[right_25%] opacity-30"
+          className="w-full h-full object-cover object-[center_center] sm:object-[65%_center] md:object-[80%_center] lg:object-[85%_center] opacity-40 md:opacity-35 transition-opacity duration-300"
         />
         {/* Soft Ambient Blend Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5]/70 via-transparent to-transparent hidden lg:block" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/50 via-transparent to-[#FAF8F5]/70 lg:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/75 to-transparent hidden md:block" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/80 via-transparent to-[#FAF8F5]/70 md:hidden" />
       </div>
 
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center">
 
           {/* Text Content Layered on Top of Background Image */}
           <motion.div
-            className="lg:col-span-7 flex flex-col text-left"
+            className="md:col-span-7 flex flex-col text-left"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -113,7 +113,7 @@ export default function Hero() {
 
           {/* Floating Badges Over the Vertical Image */}
           <motion.div
-            className="lg:col-span-5 hidden lg:flex flex-col gap-3.5 items-end justify-start self-start pt-2"
+            className="md:col-span-5 hidden md:flex flex-col gap-3.5 items-end justify-start self-start pt-2"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
