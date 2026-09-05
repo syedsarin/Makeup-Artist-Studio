@@ -8,7 +8,7 @@ export default function AboutArtist() {
   return (
     <section id="about" className="section bg-[#FAF8F5]">
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
           {/* Portrait Side */}
           <motion.div
@@ -18,9 +18,9 @@ export default function AboutArtist() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative mx-auto max-w-sm lg:max-w-none">
-              <div className="absolute -inset-4 rounded-t-[10rem] rounded-b-3xl border-2 border-[#C5A059]/40 transform -rotate-2 pointer-events-none" />
-              <div className="relative rounded-t-[10rem] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[3/4] bg-[#F4EFEA]">
+            <div className="relative mx-auto max-w-xs sm:max-w-sm lg:max-w-none">
+              <div className="absolute -inset-4 rounded-t-[10rem] rounded-b-3xl border-2 border-[#C5A059]/40 transform -rotate-2 pointer-events-none hidden sm:block" />
+              <div className="relative rounded-t-[6rem] sm:rounded-t-[10rem] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] sm:aspect-[3/4] bg-[#F4EFEA]">
                 <img
                   src={ABOUT_ARTIST.portrait}
                   alt={ARTIST_INFO.name}
@@ -53,10 +53,10 @@ export default function AboutArtist() {
               {ABOUT_ARTIST.description}
             </p>
 
-            <div className="grid grid-cols-3 gap-4 p-6 rounded-2xl bg-white border border-[#E8E2DA] shadow-xs mb-8">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-white border border-[#E8E2DA] shadow-xs mb-8">
               {ABOUT_ARTIST.stats.map((stat, idx) => (
                 <div key={idx} className="text-center border-r last:border-r-0 border-[#E8E2DA] px-2">
-                  <div className="font-serif text-3xl sm:text-4xl font-bold text-[#9B4B5A]">{stat.value}</div>
+                  <div className="font-serif text-2xl sm:text-3xl sm:text-4xl font-bold text-[#9B4B5A]">{stat.value}</div>
                   <div className="text-xs text-[#6E655F] font-medium mt-1">{stat.label}</div>
                 </div>
               ))}

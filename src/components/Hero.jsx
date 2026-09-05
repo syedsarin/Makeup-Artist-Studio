@@ -11,13 +11,13 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative min-h-[90vh] pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden flex items-center bg-[#FAF8F5]">
+    <section id="hero" className="relative min-h-[100svh] sm:min-h-[90vh] pt-24 pb-10 sm:pt-28 sm:pb-16 lg:pt-36 lg:pb-24 overflow-hidden flex items-center bg-[#FAF8F5]">
       {/* Background Glow */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-[#F7EFF1] rounded-full blur-3xl opacity-60 pointer-events-none -translate-x-1/2" />
       <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-[#FAF5EB] rounded-full blur-3xl opacity-50 pointer-events-none" />
 
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
 
           {/* Text Content */}
           <motion.div
@@ -40,7 +40,7 @@ export default function Hero() {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 mb-10">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
               <button
                 onClick={() => openWhatsApp()}
                 className="btn btn-primary btn-lg"
@@ -104,10 +104,10 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="relative mx-auto max-w-md lg:max-w-none">
+            <div className="relative mx-auto max-w-xs sm:max-w-md lg:max-w-none">
               <div className="absolute -inset-4 rounded-[2rem] border border-[#C5A059]/30 transform rotate-1 pointer-events-none hidden sm:block" />
 
-              <div className="relative rounded-[1.75rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/5]">
+              <div className="relative rounded-[1.5rem] sm:rounded-[1.75rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] sm:aspect-[4/5]">
                 <img
                   src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=1200&q=85"
                   alt="Ayesha Malik Luxury Bridal Look"

@@ -25,7 +25,7 @@ export default function Location() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto">
           
           {/* Studio Info Card */}
           <motion.div 
@@ -119,7 +119,7 @@ export default function Location() {
 
           {/* Map Preview Embed Frame */}
           <motion.div 
-            className="lg:col-span-7 rounded-3xl overflow-hidden border border-[#E8E2DA] shadow-md relative min-h-[350px] bg-[#F4EFEA]"
+            className="lg:col-span-7 rounded-3xl overflow-hidden border border-[#E8E2DA] shadow-md relative bg-[#F4EFEA]" style={{ minHeight: '300px' }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -131,7 +131,7 @@ export default function Location() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.494793616654!2d72.8277!3d19.0596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAzJzM0LjYiTiA3MsKwNDknND.fRS!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
               width="100%"
               height="100%"
-              style={{ border: 0, minHeight: '380px' }}
+              style={{ border: 0, minHeight: '300px', height: '100%' }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

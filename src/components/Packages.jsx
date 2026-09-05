@@ -16,7 +16,7 @@ export default function Packages() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6 items-stretch pt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-6 items-stretch pt-4">
           {PACKAGES.map((pkg, index) => (
             <motion.div
               key={pkg.id}
@@ -31,7 +31,7 @@ export default function Packages() {
           ))}
         </div>
 
-        <div className="mt-12 p-6 rounded-2xl bg-[#FAF8F5] border border-[#E8E2DA] max-w-3xl mx-auto text-center flex flex-col sm:flex-row items-center gap-4">
+        <div className="mt-10 sm:mt-12 p-5 sm:p-6 rounded-2xl bg-[#FAF8F5] border border-[#E8E2DA] max-w-3xl mx-auto text-center flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
           <div className="w-12 h-12 rounded-full bg-[#FAF5EB] text-[#C5A059] flex items-center justify-center shrink-0">
             <ShieldCheck className="w-6 h-6" />
           </div>

@@ -13,7 +13,7 @@ export default function BridalFeature() {
   return (
     <section id="bridal" className="section bg-[#FAF8F5]">
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
           {/* Image Side */}
           <motion.div
@@ -23,16 +23,16 @@ export default function BridalFeature() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              <div className="absolute -inset-4 bg-[#F4EFEA] rounded-[2rem] transform -rotate-2 pointer-events-none" />
-              <div className="relative rounded-[1.5rem] overflow-hidden shadow-xl border border-[#E8E2DA] aspect-[4/5] group">
+            <div className="relative mx-auto max-w-sm sm:max-w-md lg:max-w-none">
+              <div className="absolute -inset-4 bg-[#F4EFEA] rounded-[2rem] transform -rotate-2 pointer-events-none hidden sm:block" />
+              <div className="relative rounded-2xl sm:rounded-[1.5rem] overflow-hidden shadow-xl border border-[#E8E2DA] aspect-[4/3] sm:aspect-[4/5] group">
                 <img
                   src={BRIDAL_FEATURE.image}
                   alt="Bridal Makeup Artistry"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white/40 shadow-lg">
+                <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 bg-white/90 backdrop-blur-md p-3 sm:p-4 rounded-xl border border-white/40 shadow-lg">
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-[11px] font-bold uppercase tracking-widest text-[#9B4B5A] block">Signature Finish</span>
@@ -79,7 +79,7 @@ export default function BridalFeature() {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
               <button
                 onClick={() => openWhatsApp('Bridal Makeup')}
                 className="btn btn-primary btn-lg group"
