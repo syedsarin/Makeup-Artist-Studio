@@ -1,11 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import emailjs from '@emailjs/browser';
 import {
   Clock, Calendar, MessageCircle, Check, ChevronDown, ChevronUp,
   GraduationCap, Users, Sparkles, Send, CheckCircle2, AlertCircle, User, Mail, Phone, FileText
 } from 'lucide-react';
-import { MAKEUP_CLASSES, EMAILJS_CONFIG, ARTIST_INFO } from '../data/bridalData';
+import { MAKEUP_CLASSES, ARTIST_INFO, WEB3FORMS_KEY } from '../data/bridalData';
 import { openWhatsApp } from '../App';
 
 /* ─────────────────────────────────────────────
@@ -154,10 +153,9 @@ function CourseCard({ course }) {
 }
 
 /* ─────────────────────────────────────────────
-   Enquiry Form
+   Enquiry Form  (Web3Forms — no backend)
 ───────────────────────────────────────────── */
 function EnquiryForm() {
-  const formRef = useRef(null);
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
 
@@ -170,23 +168,30 @@ function EnquiryForm() {
     setStatus('sending');
 
     try {
-      await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Makeup Classes Enquiry from ${form.name}`,
           from_name: form.name,
-          from_email: form.email,
+          email: form.email,
           phone: form.phone,
           message: form.message,
           to_email: ARTIST_INFO.email,
-          subject: `Makeup Classes Enquiry from ${form.name}`,
-        },
-        EMAILJS_CONFIG.PUBLIC_KEY
-      );
-      setStatus('success');
-      setForm({ name: '', email: '', phone: '', message: '' });
+          botcheck: '',   // honeypot spam guard
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setStatus('success');
+        setForm({ name: '', email: '', phone: '', message: '' });
+      } else {
+        throw new Error(data.message);
+      }
     } catch (err) {
-      console.error('EmailJS error:', err);
+      console.error('Web3Forms error:', err);
       setStatus('error');
     }
   };
@@ -194,7 +199,6 @@ function EnquiryForm() {
   return (
     <div className="max-w-2xl mx-auto">
       <form
-        ref={formRef}
         onSubmit={handleSubmit}
         className="bg-white rounded-3xl border border-[#E8E2DA] shadow-lg p-6 sm:p-8"
       >
@@ -316,9 +320,9 @@ function EnquiryForm() {
             >
               <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
               <div>
-                <p className="font-semibold mb-0.5">Enquiry received successfully!</p>
+                <p className="font-semibold mb-0.5">Enquiry sent successfully! 🎉</p>
                 <p className="text-xs font-normal text-green-700">
-                  We have received your enquiry and will contact you within 24 hours with course details and batch schedule.
+                  We've received your details and will get back to you within 24 hours with course info and batch dates.
                 </p>
               </div>
             </motion.div>
@@ -350,7 +354,7 @@ function EnquiryForm() {
         </AnimatePresence>
 
         <p className="mt-4 text-center text-[10px] text-[#9A918A]">
-          We respect your privacy. Your details are never shared with third parties.
+          Your details are only used to respond to your enquiry. Never shared with third parties.
         </p>
       </form>
     </div>
@@ -366,25 +370,45 @@ export default function MakeupClasses() {
       <div className="container">
 
         {/* Section Header */}
-        <div className="section-header">
-          <div className="eyebrow"><span>LEARN FROM THE BEST</span></div>
-          <h2 className="section-title">
-            Makeup Courses &<br className="hidden sm:block" />
-            <span className="italic font-normal text-[#9B4B5A]"> Professional Certification</span>
-          </h2>
-          <p className="section-subtitle">
-            Master the art of luxury bridal makeup under the personal mentorship of Ayesha Malik. From beginner fundamentals to professional artist certification — learn at our Bandra studio with real-world practice on live models.
-          </p>
+        <div className="mb-10 sm:mb-14">
 
-          {/* Highlights Strip */}
-          <div className="flex flex-wrap justify-center gap-3 mt-6">
-            {['Hands-On Live Practice', 'Small Batch Sizes', 'Certificate Provided', 'Kit Included in Pro Course'].map((tag) => (
-              <div key={tag} className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#E8E2DA] rounded-full text-[11px] font-medium text-[#6E655F] shadow-xs">
-                <Check className="w-3 h-3 text-[#C5A059]" />
-                {tag}
+          {/* Centered Heading Block */}
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <div className="eyebrow justify-center"><span>LEARN FROM THE BEST</span></div>
+            <h2 className="section-title text-3xl sm:text-4xl lg:text-5xl font-serif text-[#2C221E] leading-tight mb-4">
+              Makeup Courses &{' '}
+              <br className="hidden sm:block" />
+              <span className="italic font-normal text-[#9B4B5A]">Professional Certification</span>
+            </h2>
+            <p className="text-sm sm:text-base text-[#6E655F] leading-relaxed">
+              Master the art of <span className="font-semibold text-[#2C221E]">luxury bridal makeup</span> under
+              the personal mentorship of <span className="font-semibold text-[#9B4B5A]">Ayesha Malik</span>.
+            </p>
+            <p className="text-sm sm:text-base text-[#6E655F] leading-relaxed mt-2">
+              From <span className="font-semibold text-[#2C221E]">beginner fundamentals</span> to{' '}
+              <span className="font-semibold text-[#2C221E]">professional artist certification</span> — learn
+              at our <span className="font-semibold text-[#C5A059]">Bandra studio</span> with real-world
+              practice on live models.
+            </p>
+          </div>
+
+          {/* 4-Pillar Highlights */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { tag: 'Hands-On Live Practice',    icon: <Users className="w-4 h-4 text-[#9B4B5A]" />,         bg: 'bg-[#F7EFF1]' },
+              { tag: 'Small Batch Sizes',          icon: <GraduationCap className="w-4 h-4 text-[#C5A059]" />, bg: 'bg-[#FAF5EB]' },
+              { tag: 'Certificate Provided',       icon: <Sparkles className="w-4 h-4 text-[#9B4B5A]" />,     bg: 'bg-[#F7EFF1]' },
+              { tag: 'Kit Included in Pro Course', icon: <Check className="w-4 h-4 text-[#C5A059]" />,        bg: 'bg-[#FAF5EB]' },
+            ].map(({ tag, icon, bg }) => (
+              <div key={tag} className="flex items-center gap-2.5 px-4 py-3 bg-white border border-[#E8E2DA] rounded-xl shadow-xs hover:border-[#C5A059]/40 hover:shadow-sm transition-colors">
+                <div className={`w-7 h-7 rounded-full ${bg} flex items-center justify-center shrink-0`}>
+                  {icon}
+                </div>
+                <span className="text-xs font-semibold text-[#2C221E] leading-snug">{tag}</span>
               </div>
             ))}
           </div>
+
         </div>
 
         {/* Course Cards Grid */}

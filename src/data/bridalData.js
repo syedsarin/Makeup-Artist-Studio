@@ -12,6 +12,10 @@ export const EMAILJS_CONFIG = {
   PUBLIC_KEY: 'YOUR_PUBLIC_KEY',   // e.g. 'ABCDE12345FGHij'
 };
 
+// ─── Web3Forms (free email API — no backend needed) ───────────────────────
+// Get your free key at: https://web3forms.com → enter email → check inbox
+export const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'; // ← paste your key here
+
 export const ARTIST_INFO = {
   name: "AYESHA MALIK",
   title: "BRIDAL MAKEUP ARTIST",
@@ -23,7 +27,7 @@ export const ARTIST_INFO = {
   reviewsCount: "280+",
   phone: "+91 98765 43210",
   whatsappNumber: "919876543210",
-  email: "contact@ayeshamalikbridal.com",
+  email: "syedsarin313@gmail.com",
   studioName: "Ayesha Malik Bridal Studio",
   address: "Suite 402, Luxury Promenade, Bandra West, Mumbai, Maharashtra 400050",
   hours: "Mon - Sun: 10 AM - 7 PM",

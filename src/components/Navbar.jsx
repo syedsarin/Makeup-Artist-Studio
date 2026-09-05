@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, MessageCircle } from 'lucide-react';
+import { Menu, X, MessageCircle, Mail } from 'lucide-react';
 import { ARTIST_INFO } from '../data/bridalData';
 import { openWhatsApp } from '../App';
 
@@ -97,8 +97,16 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* WhatsApp CTA */}
-        <div className="hidden md:flex items-center">
+        {/* Desktop CTAs */}
+        <div className="hidden md:flex items-center gap-2">
+          <a
+            href="#classes"
+            onClick={(e) => handleNavClick(e, '#classes')}
+            className="btn btn-secondary btn-sm group flex items-center gap-1.5"
+          >
+            <Mail className="w-3.5 h-3.5" />
+            <span>Enquiry</span>
+          </a>
           <button
             onClick={() => openWhatsApp()}
             className="btn btn-primary btn-sm group"
@@ -143,7 +151,15 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
-            <div className="pt-2">
+            <div className="pt-2 flex flex-col gap-2">
+              <a
+                href="#classes"
+                onClick={(e) => handleNavClick(e, '#classes')}
+                className="btn btn-secondary w-full justify-center"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Course Enquiry</span>
+              </a>
               <button
                 onClick={() => { setMobileMenuOpen(false); openWhatsApp(); }}
                 className="btn btn-primary w-full justify-center"
