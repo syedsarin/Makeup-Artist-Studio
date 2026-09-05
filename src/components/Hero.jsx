@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   MessageCircle,
@@ -13,6 +13,44 @@ import { openWhatsApp } from '../App';
 import heroBrideImg from '../assets/hero-bride-makeup.jpg';
 
 export default function Hero() {
+  const [debugInfo, setDebugInfo] = useState({
+    viewportWidth: 0,
+    viewportHeight: 0,
+    devicePixelRatio: 0,
+    navbarHeight: 0,
+    heroWidth: 0,
+    heroHeight: 0,
+  });
+
+  useEffect(() => {
+    const updateDebugInfo = () => {
+      const navbar = document.querySelector('header');
+      const hero = document.getElementById('hero');
+
+      setDebugInfo({
+        viewportWidth: window.innerWidth,
+        viewportHeight: window.innerHeight,
+        devicePixelRatio: window.devicePixelRatio,
+        navbarHeight: navbar?.offsetHeight || 0,
+        heroWidth: hero?.offsetWidth || 0,
+        heroHeight: hero?.offsetHeight || 0,
+      });
+    };
+
+    updateDebugInfo();
+
+    window.addEventListener('resize', updateDebugInfo);
+    window.addEventListener('orientationchange', updateDebugInfo);
+
+    const timer = setTimeout(updateDebugInfo, 500);
+
+    return () => {
+      window.removeEventListener('resize', updateDebugInfo);
+      window.removeEventListener('orientationchange', updateDebugInfo);
+      clearTimeout(timer);
+    };
+  }, []);
+
   const handlePortfolioClick = (e) => {
     e.preventDefault();
 
@@ -36,458 +74,323 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden bg-[#FAF8F5]"
+      className="relative min-h-[calc(100vh-70px)] flex items-center py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden bg-[#FAF8F5]"
     >
-      {/* =========================================================
-          HERO IMAGE
-          Keep original 16:9 ratio.
-          This prevents Chrome Android Desktop Site from creating
-          an extremely tall image container.
-      ========================================================== */}
+      {/* ================================================================
+          TEMPORARY DEBUG BOX
+          Remove this entire block after we identify the issue.
+      ================================================================= */}
+      <div
+        style={{
+          position: 'fixed',
+          top: '80px',
+          left: '10px',
+          zIndex: 99999,
+          background: '#000',
+          color: '#00ff00',
+          padding: '12px 14px',
+          fontSize: '12px',
+          lineHeight: '1.7',
+          fontFamily: 'monospace',
+          borderRadius: '8px',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
+          minWidth: '230px',
+          pointerEvents: 'none',
+        }}
+      >
+        <div style={{ color: '#fff', marginBottom: '4px' }}>
+          HERO DEBUG
+        </div>
 
-      <div className="relative w-full aspect-[16/9] overflow-hidden">
+        <div>
+          Viewport Width: {debugInfo.viewportWidth}px
+        </div>
+
+        <div>
+          Viewport Height: {debugInfo.viewportHeight}px
+        </div>
+
+        <div>
+          DPR: {debugInfo.devicePixelRatio}
+        </div>
+
+        <div>
+          Navbar Height: {debugInfo.navbarHeight}px
+        </div>
+
+        <div>
+          Hero Width: {debugInfo.heroWidth}px
+        </div>
+
+        <div>
+          Hero Height: {debugInfo.heroHeight}px
+        </div>
+
+        <div style={{ marginTop: '5px', color: '#ffff00' }}>
+          Hero Ratio:{' '}
+          {debugInfo.heroWidth > 0
+            ? (debugInfo.heroHeight / debugInfo.heroWidth).toFixed(3)
+            : '0'}
+        </div>
+      </div>
+
+      {/* ================================================================
+          HERO BACKGROUND IMAGE
+      ================================================================= */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
           src={heroBrideImg}
           alt="Bride with professional bridal makeup kit"
-          className="absolute inset-0 w-full h-full object-contain object-center"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
 
-        {/* Soft overlay */}
-        <div className="absolute inset-0 bg-[#FAF8F5]/35" />
+        <div className="absolute inset-0 bg-[#FAF8F5]/55" />
 
-        {/* Left readability overlay */}
-        <div
-          className="
-            absolute
-            inset-0
-            bg-gradient-to-r
-            from-[#FAF8F5]/85
-            via-[#FAF8F5]/45
-            to-transparent
-          "
-        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5]/80 via-[#FAF8F5]/40 to-transparent" />
 
-        {/* Bottom fade */}
-        <div
-          className="
-            absolute
-            inset-x-0
-            bottom-0
-            h-1/3
-            bg-gradient-to-t
-            from-[#FAF8F5]/65
-            to-transparent
-          "
-        />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#FAF8F5]/60 to-transparent" />
+      </div>
 
-        {/* =====================================================
-            HERO CONTENT OVER IMAGE
-        ====================================================== */}
+      {/* ================================================================
+          HERO CONTENT
+      ================================================================= */}
+      <div className="relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="max-w-3xl">
 
-        <div className="absolute inset-0 z-10 flex items-center">
-          <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
-            <div className="max-w-3xl">
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="mb-5"
+            >
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-[#A85C72]" />
 
-              {/* Eyebrow */}
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="mb-3 sm:mb-4"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="h-px w-8 bg-[#A85C72]" />
-
-                  <span
-                    className="
-                      text-[9px]
-                      font-medium
-                      uppercase
-                      tracking-[0.22em]
-                      text-[#8D5366]
-                      sm:text-xs
-                    "
-                  >
-                    {ARTIST_INFO.title}
-                  </span>
-
-                  <span className="h-px w-8 bg-[#A85C72]" />
-                </div>
-              </motion.div>
-
-              {/* Heading */}
-              <motion.h1
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="
-                  font-['Cormorant_Garamond']
-                  text-3xl
-                  font-medium
-                  leading-[0.95]
-                  text-[#2C2522]
-                  sm:text-5xl
-                  md:text-6xl
-                  lg:text-7xl
-                "
-              >
-                Your Dream Bridal Look,
-                <br />
-
-                <span className="font-normal italic text-[#A85C72]">
-                  Beautifully Yours.
+                <span className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-medium text-[#8D5366]">
+                  {ARTIST_INFO.title}
                 </span>
-              </motion.h1>
 
-              {/* Subtitle */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.25 }}
-                className="
-                  mt-3
-                  max-w-xl
-                  text-xs
-                  leading-relaxed
-                  text-[#5F5753]
-                  sm:mt-5
-                  sm:text-base
-                  md:text-lg
-                "
+                <span className="h-px w-8 bg-[#A85C72]" />
+              </div>
+            </motion.div>
+
+            {/* Heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.1,
+              }}
+              className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-[#2C221E]"
+            >
+              Your Dream Bridal Look,
+              <br />
+
+              <span className="italic text-[#A85C72] font-normal">
+                Beautifully Yours.
+              </span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.7,
+                delay: 0.25,
+              }}
+              className="mt-6 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-[#6E655F]"
+            >
+              {ARTIST_INFO.subtitle}
+            </motion.p>
+
+            {/* Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.7,
+                delay: 0.35,
+              }}
+              className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4"
+            >
+              <button
+                onClick={() => openWhatsApp()}
+                className="btn btn-primary btn-lg group flex items-center gap-2"
               >
-                {ARTIST_INFO.subtitle}
-              </motion.p>
+                <MessageCircle className="w-5 h-5 fill-white" />
 
-              {/* Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
-                className="mt-4 flex flex-wrap items-center gap-2 sm:mt-7 sm:gap-3"
+                <span>Book Your Look</span>
+
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+
+              <button
+                onClick={handlePortfolioClick}
+                className="btn btn-secondary btn-lg group flex items-center gap-2"
               >
-                {/* WhatsApp */}
-                <button
-                  type="button"
-                  onClick={openWhatsApp}
-                  className="
-                    inline-flex
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-full
-                    bg-[#A85C72]
-                    px-4
-                    py-2.5
-                    text-[10px]
-                    font-semibold
-                    tracking-wide
-                    text-white
-                    shadow-lg
-                    shadow-[#A85C72]/20
-                    transition-all
-                    duration-300
-                    hover:-translate-y-0.5
-                    hover:bg-[#934C62]
-                    sm:px-6
-                    sm:py-3.5
-                    sm:text-sm
-                  "
-                >
-                  <MessageCircle size={15} />
-                  WhatsApp Us
-                </button>
+                <span>View Portfolio</span>
 
-                {/* Portfolio */}
-                <button
-                  type="button"
-                  onClick={handlePortfolioClick}
-                  className="
-                    group
-                    inline-flex
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-full
-                    border
-                    border-[#8D817A]/40
-                    bg-white/60
-                    px-4
-                    py-2.5
-                    text-[10px]
-                    font-semibold
-                    tracking-wide
-                    text-[#403733]
-                    backdrop-blur-sm
-                    transition-all
-                    duration-300
-                    hover:-translate-y-0.5
-                    hover:bg-white/85
-                    sm:px-6
-                    sm:py-3.5
-                    sm:text-sm
-                  "
-                >
-                  View Portfolio
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </button>
+            </motion.div>
 
-                  <ArrowRight
-                    size={15}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </button>
-              </motion.div>
-
-              {/* Trust stats */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.55 }}
-                className="mt-4 border-t border-[#8D817A]/25 pt-3 sm:mt-8 sm:pt-5"
-              >
-                <div className="flex flex-wrap items-center gap-y-3">
-
-                  {/* Rating */}
-                  <div className="flex items-center gap-2 pr-4 sm:gap-3 sm:pr-7">
-                    <div
-                      className="
-                        flex
-                        h-7
-                        w-7
-                        items-center
-                        justify-center
-                        rounded-full
-                        border
-                        border-[#D8CBC4]
-                        bg-white/75
-                        sm:h-8
-                        sm:w-8
-                      "
-                    >
-                      <Star
-                        size={14}
-                        className="fill-[#B98A3C] text-[#B98A3C]"
-                      />
-                    </div>
-
-                    <div>
-                      <div className="text-[10px] font-semibold text-[#3C3430] sm:text-xs">
-                        4.9 Rating
-                      </div>
-
-                      <div className="text-[8px] text-[#81756F] sm:text-[9px]">
-                        280+ Reviews
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Brides */}
-                  <div
-                    className="
-                      flex
-                      items-center
-                      gap-2
-                      border-l
-                      border-[#8D817A]/20
-                      px-4
-                      sm:gap-3
-                      sm:px-7
-                    "
-                  >
-                    <div
-                      className="
-                        flex
-                        h-7
-                        w-7
-                        items-center
-                        justify-center
-                        rounded-full
-                        border
-                        border-[#D8CBC4]
-                        bg-white/75
-                        sm:h-8
-                        sm:w-8
-                      "
-                    >
-                      <Heart
-                        size={14}
-                        className="text-[#A85C72]"
-                      />
-                    </div>
-
-                    <div>
-                      <div className="text-[10px] font-semibold text-[#3C3430] sm:text-xs">
-                        500+ Brides
-                      </div>
-
-                      <div className="text-[8px] text-[#81756F] sm:text-[9px]">
-                        Happily Styled
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Experience */}
-                  <div
-                    className="
-                      flex
-                      items-center
-                      gap-2
-                      border-l
-                      border-[#8D817A]/20
-                      pl-4
-                      sm:gap-3
-                      sm:pl-7
-                    "
-                  >
-                    <div
-                      className="
-                        flex
-                        h-7
-                        w-7
-                        items-center
-                        justify-center
-                        rounded-full
-                        border
-                        border-[#D8CBC4]
-                        bg-white/75
-                        sm:h-8
-                        sm:w-8
-                      "
-                    >
-                      <Award
-                        size={14}
-                        className="text-[#A85C72]"
-                      />
-                    </div>
-
-                    <div>
-                      <div className="text-[10px] font-semibold text-[#3C3430] sm:text-xs">
-                        5+ Years
-                      </div>
-
-                      <div className="text-[8px] text-[#81756F] sm:text-[9px]">
-                        Master Artist
-                      </div>
-                    </div>
-                  </div>
-
+            {/* Trust Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.7,
+                delay: 0.45,
+              }}
+              className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5"
+            >
+              {/* Rating */}
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/80 border border-[#E8E2DA]">
+                  <Star className="w-4 h-4 text-[#C5A059] fill-[#C5A059]" />
                 </div>
-              </motion.div>
+
+                <div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-semibold text-[#2C221E]">
+                      4.9
+                    </span>
+
+                    <Star className="w-3 h-3 text-[#C5A059] fill-[#C5A059]" />
+                  </div>
+
+                  <p className="text-xs text-[#6E655F]">
+                    280+ Reviews
+                  </p>
+                </div>
+              </div>
+
+              {/* Brides */}
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/80 border border-[#E8E2DA]">
+                  <Heart className="w-4 h-4 text-[#A85C72] fill-[#A85C72]" />
+                </div>
+
+                <div>
+                  <div className="font-semibold text-[#2C221E]">
+                    500+
+                  </div>
+
+                  <p className="text-xs text-[#6E655F]">
+                    Brides Happily Styled
+                  </p>
+                </div>
+              </div>
+
+              {/* Experience */}
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/80 border border-[#E8E2DA]">
+                  <Award className="w-4 h-4 text-[#C5A059]" />
+                </div>
+
+                <div>
+                  <div className="font-semibold text-[#2C221E]">
+                    5+
+                  </div>
+
+                  <p className="text-xs text-[#6E655F]">
+                    Years Master Artist
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* ================================================================
+          RIGHT SIDE FLOATING BADGES
+      ================================================================= */}
+
+      {/* Badge 1 */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.7,
+          delay: 0.6,
+        }}
+        className="hidden lg:block absolute top-[18%] right-8 xl:right-16 z-20"
+      >
+        <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md border border-[#E8E2DA] rounded-2xl px-4 py-3 shadow-lg">
+          <div className="flex items-center justify-center w-9 h-9 rounded-full bg-[#F7EFF1]">
+            <Star className="w-4 h-4 text-[#A85C72] fill-[#A85C72]" />
+          </div>
+
+          <div>
+            <div className="text-xs font-semibold text-[#2C221E]">
+              4.9 / 5
+            </div>
+
+            <div className="text-[10px] text-[#6E655F]">
+              Client Rating
             </div>
           </div>
         </div>
+      </motion.div>
 
-        {/* =====================================================
-            FLOATING BADGES
-            Only real large desktop.
-        ====================================================== */}
+      {/* Badge 2 */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.7,
+          delay: 0.75,
+        }}
+        className="hidden lg:block absolute top-[48%] right-10 xl:right-20 z-20"
+      >
+        <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md border border-[#E8E2DA] rounded-2xl px-4 py-3 shadow-lg">
+          <div className="flex items-center justify-center w-9 h-9 rounded-full bg-[#FAF5EB]">
+            <Heart className="w-4 h-4 text-[#C5A059] fill-[#C5A059]" />
+          </div>
 
-        {/* Top Right */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="absolute right-8 top-[15%] z-20 hidden 2xl:block"
-        >
-          <div
-            className="
-              rounded-2xl
-              border
-              border-white/60
-              bg-white/65
-              px-5
-              py-4
-              shadow-xl
-              backdrop-blur-md
-            "
-          >
-            <div className="text-[9px] uppercase tracking-[0.18em] text-[#8D5366]">
-              100% Customized
+          <div>
+            <div className="text-xs font-semibold text-[#2C221E]">
+              500+
             </div>
 
-            <div className="mt-1 text-sm font-medium text-[#3C3430]">
-              Personalized Skin Prep
+            <div className="text-[10px] text-[#6E655F]">
+              Happy Brides
             </div>
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* Middle Right */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="absolute right-8 top-[47%] z-20 hidden 2xl:block"
-        >
-          <div
-            className="
-              flex
-              items-center
-              gap-3
-              rounded-full
-              border
-              border-white/60
-              bg-white/65
-              px-5
-              py-3
-              shadow-xl
-              backdrop-blur-md
-            "
-          >
-            <div
-              className="
-                flex
-                h-8
-                w-8
-                items-center
-                justify-center
-                rounded-full
-                bg-[#A85C72]
-                text-white
-              "
-            >
-              <Star size={14} fill="currentColor" />
+      {/* Badge 3 */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.7,
+          delay: 0.9,
+        }}
+        className="hidden lg:block absolute bottom-[12%] right-8 xl:right-16 z-20"
+      >
+        <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md border border-[#E8E2DA] rounded-2xl px-4 py-3 shadow-lg">
+          <div className="flex items-center justify-center w-9 h-9 rounded-full bg-[#F7EFF1]">
+            <Award className="w-4 h-4 text-[#A85C72]" />
+          </div>
+
+          <div>
+            <div className="text-xs font-semibold text-[#2C221E]">
+              5+ Years
             </div>
 
-            <div>
-              <div className="text-[9px] uppercase tracking-[0.15em] text-[#8D5366]">
-                Top Rated
-              </div>
-
-              <div className="text-sm font-medium text-[#3C3430]">
-                Bridal Studio
-              </div>
+            <div className="text-[10px] text-[#6E655F]">
+              Master Artist
             </div>
           </div>
-        </motion.div>
-
-        {/* Bottom Right */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="absolute bottom-[10%] right-8 z-20 hidden 2xl:block"
-        >
-          <div
-            className="
-              max-w-[260px]
-              rounded-2xl
-              border
-              border-white/60
-              bg-white/65
-              px-5
-              py-4
-              shadow-xl
-              backdrop-blur-md
-            "
-          >
-            <div className="text-[9px] uppercase tracking-[0.15em] text-[#8D5366]">
-              Signature Couture Bridal
-            </div>
-
-            <div className="mt-1 text-sm font-medium leading-relaxed text-[#3C3430]">
-              Customized HD Airbrush & Dupatta Setting
-            </div>
-          </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
