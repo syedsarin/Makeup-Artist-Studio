@@ -66,12 +66,12 @@ export default function Navbar() {
         <a
           href="#hero"
           onClick={(e) => handleNavClick(e, '#hero')}
-          className="flex flex-col text-left group"
+          className="flex flex-col text-left group shrink-0"
         >
-          <span className="font-serif text-xl sm:text-2xl font-semibold tracking-wider text-[#2C221E] group-hover:text-[#9B4B5A] transition-colors">
+          <span className="font-serif text-xl sm:text-2xl font-semibold tracking-wider text-[#2C221E] group-hover:text-[#9B4B5A] transition-colors whitespace-nowrap">
             {ARTIST_INFO.name}
           </span>
-          <span className="text-[10px] font-sans tracking-[0.25em] text-[#C5A059] uppercase font-bold">
+          <span className="text-[9px] sm:text-[10px] font-sans tracking-[0.2em] sm:tracking-[0.25em] text-[#C5A059] uppercase font-bold whitespace-nowrap">
             {ARTIST_INFO.title}
           </span>
         </a>
