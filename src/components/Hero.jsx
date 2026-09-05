@@ -1,6 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, ArrowRight, Star, Heart, Award } from 'lucide-react';
+import {
+  MessageCircle,
+  ArrowRight,
+  Star,
+  Heart,
+  Award,
+} from 'lucide-react';
+
 import { ARTIST_INFO } from '../data/bridalData';
 import { openWhatsApp } from '../App';
 import heroBrideImg from '../assets/hero-bride-makeup.jpg';
@@ -29,409 +36,457 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-[#FAF8F5]"
+      className="relative w-full overflow-hidden bg-[#FAF8F5]"
     >
       {/* =========================================================
-          MOBILE IMAGE
-          Separate image block so the 16:9 image is not cropped
-          by the tall mobile hero section.
-      ========================================================= */}
-      <div className="relative block w-full aspect-[16/9] overflow-hidden lg:hidden">
+          HERO IMAGE
+          Keep original 16:9 ratio.
+          This prevents Chrome Android Desktop Site from creating
+          an extremely tall image container.
+      ========================================================== */}
+
+      <div className="relative w-full aspect-[16/9] overflow-hidden">
         <img
           src={heroBrideImg}
           alt="Bride with professional bridal makeup kit"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-contain object-center"
         />
 
-        {/* Soft mobile image overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#FAF8F5]" />
+        {/* Soft overlay */}
+        <div className="absolute inset-0 bg-[#FAF8F5]/35" />
 
-        {/* Subtle image tint */}
-        <div className="absolute inset-0 bg-[#FAF8F5]/10" />
-      </div>
-
-      {/* =========================================================
-          DESKTOP BACKGROUND IMAGE
-          Hidden on mobile, full hero background on desktop.
-      ========================================================= */}
-      <div className="hidden lg:block absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-        <img
-          src={heroBrideImg}
-          alt="Bride with professional bridal makeup kit"
-          className="w-full h-full object-cover object-[right_25%] opacity-40"
+        {/* Left readability overlay */}
+        <div
+          className="
+            absolute
+            inset-0
+            bg-gradient-to-r
+            from-[#FAF8F5]/85
+            via-[#FAF8F5]/45
+            to-transparent
+          "
         />
 
-        {/* Desktop left-side readability overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5]/85 via-[#FAF8F5]/35 to-transparent" />
-      </div>
+        {/* Bottom fade */}
+        <div
+          className="
+            absolute
+            inset-x-0
+            bottom-0
+            h-1/3
+            bg-gradient-to-t
+            from-[#FAF8F5]/65
+            to-transparent
+          "
+        />
 
-      {/* =========================================================
-          CONTENT
-      ========================================================= */}
-      <div className="relative z-10">
-        <div className="container">
-          <div
-            className="
-              grid
-              grid-cols-1
-              lg:grid-cols-12
-              gap-8
-              lg:min-h-[calc(100vh-70px)]
-              items-center
-              py-8
-              sm:py-12
-              md:py-16
-              lg:py-20
-            "
-          >
+        {/* =====================================================
+            HERO CONTENT OVER IMAGE
+        ====================================================== */}
 
-            {/* =====================================================
-                TEXT CONTENT
-            ===================================================== */}
-            <motion.div
-              className="lg:col-span-7 flex flex-col text-left"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
+        <div className="absolute inset-0 z-10 flex items-center">
+          <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+            <div className="max-w-3xl">
+
               {/* Eyebrow */}
-              <div className="eyebrow self-start">
-                <span>{ARTIST_INFO.title}</span>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="mb-3 sm:mb-4"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-8 bg-[#A85C72]" />
+
+                  <span
+                    className="
+                      text-[9px]
+                      font-medium
+                      uppercase
+                      tracking-[0.22em]
+                      text-[#8D5366]
+                      sm:text-xs
+                    "
+                  >
+                    {ARTIST_INFO.title}
+                  </span>
+
+                  <span className="h-px w-8 bg-[#A85C72]" />
+                </div>
+              </motion.div>
 
               {/* Heading */}
-              <h1
+              <motion.h1
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
                 className="
-                  text-4xl
-                  sm:text-5xl
-                  lg:text-6xl
-                  font-serif
-                  text-[#2C221E]
+                  font-['Cormorant_Garamond']
+                  text-3xl
                   font-medium
-                  leading-[1.12]
-                  mb-6
-                  tracking-tight
+                  leading-[0.95]
+                  text-[#2C2522]
+                  sm:text-5xl
+                  md:text-6xl
+                  lg:text-7xl
                 "
               >
-                Your Dream Bridal Look, <br />
+                Your Dream Bridal Look,
+                <br />
 
-                <span className="italic text-[#9B4B5A] font-normal">
+                <span className="font-normal italic text-[#A85C72]">
                   Beautifully Yours.
                 </span>
-              </h1>
+              </motion.h1>
 
-              {/* Description */}
-              <p
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.25 }}
                 className="
-                  text-base
-                  sm:text-lg
-                  text-[#6E655F]
-                  mb-8
+                  mt-3
                   max-w-xl
-                  font-normal
+                  text-xs
                   leading-relaxed
+                  text-[#5F5753]
+                  sm:mt-5
+                  sm:text-base
+                  md:text-lg
                 "
               >
                 {ARTIST_INFO.subtitle}
-              </p>
+              </motion.p>
 
-              {/* =================================================
-                  CTA BUTTONS
-              ================================================= */}
-              <div
-                className="
-                  flex
-                  flex-wrap
-                  items-center
-                  gap-3
-                  sm:gap-4
-                  mb-8
-                  sm:mb-10
-                "
+              {/* Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="mt-4 flex flex-wrap items-center gap-2 sm:mt-7 sm:gap-3"
               >
+                {/* WhatsApp */}
                 <button
-                  onClick={() => openWhatsApp()}
-                  className="btn btn-primary btn-lg shadow-rose"
-                >
-                  <MessageCircle className="w-5 h-5 fill-white" />
-
-                  <span>WhatsApp Us</span>
-                </button>
-
-                <a
-                  href="#portfolio"
-                  onClick={handlePortfolioClick}
+                  type="button"
+                  onClick={openWhatsApp}
                   className="
-                    btn
-                    btn-secondary
-                    btn-lg
-                    group
-                    bg-white/70
-                    backdrop-blur-sm
-                  "
-                >
-                  <span>View Portfolio</span>
-
-                  <ArrowRight
-                    className="
-                      w-4
-                      h-4
-                      transition-transform
-                      group-hover:translate-x-1
-                    "
-                  />
-                </a>
-              </div>
-
-              {/* =================================================
-                  TRUST BADGES
-              ================================================= */}
-              <div
-                className="
-                  pt-6
-                  border-t
-                  border-[#E8E2DA]
-                  flex
-                  flex-wrap
-                  items-center
-                  gap-6
-                  sm:gap-8
-                "
-              >
-                {/* Rating */}
-                <div className="flex items-center gap-2">
-                  <div
-                    className="
-                      w-8
-                      h-8
-                      rounded-full
-                      bg-[#FAF5EB]
-                      border
-                      border-[#C5A059]/40
-                      flex
-                      items-center
-                      justify-center
-                      text-[#C5A059]
-                      shadow-xs
-                    "
-                  >
-                    <Star className="w-4 h-4 fill-[#C5A059]" />
-                  </div>
-
-                  <div>
-                    <div className="text-sm font-bold text-[#2C221E]">
-                      ★ 4.9 Rating
-                    </div>
-
-                    <div className="text-[11px] text-[#9A918A]">
-                      280+ Reviews
-                    </div>
-                  </div>
-                </div>
-
-                <div className="h-8 w-[1px] bg-[#E8E2DA] hidden sm:block" />
-
-                {/* Brides */}
-                <div className="flex items-center gap-2">
-                  <div
-                    className="
-                      w-8
-                      h-8
-                      rounded-full
-                      bg-[#F7EFF1]
-                      border
-                      border-[#9B4B5A]/30
-                      flex
-                      items-center
-                      justify-center
-                      text-[#9B4B5A]
-                      shadow-xs
-                    "
-                  >
-                    <Heart className="w-4 h-4 fill-[#9B4B5A]/20" />
-                  </div>
-
-                  <div>
-                    <div className="text-sm font-bold text-[#2C221E]">
-                      500+ Brides
-                    </div>
-
-                    <div className="text-[11px] text-[#9A918A]">
-                      Happily Styled
-                    </div>
-                  </div>
-                </div>
-
-                <div className="h-8 w-[1px] bg-[#E8E2DA] hidden sm:block" />
-
-                {/* Experience */}
-                <div className="flex items-center gap-2">
-                  <div
-                    className="
-                      w-8
-                      h-8
-                      rounded-full
-                      bg-[#FAF5EB]
-                      border
-                      border-[#C5A059]/40
-                      flex
-                      items-center
-                      justify-center
-                      text-[#C5A059]
-                      shadow-xs
-                    "
-                  >
-                    <Award className="w-4 h-4" />
-                  </div>
-
-                  <div>
-                    <div className="text-sm font-bold text-[#2C221E]">
-                      5+ Years
-                    </div>
-
-                    <div className="text-[11px] text-[#9A918A]">
-                      Master Artist
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* =====================================================
-                DESKTOP FLOATING BADGES
-            ===================================================== */}
-            <motion.div
-              className="
-                lg:col-span-5
-                hidden
-                lg:flex
-                flex-col
-                gap-3.5
-                items-end
-                justify-start
-                self-start
-                pt-2
-              "
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.9,
-                delay: 0.2,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              {/* Customized Badge */}
-              <div
-                className="
-                  bg-white/95
-                  backdrop-blur-md
-                  border
-                  border-[#E8E2DA]
-                  p-4
-                  rounded-2xl
-                  shadow-xl
-                  flex
-                  items-center
-                  gap-3
-                "
-              >
-                <div
-                  className="
-                    w-10
-                    h-10
-                    rounded-full
-                    bg-[#9B4B5A]
-                    text-white
-                    flex
+                    inline-flex
                     items-center
                     justify-center
-                    text-lg
-                    font-serif
-                    shadow-xs
-                  "
-                >
-                  ✨
-                </div>
-
-                <div className="text-left">
-                  <div className="text-xs font-bold text-[#2C221E]">
-                    100% Customized
-                  </div>
-
-                  <div className="text-[10px] text-[#6E655F]">
-                    Personalized Skin Prep
-                  </div>
-                </div>
-              </div>
-
-              {/* Rating Badge */}
-              <div
-                className="
-                  bg-white/95
-                  backdrop-blur-md
-                  border
-                  border-[#E8E2DA]
-                  p-4
-                  rounded-2xl
-                  shadow-xl
-                  flex
-                  items-center
-                  gap-3
-                "
-              >
-                <div className="flex text-[#C5A059]">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-4 h-4 fill-current"
-                    />
-                  ))}
-                </div>
-
-                <span className="text-xs font-bold text-[#2C221E]">
-                  Top Rated Bridal Studio
-                </span>
-              </div>
-
-              {/* Signature Badge */}
-              <div
-                className="
-                  bg-black/45
-                  backdrop-blur-md
-                  text-white
-                  border
-                  border-white/25
-                  p-4
-                  rounded-2xl
-                  shadow-xl
-                  text-left
-                  max-w-xs
-                "
-              >
-                <div
-                  className="
-                    text-xs
+                    gap-2
+                    rounded-full
+                    bg-[#A85C72]
+                    px-4
+                    py-2.5
+                    text-[10px]
                     font-semibold
-                    uppercase
-                    tracking-wider
-                    text-[#E5D5BC]
-                    mb-1
+                    tracking-wide
+                    text-white
+                    shadow-lg
+                    shadow-[#A85C72]/20
+                    transition-all
+                    duration-300
+                    hover:-translate-y-0.5
+                    hover:bg-[#934C62]
+                    sm:px-6
+                    sm:py-3.5
+                    sm:text-sm
                   "
                 >
-                  Signature Couture Bridal
+                  <MessageCircle size={15} />
+                  WhatsApp Us
+                </button>
+
+                {/* Portfolio */}
+                <button
+                  type="button"
+                  onClick={handlePortfolioClick}
+                  className="
+                    group
+                    inline-flex
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-full
+                    border
+                    border-[#8D817A]/40
+                    bg-white/60
+                    px-4
+                    py-2.5
+                    text-[10px]
+                    font-semibold
+                    tracking-wide
+                    text-[#403733]
+                    backdrop-blur-sm
+                    transition-all
+                    duration-300
+                    hover:-translate-y-0.5
+                    hover:bg-white/85
+                    sm:px-6
+                    sm:py-3.5
+                    sm:text-sm
+                  "
+                >
+                  View Portfolio
+
+                  <ArrowRight
+                    size={15}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </button>
+              </motion.div>
+
+              {/* Trust stats */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.55 }}
+                className="mt-4 border-t border-[#8D817A]/25 pt-3 sm:mt-8 sm:pt-5"
+              >
+                <div className="flex flex-wrap items-center gap-y-3">
+
+                  {/* Rating */}
+                  <div className="flex items-center gap-2 pr-4 sm:gap-3 sm:pr-7">
+                    <div
+                      className="
+                        flex
+                        h-7
+                        w-7
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        border-[#D8CBC4]
+                        bg-white/75
+                        sm:h-8
+                        sm:w-8
+                      "
+                    >
+                      <Star
+                        size={14}
+                        className="fill-[#B98A3C] text-[#B98A3C]"
+                      />
+                    </div>
+
+                    <div>
+                      <div className="text-[10px] font-semibold text-[#3C3430] sm:text-xs">
+                        4.9 Rating
+                      </div>
+
+                      <div className="text-[8px] text-[#81756F] sm:text-[9px]">
+                        280+ Reviews
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Brides */}
+                  <div
+                    className="
+                      flex
+                      items-center
+                      gap-2
+                      border-l
+                      border-[#8D817A]/20
+                      px-4
+                      sm:gap-3
+                      sm:px-7
+                    "
+                  >
+                    <div
+                      className="
+                        flex
+                        h-7
+                        w-7
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        border-[#D8CBC4]
+                        bg-white/75
+                        sm:h-8
+                        sm:w-8
+                      "
+                    >
+                      <Heart
+                        size={14}
+                        className="text-[#A85C72]"
+                      />
+                    </div>
+
+                    <div>
+                      <div className="text-[10px] font-semibold text-[#3C3430] sm:text-xs">
+                        500+ Brides
+                      </div>
+
+                      <div className="text-[8px] text-[#81756F] sm:text-[9px]">
+                        Happily Styled
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Experience */}
+                  <div
+                    className="
+                      flex
+                      items-center
+                      gap-2
+                      border-l
+                      border-[#8D817A]/20
+                      pl-4
+                      sm:gap-3
+                      sm:pl-7
+                    "
+                  >
+                    <div
+                      className="
+                        flex
+                        h-7
+                        w-7
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        border-[#D8CBC4]
+                        bg-white/75
+                        sm:h-8
+                        sm:w-8
+                      "
+                    >
+                      <Award
+                        size={14}
+                        className="text-[#A85C72]"
+                      />
+                    </div>
+
+                    <div>
+                      <div className="text-[10px] font-semibold text-[#3C3430] sm:text-xs">
+                        5+ Years
+                      </div>
+
+                      <div className="text-[8px] text-[#81756F] sm:text-[9px]">
+                        Master Artist
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-
-                <p className="text-xs text-white/90 font-light">
-                  Customized HD Airbrush & Dupatta Setting
-                </p>
-              </div>
-            </motion.div>
-
+              </motion.div>
+            </div>
           </div>
         </div>
+
+        {/* =====================================================
+            FLOATING BADGES
+            Only real large desktop.
+        ====================================================== */}
+
+        {/* Top Right */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="absolute right-8 top-[15%] z-20 hidden 2xl:block"
+        >
+          <div
+            className="
+              rounded-2xl
+              border
+              border-white/60
+              bg-white/65
+              px-5
+              py-4
+              shadow-xl
+              backdrop-blur-md
+            "
+          >
+            <div className="text-[9px] uppercase tracking-[0.18em] text-[#8D5366]">
+              100% Customized
+            </div>
+
+            <div className="mt-1 text-sm font-medium text-[#3C3430]">
+              Personalized Skin Prep
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Middle Right */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="absolute right-8 top-[47%] z-20 hidden 2xl:block"
+        >
+          <div
+            className="
+              flex
+              items-center
+              gap-3
+              rounded-full
+              border
+              border-white/60
+              bg-white/65
+              px-5
+              py-3
+              shadow-xl
+              backdrop-blur-md
+            "
+          >
+            <div
+              className="
+                flex
+                h-8
+                w-8
+                items-center
+                justify-center
+                rounded-full
+                bg-[#A85C72]
+                text-white
+              "
+            >
+              <Star size={14} fill="currentColor" />
+            </div>
+
+            <div>
+              <div className="text-[9px] uppercase tracking-[0.15em] text-[#8D5366]">
+                Top Rated
+              </div>
+
+              <div className="text-sm font-medium text-[#3C3430]">
+                Bridal Studio
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Bottom Right */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
+          className="absolute bottom-[10%] right-8 z-20 hidden 2xl:block"
+        >
+          <div
+            className="
+              max-w-[260px]
+              rounded-2xl
+              border
+              border-white/60
+              bg-white/65
+              px-5
+              py-4
+              shadow-xl
+              backdrop-blur-md
+            "
+          >
+            <div className="text-[9px] uppercase tracking-[0.15em] text-[#8D5366]">
+              Signature Couture Bridal
+            </div>
+
+            <div className="mt-1 text-sm font-medium leading-relaxed text-[#3C3430]">
+              Customized HD Airbrush & Dupatta Setting
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
