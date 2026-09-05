@@ -7,11 +7,10 @@ export default function PackageCard({ pkg }) {
 
   return (
     <div
-      className={`luxury-card relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl transition-all duration-300 w-full ${
-        isSignature
+      className={`luxury-card relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl transition-all duration-300 w-full ${isSignature
           ? 'bg-gradient-to-b from-white via-[#FDFBF7] to-[#FAF5EB] border-2 border-[#C5A059] shadow-xl md:-translate-y-2'
           : 'bg-white border border-[#E8E2DA] hover:border-[#C5A059]/40'
-      }`}
+        }`}
     >
       {isSignature && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#C5A059] text-white text-[11px] font-bold uppercase tracking-widest px-4 py-1 rounded-full shadow-md flex items-center gap-1.5">

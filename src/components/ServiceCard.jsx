@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 export default function ServiceCard({ service, onSelectService }) {
   return (
-    <div 
+    <div
       onClick={() => onSelectService(service)}
       className="luxury-card group overflow-hidden cursor-pointer flex flex-col h-full relative border border-[#E8E2DA] hover:border-[#C5A059]/50 transition-all duration-300 rounded-2xl bg-white shadow-sm hover:shadow-md"
     >
@@ -46,8 +46,8 @@ export default function ServiceCard({ service, onSelectService }) {
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#F4EFEA]">
           {service.tags.map((tag, idx) => (
-            <span 
-              key={idx} 
+            <span
+              key={idx}
               className="text-[10px] bg-[#FAF8F5] text-[#6E655F] px-2.5 py-1 rounded-md border border-[#E8E2DA]"
             >
               {tag}

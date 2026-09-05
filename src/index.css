@@ -8,28 +8,45 @@
 
 :root {
   /* Color System - Warm Luxury Neutral & Dusty Rose / Gold Palette */
-  --bg-primary: #FAF8F5;          /* Ivory / Soft warm white */
-  --bg-secondary: #F4EFEA;        /* Warm Beige Nude */
-  --bg-card: #FFFFFF;             /* Pure White for crisp cards */
-  --bg-card-alt: #FDFBF7;         /* Soft Cream */
-  --bg-dark: #1F1917;             /* Warm Charcoal Dark Mode / Footer */
+  --bg-primary: #FAF8F5;
+  /* Ivory / Soft warm white */
+  --bg-secondary: #F4EFEA;
+  /* Warm Beige Nude */
+  --bg-card: #FFFFFF;
+  /* Pure White for crisp cards */
+  --bg-card-alt: #FDFBF7;
+  /* Soft Cream */
+  --bg-dark: #1F1917;
+  /* Warm Charcoal Dark Mode / Footer */
   --bg-dark-accent: #2A2220;
 
-  --text-primary: #2C221E;        /* Espresso Dark Charcoal */
-  --text-secondary: #6E655F;      /* Muted Taupe Gray */
-  --text-muted: #9A918A;          /* Light Muted Gray */
-  --text-inverse: #FFFFFF;        /* White text for dark sections */
+  --text-primary: #2C221E;
+  /* Espresso Dark Charcoal */
+  --text-secondary: #6E655F;
+  /* Muted Taupe Gray */
+  --text-muted: #9A918A;
+  /* Light Muted Gray */
+  --text-inverse: #FFFFFF;
+  /* White text for dark sections */
 
-  --accent-rose: #9B4B5A;         /* Dusty Rose / Primary Accent */
-  --accent-rose-hover: #7E3845;   /* Darker Rose Hover */
-  --accent-rose-light: #F7EFF1;   /* Soft Rose Tint */
-  
-  --accent-gold: #C5A059;         /* Champagne Metallic Gold */
-  --accent-gold-hover: #AA8541;   /* Richer Gold */
-  --accent-gold-light: #FAF5EB;   /* Warm Gold Glow */
+  --accent-rose: #9B4B5A;
+  /* Dusty Rose / Primary Accent */
+  --accent-rose-hover: #7E3845;
+  /* Darker Rose Hover */
+  --accent-rose-light: #F7EFF1;
+  /* Soft Rose Tint */
 
-  --border-light: #E8E2DA;        /* Light Divider Border */
-  --border-medium: #D8CEC3;       /* Medium Card Border */
+  --accent-gold: #C5A059;
+  /* Champagne Metallic Gold */
+  --accent-gold-hover: #AA8541;
+  /* Richer Gold */
+  --accent-gold-light: #FAF5EB;
+  /* Warm Gold Glow */
+
+  --border-light: #E8E2DA;
+  /* Light Divider Border */
+  --border-medium: #D8CEC3;
+  /* Medium Card Border */
 
   /* Typography */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -50,7 +67,9 @@
 }
 
 /* Reset & Base Styles */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -69,7 +88,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   position: relative;
-  padding-bottom: 72px; /* Space for mobile sticky bottom bar */
+  padding-bottom: 72px;
+  /* Space for mobile sticky bottom bar */
 }
 
 @media (min-width: 769px) {
@@ -79,7 +99,11 @@ body {
 }
 
 /* Typography Helpers */
-h1, h2, h3, h4, .font-serif {
+h1,
+h2,
+h3,
+h4,
+.font-serif {
   font-family: var(--font-serif);
   font-weight: 500;
   line-height: 1.15;
@@ -274,6 +298,7 @@ p {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -283,13 +308,16 @@ p {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
   background: #D5CBC0;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-rose);
 }

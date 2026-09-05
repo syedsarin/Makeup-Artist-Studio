@@ -17,18 +17,16 @@ function CourseCard({ course }) {
   return (
     <motion.div
       layout
-      className={`relative flex flex-col rounded-3xl overflow-hidden border transition-all duration-300 ${
-        isPopular
+      className={`relative flex flex-col rounded-3xl overflow-hidden border transition-all duration-300 ${isPopular
           ? 'border-2 border-[#9B4B5A] shadow-xl'
           : 'border border-[#E8E2DA] hover:border-[#C5A059]/50 hover:shadow-md'
-      }`}
+        }`}
     >
       {/* Badge */}
-      <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 ${
-        course.badgeColor === 'rose'
+      <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5 ${course.badgeColor === 'rose'
           ? 'bg-[#9B4B5A] text-white'
           : 'bg-[#C5A059] text-white'
-      }`}>
+        }`}>
         {isPopular ? <Sparkles className="w-3 h-3" /> : <GraduationCap className="w-3 h-3" />}
         {course.badge}
       </div>
@@ -99,9 +97,8 @@ function CourseCard({ course }) {
                 <div className="space-y-2 pt-1">
                   {course.highlights.map((item, idx) => (
                     <div key={idx} className="flex items-start gap-2.5">
-                      <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
-                        isPopular ? 'bg-[#9B4B5A] text-white' : 'bg-[#FAF5EB] text-[#C5A059]'
-                      }`}>
+                      <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${isPopular ? 'bg-[#9B4B5A] text-white' : 'bg-[#FAF5EB] text-[#C5A059]'
+                        }`}>
                         <Check className="w-2.5 h-2.5 stroke-[3]" />
                       </div>
                       <span className="text-xs text-[#2C221E] leading-snug">{item}</span>
@@ -117,9 +114,8 @@ function CourseCard({ course }) {
             <div className="space-y-2">
               {course.highlights.slice(0, 3).map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2.5">
-                  <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
-                    isPopular ? 'bg-[#9B4B5A] text-white' : 'bg-[#FAF5EB] text-[#C5A059]'
-                  }`}>
+                  <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${isPopular ? 'bg-[#9B4B5A] text-white' : 'bg-[#FAF5EB] text-[#C5A059]'
+                    }`}>
                     <Check className="w-2.5 h-2.5 stroke-[3]" />
                   </div>
                   <span className="text-xs text-[#2C221E] leading-snug">{item}</span>
@@ -395,10 +391,10 @@ export default function MakeupClasses() {
           {/* 4-Pillar Highlights */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
-              { tag: 'Hands-On Live Practice',    icon: <Users className="w-4 h-4 text-[#9B4B5A]" />,         bg: 'bg-[#F7EFF1]' },
-              { tag: 'Small Batch Sizes',          icon: <GraduationCap className="w-4 h-4 text-[#C5A059]" />, bg: 'bg-[#FAF5EB]' },
-              { tag: 'Certificate Provided',       icon: <Sparkles className="w-4 h-4 text-[#9B4B5A]" />,     bg: 'bg-[#F7EFF1]' },
-              { tag: 'Kit Included in Pro Course', icon: <Check className="w-4 h-4 text-[#C5A059]" />,        bg: 'bg-[#FAF5EB]' },
+              { tag: 'Hands-On Live Practice', icon: <Users className="w-4 h-4 text-[#9B4B5A]" />, bg: 'bg-[#F7EFF1]' },
+              { tag: 'Small Batch Sizes', icon: <GraduationCap className="w-4 h-4 text-[#C5A059]" />, bg: 'bg-[#FAF5EB]' },
+              { tag: 'Certificate Provided', icon: <Sparkles className="w-4 h-4 text-[#9B4B5A]" />, bg: 'bg-[#F7EFF1]' },
+              { tag: 'Kit Included in Pro Course', icon: <Check className="w-4 h-4 text-[#C5A059]" />, bg: 'bg-[#FAF5EB]' },
             ].map(({ tag, icon, bg }) => (
               <div key={tag} className="flex items-center gap-2.5 px-4 py-3 bg-white border border-[#E8E2DA] rounded-xl shadow-xs hover:border-[#C5A059]/40 hover:shadow-sm transition-colors">
                 <div className={`w-7 h-7 rounded-full ${bg} flex items-center justify-center shrink-0`}>

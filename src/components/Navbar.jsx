@@ -47,6 +47,10 @@ export default function Navbar() {
     setMobileMenuOpen(false);
     const targetEl = document.querySelector(href);
     if (targetEl) {
+      if (href === '#hero') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
       const navOffset = 70;
       const offsetPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - navOffset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
@@ -55,10 +59,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 left-0 right-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-[#E8E2DA] transition-all duration-300 ${
         isScrolled
-          ? 'py-3 bg-white/90 backdrop-blur-md shadow-sm border-b border-[#E8E2DA]'
-          : 'py-5 bg-transparent'
+          ? 'py-2.5 shadow-sm'
+          : 'py-3.5 sm:py-4 shadow-xs'
       }`}
     >
       <div className="container flex items-center justify-between">

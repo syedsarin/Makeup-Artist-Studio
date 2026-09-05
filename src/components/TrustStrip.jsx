@@ -23,11 +23,10 @@ export default function TrustStrip() {
       <div className="container">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 items-center justify-between">
           {TRUST_STATS.map((stat, idx) => (
-            <div 
+            <div
               key={stat.id}
-              className={`flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 px-3 ${
-                idx !== TRUST_STATS.length - 1 ? 'md:border-r md:border-[#E8E2DA]' : ''
-              }`}
+              className={`flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 px-3 ${idx !== TRUST_STATS.length - 1 ? 'md:border-r md:border-[#E8E2DA]' : ''
+                }`}
             >
               <div className="w-10 h-10 rounded-full bg-[#FAF8F5] border border-[#E8E2DA] flex items-center justify-center shrink-0">
                 {getIcon(stat.icon)}
