@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import {
   MessageCircle,
@@ -13,44 +13,6 @@ import { openWhatsApp } from '../App';
 import heroBrideImg from '../assets/hero-bride-makeup.jpg';
 
 export default function Hero() {
-  const [debugInfo, setDebugInfo] = useState({
-    viewportWidth: 0,
-    viewportHeight: 0,
-    devicePixelRatio: 0,
-    navbarHeight: 0,
-    heroWidth: 0,
-    heroHeight: 0,
-  });
-
-  useEffect(() => {
-    const updateDebugInfo = () => {
-      const navbar = document.querySelector('header');
-      const hero = document.getElementById('hero');
-
-      setDebugInfo({
-        viewportWidth: window.innerWidth,
-        viewportHeight: window.innerHeight,
-        devicePixelRatio: window.devicePixelRatio,
-        navbarHeight: navbar?.offsetHeight || 0,
-        heroWidth: hero?.offsetWidth || 0,
-        heroHeight: hero?.offsetHeight || 0,
-      });
-    };
-
-    updateDebugInfo();
-
-    window.addEventListener('resize', updateDebugInfo);
-    window.addEventListener('orientationchange', updateDebugInfo);
-
-    const timer = setTimeout(updateDebugInfo, 500);
-
-    return () => {
-      window.removeEventListener('resize', updateDebugInfo);
-      window.removeEventListener('orientationchange', updateDebugInfo);
-      clearTimeout(timer);
-    };
-  }, []);
-
   const handlePortfolioClick = (e) => {
     e.preventDefault();
 
@@ -74,66 +36,8 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[calc(100vh-70px)] flex items-center py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden bg-[#FAF8F5]"
+      className="relative w-full aspect-[16/9] flex items-center overflow-hidden bg-[#FAF8F5]"
     >
-      {/* ================================================================
-          TEMPORARY DEBUG BOX
-          Remove this entire block after we identify the issue.
-      ================================================================= */}
-      <div
-        style={{
-          position: 'fixed',
-          top: '80px',
-          left: '10px',
-          zIndex: 99999,
-          background: '#000',
-          color: '#00ff00',
-          padding: '12px 14px',
-          fontSize: '12px',
-          lineHeight: '1.7',
-          fontFamily: 'monospace',
-          borderRadius: '8px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
-          minWidth: '230px',
-          pointerEvents: 'none',
-        }}
-      >
-        <div style={{ color: '#fff', marginBottom: '4px' }}>
-          HERO DEBUG
-        </div>
-
-        <div>
-          Viewport Width: {debugInfo.viewportWidth}px
-        </div>
-
-        <div>
-          Viewport Height: {debugInfo.viewportHeight}px
-        </div>
-
-        <div>
-          DPR: {debugInfo.devicePixelRatio}
-        </div>
-
-        <div>
-          Navbar Height: {debugInfo.navbarHeight}px
-        </div>
-
-        <div>
-          Hero Width: {debugInfo.heroWidth}px
-        </div>
-
-        <div>
-          Hero Height: {debugInfo.heroHeight}px
-        </div>
-
-        <div style={{ marginTop: '5px', color: '#ffff00' }}>
-          Hero Ratio:{' '}
-          {debugInfo.heroWidth > 0
-            ? (debugInfo.heroHeight / debugInfo.heroWidth).toFixed(3)
-            : '0'}
-        </div>
-      </div>
-
       {/* ================================================================
           HERO BACKGROUND IMAGE
       ================================================================= */}
@@ -144,10 +48,13 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
 
+        {/* Main soft overlay */}
         <div className="absolute inset-0 bg-[#FAF8F5]/55" />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5]/80 via-[#FAF8F5]/40 to-transparent" />
+        {/* Left-side readability gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5]/90 via-[#FAF8F5]/50 to-transparent" />
 
+        {/* Bottom fade */}
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#FAF8F5]/60 to-transparent" />
       </div>
 
@@ -163,7 +70,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="mb-5"
+              className="mb-4 sm:mb-5"
             >
               <div className="flex items-center gap-3">
                 <span className="h-px w-8 bg-[#A85C72]" />
@@ -176,7 +83,7 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Heading */}
+            {/* Main Heading */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -202,12 +109,12 @@ export default function Hero() {
                 duration: 0.7,
                 delay: 0.25,
               }}
-              className="mt-6 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-[#6E655F]"
+              className="mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed text-[#6E655F]"
             >
               {ARTIST_INFO.subtitle}
             </motion.p>
 
-            {/* Buttons */}
+            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -215,7 +122,7 @@ export default function Hero() {
                 duration: 0.7,
                 delay: 0.35,
               }}
-              className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4"
+              className="mt-5 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4"
             >
               <button
                 onClick={() => openWhatsApp()}
@@ -238,7 +145,9 @@ export default function Hero() {
               </button>
             </motion.div>
 
-            {/* Trust Stats */}
+            {/* ==========================================================
+                TRUST STATS
+            =========================================================== */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -246,24 +155,24 @@ export default function Hero() {
                 duration: 0.7,
                 delay: 0.45,
               }}
-              className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5"
+              className="mt-6 sm:mt-10 flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-5"
             >
               {/* Rating */}
               <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/80 border border-[#E8E2DA]">
+                <div className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/80 border border-[#E8E2DA]">
                   <Star className="w-4 h-4 text-[#C5A059] fill-[#C5A059]" />
                 </div>
 
                 <div>
                   <div className="flex items-center gap-1">
-                    <span className="font-semibold text-[#2C221E]">
+                    <span className="font-semibold text-sm sm:text-base text-[#2C221E]">
                       4.9
                     </span>
 
                     <Star className="w-3 h-3 text-[#C5A059] fill-[#C5A059]" />
                   </div>
 
-                  <p className="text-xs text-[#6E655F]">
+                  <p className="text-[10px] sm:text-xs text-[#6E655F]">
                     280+ Reviews
                   </p>
                 </div>
@@ -271,16 +180,16 @@ export default function Hero() {
 
               {/* Brides */}
               <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/80 border border-[#E8E2DA]">
+                <div className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/80 border border-[#E8E2DA]">
                   <Heart className="w-4 h-4 text-[#A85C72] fill-[#A85C72]" />
                 </div>
 
                 <div>
-                  <div className="font-semibold text-[#2C221E]">
+                  <div className="font-semibold text-sm sm:text-base text-[#2C221E]">
                     500+
                   </div>
 
-                  <p className="text-xs text-[#6E655F]">
+                  <p className="text-[10px] sm:text-xs text-[#6E655F]">
                     Brides Happily Styled
                   </p>
                 </div>
@@ -288,16 +197,16 @@ export default function Hero() {
 
               {/* Experience */}
               <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/80 border border-[#E8E2DA]">
+                <div className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/80 border border-[#E8E2DA]">
                   <Award className="w-4 h-4 text-[#C5A059]" />
                 </div>
 
                 <div>
-                  <div className="font-semibold text-[#2C221E]">
+                  <div className="font-semibold text-sm sm:text-base text-[#2C221E]">
                     5+
                   </div>
 
-                  <p className="text-xs text-[#6E655F]">
+                  <p className="text-[10px] sm:text-xs text-[#6E655F]">
                     Years Master Artist
                   </p>
                 </div>
