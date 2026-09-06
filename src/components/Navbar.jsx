@@ -81,13 +81,13 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center md:gap-4 lg:gap-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`text-sm font-medium transition-colors relative py-1 ${
+              className={`md:text-xs lg:text-sm font-medium transition-colors relative py-1 ${
                 activeSection === link.id
                   ? 'text-[#9B4B5A] font-semibold'
                   : 'text-[#6E655F] hover:text-[#2C221E]'

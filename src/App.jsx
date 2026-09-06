@@ -24,7 +24,7 @@ export function openWhatsApp(context = '') {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#2C221E] font-sans selection:bg-[#9B4B5A] selection:text-white">
+    <div className="min-h-screen overflow-x-hidden bg-[#FAF8F5] text-[#2C221E] font-sans selection:bg-[#9B4B5A] selection:text-white">
       <Navbar />
       <main>
         <Hero />
