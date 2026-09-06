@@ -36,7 +36,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-[100dvh] lg:min-h-[800px] lg:aspect-[16/9] flex items-center overflow-hidden bg-[#FAF8F5]"
+      className="relative w-full min-h-[100dvh] md:min-h-[600px] md:aspect-[16/9] lg:min-h-[700px] xl:min-h-[800px] flex items-center overflow-hidden bg-[#FAF8F5]"
     >
       {/* ================================================================
           HERO BACKGROUND IMAGE
