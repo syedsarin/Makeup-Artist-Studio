@@ -36,7 +36,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative w-full aspect-[16/9] flex items-center overflow-hidden bg-[#FAF8F5]"
+      className="relative w-full min-h-[100dvh] lg:min-h-[800px] lg:aspect-[16/9] flex items-center overflow-hidden bg-[#FAF8F5]"
     >
       {/* ================================================================
           HERO BACKGROUND IMAGE
@@ -45,7 +45,7 @@ export default function Hero() {
         <img
           src={heroBrideImg}
           alt="Bride with professional bridal makeup kit"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-[30%_center] md:object-center"
         />
 
         {/* Main soft overlay */}
