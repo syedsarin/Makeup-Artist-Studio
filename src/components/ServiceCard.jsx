@@ -1,58 +1,41 @@
 import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { Plus, ArrowRight } from 'lucide-react';
 
 export default function ServiceCard({ service, onSelectService }) {
   return (
     <div
       onClick={() => onSelectService(service)}
-      className="luxury-card group overflow-hidden cursor-pointer flex flex-col h-full relative border border-[#E8E2DA] hover:border-[#C5A059]/50 transition-all duration-300 rounded-2xl bg-white shadow-sm hover:shadow-md"
+      className="group rounded-[24px] sm:rounded-[30px] bg-white border border-[#ECE4DB] p-3 sm:p-4 shadow-2xs hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between h-full"
     >
-      {/* Image Container */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-[#F4EFEA]">
+      {/* Portrait Image Container matching Image 2 with slightly increased size */}
+      <div className="relative aspect-[3/4] rounded-[18px] sm:rounded-[24px] overflow-hidden bg-[#ECE3D8] min-h-[220px] sm:min-h-[280px] lg:min-h-[320px]">
         <img
           src={service.image}
           alt={service.title}
-          className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700"
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+          loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
-        {/* Floating Top Tag */}
-        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full border border-white/40 shadow-xs">
-          <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#9B4B5A]">
-            {service.title} Look
-          </span>
-        </div>
-
-        {/* Hover Arrow Icon */}
-        <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-md text-[#2C221E] flex items-center justify-center transform translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-          <ArrowUpRight className="w-4 h-4" />
+        {/* Floating Top-Right Plus Circle Button matching Image 2 */}
+        <div
+          className="absolute top-3 right-3 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#1F1917] shadow-sm flex items-center justify-center font-bold text-base sm:text-lg group-hover:bg-[#A25345] group-hover:text-white transition-all duration-200 z-10"
+          title="Quick View / Book"
+        >
+          <Plus className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5]" />
         </div>
       </div>
 
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-grow justify-between text-left">
-        <div>
-          <h3 className="font-serif text-2xl font-semibold text-[#2C221E] group-hover:text-[#9B4B5A] transition-colors mb-1">
-            {service.title}
-          </h3>
-          <p className="text-xs font-medium text-[#C5A059] mb-3">
-            {service.subtitle}
-          </p>
-          <p className="text-xs sm:text-sm text-[#6E655F] leading-relaxed line-clamp-3 mb-4">
-            {service.description}
-          </p>
-        </div>
+      {/* Card Details matching Image 2 with comfortable typography */}
+      <div className="pt-3.5 sm:pt-4 pb-1 px-1 text-left">
+        {/* Uppercase Category Title */}
+        <h3 className="font-bold text-sm sm:text-base tracking-wider text-[#1F1917] uppercase group-hover:text-[#A25345] transition-colors">
+          {service.title}
+        </h3>
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#F4EFEA]">
-          {service.tags.map((tag, idx) => (
-            <span
-              key={idx}
-              className="text-[10px] bg-[#FAF8F5] text-[#6E655F] px-2.5 py-1 rounded-md border border-[#E8E2DA]"
-            >
-              {tag}
-            </span>
-          ))}
+        {/* Shop Now / Book Link with Right Arrow */}
+        <div className="text-xs sm:text-[13px] font-medium text-[#1F1917] group-hover:text-[#A25345] flex items-center gap-1.5 mt-1 sm:mt-1.5 transition-colors">
+          <span>{service.actionText || 'Shop Now'}</span>
+          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-[#1F1917] group-hover:text-[#A25345]" />
         </div>
       </div>
     </div>

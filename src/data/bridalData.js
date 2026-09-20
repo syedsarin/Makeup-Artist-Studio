@@ -1,4 +1,11 @@
 // Data Source for Luxury Bridal Makeup Artist Website
+import heroBrideHaloImg from '../assets/hero-bride-halo.jpg';
+import catBridalImg from '../assets/cat-bridal.jpg';
+import heroBrideMakeupImg from '../assets/hero-bride-makeup.jpg';
+import catEngagementImg from '../assets/cat-engagement.jpg';
+import catPartyImg from '../assets/cat-party.jpg';
+import catHairImg from '../assets/cat-hair.jpg';
+import makeupToolkitImg from '../assets/makeup-toolkit.jpg';
 
 export const EMAILJS_CONFIG = {
   // ─────────────────────────────────────────────────────────────────────────
@@ -27,7 +34,7 @@ export const ARTIST_INFO = {
   reviewsCount: "280+",
   phone: "+91 98765 43210",
   whatsappNumber: "919876543210",
-  email: "syedsarin313@gmail.com",
+  email: "ayeshamalik1@gmail.com",
   studioName: "Ayesha Malik Bridal Studio",
   address: "Suite 402, Luxury Promenade, Bandra West, Mumbai, Maharashtra 400050",
   hours: "Mon - Sun: 10 AM - 7 PM",
@@ -210,55 +217,136 @@ export const PORTFOLIO_ITEMS = [
 ];
 
 export const PACKAGES = [
+  // ─── Bridal Packages ───────────────────────────────────────────────────
   {
-    id: "essential",
-    name: "ESSENTIAL",
-    price: "₹18,000",
-    popular: false,
-    badge: null,
-    description: "Perfect for intimate weddings & classic bridal styling.",
-    features: [
-      "HD Premium Waterproof Makeup",
-      "Classic Bridal Hair Styling",
-      "Single Dupatta Draping",
-      "Standard Silk False Lashes",
-      "Basic Skin Preparation",
-      "On-Venue Artist Travel"
-    ],
-    ctaText: "Check Availability"
-  },
-  {
-    id: "signature",
-    name: "SIGNATURE",
+    id: "bridal-signature",
+    name: "SIGNATURE BRIDAL",
+    category: "Bridal",
     price: "₹28,000",
     popular: true,
-    badge: "MOST REQUESTED",
-    description: "Our signature luxury experience for the bride who wants flawless airbrush perfection.",
+    badge: "MOST POPULAR",
+    image: catBridalImg,
+    description: "Camera-ready airbrush perfection crafted for your wedding ceremony.",
     features: [
       "Ultra-HD Airbrush & HD Blended Makeup",
       "Advanced Couture Hair Extensions & Styling",
       "Double Dupatta & Heavy Jewelry Draping",
-      "3D Premium Mink Lashes",
+      "3D Premium Mink Lashes & Eye Detailing",
       "Pre-Bridal Skin & Hair Consultation",
-      "Personalized Touch-Up Kit Included",
-      "On-Venue Dedicated Team"
+      "Personalized Touch-Up Kit Included"
     ],
     ctaText: "Check Availability"
   },
   {
-    id: "luxury",
-    name: "LUXURY",
+    id: "bridal-royal",
+    name: "ROYAL BRIDAL VIP",
+    category: "Bridal",
     price: "₹45,000",
     popular: false,
     badge: "FULL WEDDING VIP",
-    description: "Complete multi-event VIP package with trial session & assistant touch-up service.",
+    image: heroBrideHaloImg,
+    description: "Complete multi-event VIP package with private studio trial session.",
     features: [
       "Luxury HD / Airbrush Bridal Makeup",
-      "Full Bridal Trial Session at Studio",
-      "2 Pre-Wedding Function Looks (Haldi/Mehendi)",
-      "Assistant On-Site for Pheras & Reception Touch-ups",
-      "Luxury Skin Prep & Facial Massage",
+      "Full Bridal Trial Session at Bandra Studio",
+      "Assistant On-Site for Pheras & Touch-ups",
+      "Luxury Skin Prep, Sheet Mask & Facial Massage",
+      "Double Dupatta, Saree & Heavy Jewelry Setting",
       "Mother of Bride Complementary Express Look"
+    ],
+    ctaText: "Check Availability"
+  },
+  {
+    id: "bridal-classic",
+    name: "CLASSIC BRIDAL",
+    category: "Bridal",
+    price: "₹18,000",
+    popular: false,
+    badge: null,
+    image: heroBrideMakeupImg,
+    description: "Ideal for intimate ceremonies, traditional pheras & classic bridal styling.",
+    features: [
+      "HD Premium Waterproof Makeup",
+      "Traditional Bridal Bun or Floral Braid",
+      "Single Dupatta Draping & Jewelry Pinning",
+      "Standard Silk False Lashes Included",
+      "Deep Hydration Skin Preparation"
+    ],
+    ctaText: "Check Availability"
+  },
+
+  // ─── Engagement Packages ───────────────────────────────────────────────
+  {
+    id: "engagement-signature",
+    name: "SIGNATURE ENGAGEMENT",
+    category: "Engagement",
+    price: "₹16,000",
+    popular: true,
+    badge: "TRENDING",
+    image: catEngagementImg,
+    description: "Soft romantic glam with subtle shimmer and sculpted features for ring ceremonies.",
+    features: [
+      "Ultra-HD Soft Glam Complexion & Contouring",
+      "Couture Hollywood Waves or Modern Textured Bun",
+      "Dupatta / Gown / Lehenga Draping Included",
+      "Fluffy Wispy False Lashes",
+      "Custom Long-Wear Lip Color Blend"
+    ],
+    ctaText: "Check Availability"
+  },
+  {
+    id: "engagement-classic",
+    name: "CLASSIC ENGAGEMENT",
+    category: "Engagement",
+    price: "₹12,000",
+    popular: false,
+    badge: null,
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+    description: "Dewy, radiant finish with soft definition to complement couture lehengas.",
+    features: [
+      "HD Radiant Glow Makeup Finish",
+      "Romantic Soft Curls or Half-Up Hairstyle",
+      "Outfit Draping & Precision Pinning",
+      "Natural Accent False Eyelashes",
+      "Hydrating Skin Glow Primer"
+    ],
+    ctaText: "Check Availability"
+  },
+
+  // ─── Party Packages ────────────────────────────────────────────────────
+  {
+    id: "party-reception",
+    name: "RECEPTION & COCKTAIL",
+    category: "Party",
+    price: "₹9,500",
+    popular: true,
+    badge: "HIGH DEMAND",
+    image: catPartyImg,
+    description: "High-impact evening styling with striking eyes for receptions and galas.",
+    features: [
+      "High-Definition Glam Evening Makeup",
+      "Smokey Eyes or Metallic Shimmer Eye Detail",
+      "Modern Glam Curls, Sleek Pony, or Textured Bun",
+      "Saree / Indo-Western Gown Draping",
+      "Premium Winged Lashes Included"
+    ],
+    ctaText: "Check Availability"
+  },
+  {
+    id: "party-festive",
+    name: "FESTIVE & BRIDESMAID",
+    category: "Party",
+    price: "₹6,500",
+    popular: false,
+    badge: null,
+    image: catHairImg,
+    description: "Chic, luminous look for bridesmaids, sisters of the bride, and wedding guests.",
+    features: [
+      "Dewy HD Skin Makeup",
+      "Classic Hair Styling (Curls, Blowdry or Bun)",
+      "Outfit Draping (Saree / Dupatta Pinning)",
+      "Subtle False Eyelashes Included",
+      "Sweat-Proof Finish for Dancing"
     ],
     ctaText: "Check Availability"
   }
@@ -352,3 +440,11 @@ export const MAKEUP_CLASSES = [
     ]
   }
 ];
+
+export function openWhatsApp(context = '') {
+  const phone = ARTIST_INFO.phone.replace(/[^0-9]/g, '');
+  const message = context
+    ? `Hi Ayesha, I would like to inquire about ${context}. Could you please share availability and details?`
+    : `Hi Ayesha, I would like to inquire about booking bridal makeup services. Could you please share your availability and package details?`;
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+}

@@ -1,59 +1,103 @@
-import React, { useEffect } from 'react';
-import { X, MessageCircle, Sparkles } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default function PortfolioModal({ item, onClose, onBook }) {
+export default function PortfolioModal({ isOpen, items, currentIndex, onClose, onPrev, onNext }) {
+  const [touchStart, setTouchStart] = useState(null);
+
   useEffect(() => {
-    const handleKeyDown = (e) => { if (e.key === 'Escape') onClose(); };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+    if (!isOpen) return;
 
-  if (!item) return null;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') onPrev();
+      if (e.key === 'ArrowRight') onNext();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onPrev, onNext, onClose]);
+
+  if (!isOpen || !items || items.length === 0) return null;
+
+  const currentItem = items[currentIndex] || items[0];
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStart) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    if (diff > 50) onNext();
+    if (diff < -50) onPrev();
+    setTouchStart(null);
+  };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div
+      onClick={onClose}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/92 backdrop-blur-xs p-3 sm:p-6 select-none transition-opacity duration-200"
+    >
+      {/* Close Button (Top Right) */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/25 active:scale-95"
+        aria-label="Close Lightbox"
+      >
+        <X className="h-5 w-5 sm:h-6 sm:w-6" />
+      </button>
+
+      {/* Previous Button (Left) */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onPrev();
+        }}
+        className="fixed left-3 top-1/2 z-50 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/25 active:scale-95 sm:left-6 sm:h-13 sm:w-13"
+        aria-label="Previous Image"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+
+      {/* Next Button (Right) */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onNext();
+        }}
+        className="fixed right-3 top-1/2 z-50 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/25 active:scale-95 sm:right-6 sm:h-13 sm:w-13"
+        aria-label="Next Image"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
+
+      {/* Large Centered Image Preserving Aspect Ratio */}
       <div
-        className="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl border border-white/20 flex flex-col md:flex-row max-h-[90vh]"
+        className="relative flex max-h-[88vh] max-w-[92vw] items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black flex items-center justify-center transition-colors"
-          aria-label="Close"
-        >
-          <X className="w-5 h-5" />
-        </button>
+        <img
+          key={currentItem.id}
+          src={currentItem.image}
+          alt=""
+          className="max-h-[86vh] max-w-[90vw] rounded-md object-contain shadow-2xl transition-opacity duration-200"
+        />
+      </div>
 
-        <div className="md:w-3/5 bg-black flex items-center justify-center overflow-hidden max-h-[50vh] md:max-h-none">
-          <img src={item.image} alt={item.title} className="w-full h-full object-contain max-h-[80vh]" />
-        </div>
-
-        <div className="md:w-2/5 p-6 md:p-8 flex flex-col justify-between bg-[#FAF8F5]">
-          <div>
-            <div className="eyebrow mb-2"><span>{item.category} Look</span></div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-[#2C221E] mb-3">{item.title}</h3>
-            <p className="text-sm text-[#6E655F] leading-relaxed mb-6">{item.description}</p>
-            <div className="p-4 rounded-xl bg-white border border-[#E8E2DA] mb-6">
-              <div className="flex items-center gap-2 text-xs font-semibold text-[#9B4B5A] mb-1">
-                <Sparkles className="w-4 h-4 text-[#C5A059]" />
-                <span>Signature Artistry</span>
-              </div>
-              <p className="text-xs text-[#6E655F]">
-                Hand-blended contouring, lightweight skin prep, and customized hair styling tailored for camera perfection.
-              </p>
-            </div>
-          </div>
-
-          <div className="pt-4 border-t border-[#E8E2DA]">
-            <button
-              onClick={() => { onClose(); onBook(item.title); }}
-              className="btn btn-primary w-full justify-center"
-            >
-              <MessageCircle className="w-4 h-4 fill-white" />
-              <span>Book Similar Look on WhatsApp</span>
-            </button>
-          </div>
-        </div>
+      {/* Subtle Counter (Bottom Center) */}
+      <div className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-medium tracking-widest text-white/80 backdrop-blur-md sm:bottom-6 sm:text-sm">
+        {currentIndex + 1} / {items.length}
       </div>
     </div>
   );
