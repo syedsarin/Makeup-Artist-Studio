@@ -12,39 +12,41 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Track scroll and active section
+  /* =========================================
+     Scroll + Active Section
+  ========================================= */
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 25);
 
-      if (location.pathname === '/') {
-        const sections = [
-          'hero',
-          'about',
-          'bridal',
-          'home-portfolio',
-          'home-packages',
-          'home-courses',
-          'location',
-        ];
+      if (location.pathname !== '/') return;
 
-        const scrollPosition = window.scrollY + 130;
+      const sections = [
+        'hero',
+        'about',
+        'bridal',
+        'home-portfolio',
+        'home-packages',
+        'home-courses',
+        'location',
+      ];
 
-        for (const sectionId of sections) {
-          const el = document.getElementById(sectionId);
+      const scrollPosition = window.scrollY + 130;
 
-          if (el) {
-            const top = el.offsetTop;
-            const height = el.offsetHeight;
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
 
-            if (
-              scrollPosition >= top &&
-              scrollPosition < top + height
-            ) {
-              setActiveSection(sectionId);
-              break;
-            }
-          }
+        if (!el) continue;
+
+        const top = el.offsetTop;
+        const height = el.offsetHeight;
+
+        if (
+          scrollPosition >= top &&
+          scrollPosition < top + height
+        ) {
+          setActiveSection(sectionId);
+          break;
         }
       }
     };
@@ -52,32 +54,90 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [location.pathname]);
 
-  // Handle hash scrolling after navigating from another route
+  /* =========================================
+     Reliable Section Navigation
+  ========================================= */
   useEffect(() => {
-    if (location.pathname === '/' && location.hash) {
-      setTimeout(() => {
-        const target = document.querySelector(location.hash);
+    if (location.pathname !== '/') return;
 
-        if (target) {
-          const navOffset = 70;
+    const targetId =
+      location.state?.scrollTo ||
+      (location.hash
+        ? location.hash.replace('#', '')
+        : null);
 
-          const offsetPosition =
-            target.getBoundingClientRect().top +
-            window.pageYOffset -
-            navOffset;
+    if (!targetId) return;
 
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth',
-          });
+    let attempts = 0;
+    let cancelled = false;
+
+    const scrollToTarget = () => {
+      if (cancelled) return;
+
+      const target = document.getElementById(targetId);
+
+      if (target) {
+        const navOffset = 70;
+
+        const offsetPosition =
+          target.getBoundingClientRect().top +
+          window.pageYOffset -
+          navOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+
+        // Remove navigation state after successful scroll
+        if (location.state?.scrollTo) {
+          navigate(
+            {
+              pathname: '/',
+              hash: `#${targetId}`,
+            },
+            {
+              replace: true,
+              state: {},
+            }
+          );
         }
-      }, 100);
-    }
-  }, [location]);
 
+        return;
+      }
+
+      // Wait until homepage sections are rendered
+      attempts++;
+
+      if (attempts < 30) {
+        requestAnimationFrame(scrollToTarget);
+      }
+    };
+
+    // Start after the route has rendered
+    const timer = setTimeout(() => {
+      requestAnimationFrame(scrollToTarget);
+    }, 50);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [
+    location.pathname,
+    location.hash,
+    location.state,
+    navigate,
+  ]);
+
+  /* =========================================
+     Navigation Links
+  ========================================= */
   const navLinks = [
     {
       name: 'Home',
@@ -120,25 +180,37 @@ export default function Navbar() {
     },
   ];
 
+  /* =========================================
+     Handle Navigation
+  ========================================= */
   const handleNavAction = (e, link) => {
     e.preventDefault();
     setMobileMenuOpen(false);
 
+    /* Separate Pages */
     if (link.type === 'page') {
       navigate(link.route);
       return;
     }
 
-    if (location.pathname === '/') {
-      if (link.hash === '#hero') {
+    /* Home */
+    if (link.hash === '#hero') {
+      if (location.pathname === '/') {
         window.scrollTo({
           top: 0,
           behavior: 'smooth',
         });
-        return;
+      } else {
+        navigate('/');
       }
 
-      const targetEl = document.querySelector(link.hash);
+      return;
+    }
+
+    /* Already on Homepage */
+    if (location.pathname === '/') {
+      const targetId = link.hash.replace('#', '');
+      const targetEl = document.getElementById(targetId);
 
       if (targetEl) {
         const navOffset = 70;
@@ -153,44 +225,59 @@ export default function Navbar() {
           behavior: 'smooth',
         });
       }
-    } else {
-      navigate(link.route);
+
+      return;
     }
+
+    /* =========================================
+       From Portfolio / Packages / Courses
+       Navigate DIRECTLY to required section
+    ========================================= */
+    navigate('/', {
+      state: {
+        scrollTo: link.hash.replace('#', ''),
+      },
+    });
   };
 
+  /* =========================================
+     Active Link
+  ========================================= */
   const isLinkActive = (link) => {
     if (link.type === 'page') {
       return location.pathname === link.route;
     }
 
-    if (location.pathname === '/') {
-      if (
-        link.hash === '#hero' &&
-        (activeSection === 'hero' || window.scrollY < 100)
-      ) {
-        return true;
-      }
+    if (location.pathname !== '/') {
+      return false;
+    }
 
-      if (
-        link.hash === '#about' &&
-        activeSection === 'about'
-      ) {
-        return true;
-      }
+    if (
+      link.hash === '#hero' &&
+      (activeSection === 'hero' || window.scrollY < 100)
+    ) {
+      return true;
+    }
 
-      if (
-        link.hash === '#bridal' &&
-        activeSection === 'bridal'
-      ) {
-        return true;
-      }
+    if (
+      link.hash === '#about' &&
+      activeSection === 'about'
+    ) {
+      return true;
+    }
 
-      if (
-        link.hash === '#location' &&
-        activeSection === 'location'
-      ) {
-        return true;
-      }
+    if (
+      link.hash === '#bridal' &&
+      activeSection === 'bridal'
+    ) {
+      return true;
+    }
+
+    if (
+      link.hash === '#location' &&
+      activeSection === 'location'
+    ) {
+      return true;
     }
 
     return false;
@@ -198,21 +285,25 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Fixed Navbar */}
+      {/* =========================================
+          FIXED NAVBAR
+      ========================================= */}
       <header
-        className={`fixed top-0 left-0 right-0 z-[100] w-full bg-white/95 backdrop-blur-md border-b border-[#ECE6DE] transition-all duration-300 ${isScrolled
+        className={`fixed left-0 right-0 top-0 z-[100] w-full border-b border-[#ECE6DE] bg-white/95 backdrop-blur-md transition-all duration-300 ${isScrolled
             ? 'py-2 shadow-md'
-            : 'py-2.5 sm:py-3 shadow-xs'
+            : 'py-2.5 shadow-xs sm:py-3'
           }`}
       >
         <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
 
-          {/* Brand Logo */}
+          {/* Brand */}
           <Link
             to="/"
             onClick={(e) => {
               if (location.pathname === '/') {
                 e.preventDefault();
+
+                setMobileMenuOpen(false);
 
                 window.scrollTo({
                   top: 0,
@@ -222,7 +313,7 @@ export default function Navbar() {
             }}
             className="group flex shrink-0 flex-col text-left"
           >
-            <span className="whitespace-nowrap font-serif text-lg font-semibold tracking-wider leading-tight text-[#1F1917] transition-colors group-hover:text-[#A25345] sm:text-xl">
+            <span className="whitespace-nowrap font-serif text-lg font-semibold leading-tight tracking-wider text-[#1F1917] transition-colors group-hover:text-[#A25345] sm:text-xl">
               {ARTIST_INFO.name}
             </span>
 
@@ -240,7 +331,9 @@ export default function Navbar() {
                 <a
                   key={link.name}
                   href={link.route}
-                  onClick={(e) => handleNavAction(e, link)}
+                  onClick={(e) =>
+                    handleNavAction(e, link)
+                  }
                   className={`relative cursor-pointer py-1 text-xs tracking-wide transition-colors lg:text-[13px] ${active
                       ? 'font-semibold text-[#1F1917]'
                       : 'font-medium text-[#655E59] hover:text-[#1F1917]'
@@ -256,8 +349,9 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Desktop CTAs */}
+          {/* Desktop CTA */}
           <div className="hidden items-center gap-2 md:flex">
+
             <a
               href="/#location"
               onClick={(e) =>
@@ -282,10 +376,12 @@ export default function Navbar() {
               <MessageCircle className="h-3.5 w-3.5 fill-white" />
               <span>WhatsApp Us</span>
             </button>
+
           </div>
 
           {/* Mobile Actions */}
           <div className="flex items-center gap-2 md:hidden">
+
             <button
               onClick={() =>
                 openWhatsApp('Mobile Navbar Booking')
@@ -309,18 +405,24 @@ export default function Navbar() {
                 <Menu className="h-5 w-5" />
               )}
             </button>
+
           </div>
         </div>
 
-        {/* Mobile Drawer */}
+        {/* =========================================
+            MOBILE MENU
+        ========================================= */}
         {mobileMenuOpen && (
           <>
             <div
               className="fixed inset-0 top-[58px] z-40 bg-black/40 backdrop-blur-xs md:hidden"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() =>
+                setMobileMenuOpen(false)
+              }
             />
 
             <div className="relative z-50 max-h-[calc(100vh-58px)] overflow-y-auto border-b border-[#ECE6DE] bg-white/98 px-5 py-5 shadow-xl backdrop-blur-xl md:hidden">
+
               <div className="flex flex-col gap-1">
 
                 {navLinks.map((link) => {
@@ -345,6 +447,7 @@ export default function Navbar() {
 
                 <div className="mt-2 flex flex-col gap-2.5 border-t border-[#ECE6DE] pt-3">
 
+                  {/* Contact */}
                   <a
                     href="/#location"
                     onClick={(e) =>
@@ -362,6 +465,7 @@ export default function Navbar() {
                     </span>
                   </a>
 
+                  {/* WhatsApp */}
                   <button
                     onClick={() => {
                       setMobileMenuOpen(false);
@@ -380,7 +484,7 @@ export default function Navbar() {
         )}
       </header>
 
-      {/* Space reserved for fixed navbar */}
+      {/* Fixed Navbar Spacer */}
       <div className="h-[58px] sm:h-[64px]" />
     </>
   );

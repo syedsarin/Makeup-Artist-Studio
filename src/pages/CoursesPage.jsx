@@ -27,157 +27,211 @@ export default function CoursesPage() {
   }, []);
 
   const trainingPhotos = [
-    { title: 'Pro Vanity & Brushes', img: makeupToolkitImg },
-    { title: 'Live Bridal Demos', img: heroBrideMakeupImg },
-    { title: 'Hair & Dupatta Architecture', img: catHairImg },
-    { title: 'Portfolio Photoshoot', img: heroBrideHaloImg },
+    {
+      title: 'Pro Vanity & Brushes',
+      img: makeupToolkitImg,
+    },
+    {
+      title: 'Live Bridal Demos',
+      img: heroBrideMakeupImg,
+    },
+    {
+      title: 'Hair & Dupatta Architecture',
+      img: catHairImg,
+    },
+    {
+      title: 'Portfolio Photoshoot',
+      img: heroBrideHaloImg,
+    },
   ];
 
   return (
     <div className="bg-[#FAF8F5]">
 
-      {/* ─────────────────────────────────────────
-          Academy Hero Header
-      ───────────────────────────────────────── */}
-      <section className="relative min-h-[330px] sm:min-h-[400px] lg:min-h-[450px] overflow-hidden">
+      {/* =====================================================
+          ACADEMY HERO SLIDER
+      ===================================================== */}
+      <section className="relative w-full min-h-[560px] overflow-hidden bg-[#1F1917] sm:min-h-[620px] lg:min-h-[680px]">
 
-        {/* Background Image Slider */}
+        {/* Background Images */}
         <AnimatePresence mode="wait">
           <motion.img
             key={COURSE_HERO_IMAGES[heroSlide]}
             src={COURSE_HERO_IMAGES[heroSlide]}
             alt="Ayesha Malik Makeup Academy"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: 'easeInOut' }}
-            className="absolute inset-0 w-full h-full object-cover"
+            initial={{
+              opacity: 0,
+              scale: 1.02,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            transition={{
+              opacity: {
+                duration: 0.8,
+              },
+              scale: {
+                duration: 1.2,
+                ease: 'easeOut',
+              },
+            }}
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
         </AnimatePresence>
 
-        {/* Dark Luxury Overlay */}
-        <div className="absolute inset-0 bg-black/45" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/65" />
+        {/* Left Readability Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/10" />
+
+        {/* Bottom Readability Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
 
         {/* Hero Content */}
-        <div className="relative z-10 min-h-[330px] sm:min-h-[400px] lg:min-h-[450px] flex items-center justify-center px-5 text-center">
-          <div className="max-w-3xl mx-auto">
+        <div className="relative z-10 flex min-h-[560px] items-center sm:min-h-[620px] lg:min-h-[680px]">
 
-            {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <span className="h-px w-7 bg-[#E5C98A]" />
+          <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-24">
 
-              <span className="text-[9px] sm:text-[11px] font-semibold uppercase tracking-[0.25em] text-[#E5C98A]">
-                ACADEMY COURSES
-              </span>
+            <div className="max-w-xl text-left">
 
-              <span className="h-px w-7 bg-[#E5C98A]" />
+              {/* Eyebrow */}
+              <div className="mb-5 flex items-center gap-3">
+                <span className="h-px w-10 bg-[#E5C98A]" />
+
+                <span className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#F3DFAE] drop-shadow-md sm:text-[11px]">
+                  ACADEMY COURSES
+                </span>
+              </div>
+
+              {/* Small Label */}
+              <p className="mb-3 text-[9px] font-semibold uppercase tracking-[0.3em] text-white/90 drop-shadow-lg sm:text-xs">
+                PROFESSIONAL CERTIFICATION
+              </p>
+
+              {/* Main Heading */}
+              <h1 className="font-serif text-4xl font-semibold leading-[1.05] text-white drop-shadow-[0_4px_14px_rgba(0,0,0,0.9)] sm:text-5xl lg:text-6xl xl:text-7xl">
+                Ayesha Malik
+
+                <span className="mt-2 block italic font-normal text-[#F3DFAE] drop-shadow-[0_4px_14px_rgba(0,0,0,0.9)]">
+                  Makeup Academy
+                </span>
+              </h1>
+
+              {/* Description */}
+              <p className="mt-5 max-w-md text-sm font-medium leading-relaxed text-white/95 drop-shadow-[0_2px_9px_rgba(0,0,0,0.9)] sm:text-base">
+                Hands-on bridal makeup masterclasses with personal mentorship.
+              </p>
+
+              {/* CTA */}
+              <button
+                onClick={() =>
+                  openWhatsApp('Academy Course Enrollment Enquiry')
+                }
+                className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-xs font-semibold tracking-wide text-[#1F1917] shadow-xl transition-all duration-300 hover:scale-[1.02] hover:bg-[#F3DFAE]"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Enquire About Courses
+              </button>
+
             </div>
-
-            {/* Eyebrow */}
-            <p className="text-[9px] sm:text-xs font-semibold tracking-[0.3em] uppercase text-white/85 mb-2">
-              CERTIFICATION
-            </p>
-
-            {/* Main Title */}
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-white">
-              Ayesha Malik
-              <span className="block italic font-normal text-[#F3DFAE]">
-                Makeup Academy
-              </span>
-            </h1>
-
-            {/* Subtitle */}
-            <p className="mt-3 sm:mt-4 max-w-xl mx-auto text-xs sm:text-sm lg:text-base leading-relaxed text-white/85">
-              Hands-on bridal makeup masterclasses with personal mentorship.
-            </p>
-
-            {/* CTA */}
-            <button
-              onClick={() => openWhatsApp('Academy Course Enrollment Enquiry')}
-              className="mt-5 sm:mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 sm:px-6 sm:py-3 text-[11px] sm:text-xs font-semibold tracking-wide text-[#1F1917] shadow-lg transition-all duration-300 hover:bg-[#F3DFAE] hover:scale-[1.02]"
-            >
-              <MessageCircle className="w-3.5 h-3.5" />
-              Enquire About Courses
-            </button>
-
           </div>
         </div>
 
         {/* Slider Indicators */}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
+        <div className="absolute bottom-7 left-6 z-20 flex items-center gap-2 sm:left-10 lg:left-16 xl:left-24">
           {COURSE_HERO_IMAGES.map((_, index) => (
             <button
               key={index}
               onClick={() => setHeroSlide(index)}
               aria-label={`Show academy image ${index + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 ${heroSlide === index
-                  ? 'w-7 bg-white'
-                  : 'w-1.5 bg-white/60'
+              className={`h-1.5 rounded-full transition-all duration-500 ${heroSlide === index
+                  ? 'w-10 bg-white shadow-md'
+                  : 'w-2 bg-white/50 hover:bg-white/80'
                 }`}
             />
           ))}
         </div>
+
       </section>
 
-      {/* Courses List with Syllabus & Tuition */}
+      {/* =====================================================
+          COURSES LIST
+      ===================================================== */}
       <MakeupClasses />
 
-      {/* Studio Masterclass & Training Photos */}
-      <section className="py-10 sm:py-14 bg-white border-t border-[#ECE6DE]">
+      {/* =====================================================
+          INSIDE THE ACADEMY
+      ===================================================== */}
+      <section className="border-t border-[#ECE6DE] bg-white py-10 sm:py-14">
         <div className="container max-w-5xl">
 
-          <div className="flex items-center justify-between mb-6 text-left">
+          {/* Section Header */}
+          <div className="mb-6 flex items-center justify-between text-left">
+
             <div>
               <div className="eyebrow mb-1">
                 <span>INSIDE THE ACADEMY</span>
               </div>
 
-              <h3 className="font-serif text-xl sm:text-2xl font-semibold text-[#1F1917]">
+              <h3 className="font-serif text-xl font-semibold text-[#1F1917] sm:text-2xl">
                 Masterclass Studio &amp; Hands-On Training
               </h3>
             </div>
 
             <button
-              onClick={() => openWhatsApp('Academy Next Batch Inquiry')}
-              className="btn btn-secondary btn-sm hidden sm:flex items-center gap-1.5"
+              onClick={() =>
+                openWhatsApp('Academy Next Batch Inquiry')
+              }
+              className="btn btn-secondary btn-sm hidden items-center gap-1.5 sm:flex"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-[#A25345]" />
+              <MessageCircle className="h-3.5 w-3.5 text-[#A25345]" />
               <span>Next Batch Dates</span>
             </button>
+
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          {/* Training Photos */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+
             {trainingPhotos.map((item, idx) => (
               <div
                 key={idx}
-                className="group relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden border border-[#ECE6DE] bg-[#FAF8F5] shadow-2xs"
+                className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-[#ECE6DE] bg-[#FAF8F5] shadow-2xs sm:rounded-2xl"
               >
+
                 <img
                   src={item.img}
                   alt={item.title}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2.5">
+                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-2.5">
                   <span className="text-[11px] font-medium text-white">
                     {item.title}
                   </span>
                 </div>
+
               </div>
             ))}
+
           </div>
         </div>
       </section>
 
-      {/* Quick Batch Reservation CTA */}
-      <section className="py-8 sm:py-10 bg-[#FFF2F5] border-t border-[#ECE6DE]">
+      {/* =====================================================
+          QUICK BATCH RESERVATION CTA
+      ===================================================== */}
+      <section className="border-t border-[#ECE6DE] bg-[#FFF2F5] py-8 sm:py-10">
+
         <div className="container max-w-3xl text-center">
-          <div className="p-5 rounded-2xl bg-white border border-[#A25345]/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-2xs">
+
+          <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-[#A25345]/20 bg-white p-5 text-center shadow-2xs sm:flex-row sm:text-left">
 
             <div>
-              <p className="text-[9px] uppercase tracking-wider font-bold text-[#A25345]">
+              <p className="text-[9px] font-bold uppercase tracking-wider text-[#A25345]">
                 Limited to 6 Students
               </p>
 
@@ -187,15 +241,19 @@ export default function CoursesPage() {
             </div>
 
             <button
-              onClick={() => openWhatsApp('Academy Course Enrollment Enquiry')}
-              className="btn btn-primary btn-md shrink-0 flex items-center gap-2"
+              onClick={() =>
+                openWhatsApp('Academy Course Enrollment Enquiry')
+              }
+              className="btn btn-primary btn-md flex shrink-0 items-center gap-2"
             >
-              <MessageCircle className="w-4 h-4 fill-white" />
+              <MessageCircle className="h-4 w-4 fill-white" />
               <span>WhatsApp for Syllabus PDF</span>
             </button>
 
           </div>
+
         </div>
+
       </section>
 
     </div>
