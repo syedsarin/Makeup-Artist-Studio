@@ -23,14 +23,14 @@ const CATEGORY_STATS = [
     count: '800+',
     desc: 'Chic & Editorial',
     icon: Gem,
-    image: '../public/B11.png',
+    image: "/B11.png",
   },
   {
     label: 'Custom',
     count: '200+',
     desc: 'Bespoke Themes',
     icon: Palette,
-    image: '../public/B8.png',
+    image: "/B8.png",
   },
 ];
 
