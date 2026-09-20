@@ -225,7 +225,7 @@ export const PACKAGES = [
     price: "₹28,000",
     popular: true,
     badge: "MOST POPULAR",
-    image: catBridalImg,
+    image: '../public/B4.png',
     description: "Camera-ready airbrush perfection crafted for your wedding ceremony.",
     features: [
       "Ultra-HD Airbrush & HD Blended Makeup",
@@ -244,7 +244,7 @@ export const PACKAGES = [
     price: "₹45,000",
     popular: false,
     badge: "FULL WEDDING VIP",
-    image: heroBrideHaloImg,
+    image: '../public/B3.png',
     description: "Complete multi-event VIP package with private studio trial session.",
     features: [
       "Luxury HD / Airbrush Bridal Makeup",
@@ -283,7 +283,7 @@ export const PACKAGES = [
     price: "₹16,000",
     popular: true,
     badge: "TRENDING",
-    image: catEngagementImg,
+    image: '../public/B11.png',
     description: "Soft romantic glam with subtle shimmer and sculpted features for ring ceremonies.",
     features: [
       "Ultra-HD Soft Glam Complexion & Contouring",
@@ -301,7 +301,7 @@ export const PACKAGES = [
     price: "₹12,000",
     popular: false,
     badge: null,
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+    image: '../public/B13.png',
     description: "Dewy, radiant finish with soft definition to complement couture lehengas.",
     features: [
       "HD Radiant Glow Makeup Finish",
@@ -321,7 +321,7 @@ export const PACKAGES = [
     price: "₹9,500",
     popular: true,
     badge: "HIGH DEMAND",
-    image: catPartyImg,
+    image: '../public/B14.png',
     description: "High-impact evening styling with striking eyes for receptions and galas.",
     features: [
       "High-Definition Glam Evening Makeup",
@@ -339,7 +339,7 @@ export const PACKAGES = [
     price: "₹6,500",
     popular: false,
     badge: null,
-    image: catHairImg,
+    image: '../public/B12.png',
     description: "Chic, luminous look for bridesmaids, sisters of the bride, and wedding guests.",
     features: [
       "Dewy HD Skin Makeup",
@@ -377,7 +377,7 @@ export const MAKEUP_CLASSES = [
     sessionLength: "2 hrs / session",
     price: "₹12,000",
     popular: false,
-    image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+    image: '../public/course/C5.png',
     highlights: [
       "Skin Types & Undertone Theory",
       "Primer, Foundation & Concealer Techniques",
@@ -400,7 +400,7 @@ export const MAKEUP_CLASSES = [
     sessionLength: "3 hrs / session",
     price: "₹28,000",
     popular: true,
-    image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80",
+    image: '../public/course/C4.png',
     highlights: [
       "HD & Airbrush Bridal Makeup (All Skin Tones)",
       "South Indian, North Indian & Muslim Bridal Looks",
@@ -425,7 +425,7 @@ export const MAKEUP_CLASSES = [
     sessionLength: "3 hrs / session",
     price: "₹55,000",
     popular: false,
-    image: "https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=800&q=80",
+    image: '../public/course/C6.png',
     highlights: [
       "Complete Foundation + Advanced Bridal Curriculum",
       "Editorial & High-Fashion Makeup",
