@@ -11,47 +11,38 @@ import {
 } from 'lucide-react';
 import { openWhatsApp } from '../App';
 
-import heroBrideHaloImg from '../assets/hero-bride-halo.jpg';
-import catBridalImg from '../assets/cat-bridal.jpg';
 import heroBrideMakeupImg from '../assets/hero-bride-makeup.jpg';
-import catEngagementImg from '../assets/cat-engagement.jpg';
-import catHairImg from '../assets/cat-hair.jpg';
 import makeupToolkitImg from '../assets/makeup-toolkit.jpg';
 
 const BRIDAL_SLIDES = [
   {
     id: 1,
-    image: heroBrideHaloImg,
+    image: heroBrideMakeupImg,
     alt: 'Timeless Bridal Elegance in Champagne Couture',
     title: 'Signature Couture Bridal',
   },
   {
     id: 2,
-    image: catBridalImg,
+    image: '/B4.png',
     alt: 'Flawless HD Royal Bridal Look with Floral Veil',
     title: 'Royal Ivory & Gold Bride',
   },
   {
     id: 3,
-    image: makeupToolkitImg,
+    image: '/B3.png',
     alt: 'Professional Luxury Bridal Makeup Vanity Toolkit',
     title: 'Luxury Artist Makeup Toolkit',
   },
-  {
-    id: 4,
-    image: heroBrideMakeupImg,
-    alt: 'Royal Red Bridal Makeup Application in Progress',
-    title: 'Crimson Red Bridal Artistry',
-  },
+
   {
     id: 5,
-    image: catEngagementImg,
+    image: makeupToolkitImg,
     alt: 'Soft Romantic Pastel Engagement Glam',
     title: 'Romantic Pastel Glam',
   },
   {
     id: 6,
-    image: catHairImg,
+    image: '/B11.png',
     alt: 'Intricate Bridal Hair Styling & Dupatta Draping',
     title: 'Couture Hair & Dupatta Draping',
   },
@@ -61,17 +52,21 @@ export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % BRIDAL_SLIDES.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex + 1) % BRIDAL_SLIDES.length
+    );
   }, []);
 
   const prevSlide = useCallback(() => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + BRIDAL_SLIDES.length) % BRIDAL_SLIDES.length
+      (prevIndex) =>
+        (prevIndex - 1 + BRIDAL_SLIDES.length) %
+        BRIDAL_SLIDES.length
     );
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 3500);
+    const timer = setInterval(nextSlide, 3000);
     return () => clearInterval(timer);
   }, [nextSlide, currentIndex]);
 
@@ -87,12 +82,15 @@ export default function Hero() {
 
   const handlePortfolioClick = (e) => {
     e.preventDefault();
+
     const target = document.querySelector('#portfolio');
 
     if (target) {
       const navOffset = 70;
       const offsetPosition =
-        target.getBoundingClientRect().top + window.pageYOffset - navOffset;
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        navOffset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -108,7 +106,9 @@ export default function Hero() {
     >
       {/* Soft Rose Blush Ambient Studio Auras */}
       <div className="pointer-events-none absolute -right-28 -top-28 h-[400px] w-[400px] rounded-full bg-[#FFD6E7]/40 blur-[100px] sm:h-[600px] sm:w-[600px]" />
+
       <div className="pointer-events-none absolute -bottom-36 -left-28 h-[400px] w-[400px] rounded-full bg-[#FFE8F0]/60 blur-[100px] sm:h-[550px] sm:w-[550px]" />
+
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/50 blur-[120px]" />
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
@@ -116,6 +116,7 @@ export default function Hero() {
 
           {/* LEFT SIDE: TEXT CONTENT & CTAS */}
           <div className="relative z-10 text-left lg:col-span-5">
+
             {/* Subtle Ambient Makeup Toolkit Glow behind Text */}
             <div className="pointer-events-none absolute -inset-4 -z-10 overflow-hidden rounded-3xl opacity-20">
               <img
@@ -123,7 +124,9 @@ export default function Hero() {
                 alt=""
                 className="h-full w-full object-cover object-center filter blur-[1px]"
               />
+
               <div className="absolute inset-0 bg-gradient-to-r from-[#FFF2F5]/95 via-[#FFF2F5]/85 to-[#FFF2F5]" />
+
               <div className="absolute inset-0 bg-gradient-to-t from-[#FFF2F5] via-transparent to-[#FFF2F5]" />
             </div>
 
@@ -135,6 +138,7 @@ export default function Hero() {
               className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#A25345]/15 bg-white/80 px-3.5 py-1 backdrop-blur-md"
             >
               <Sparkles className="h-3.5 w-3.5 text-[#A25345]" />
+
               <span className="text-[11px] font-semibold uppercase tracking-wider text-[#A25345] sm:text-xs">
                 Luxury Bridal &amp; Couture Artistry
               </span>
@@ -150,12 +154,11 @@ export default function Hero() {
               <h1 className="font-serif text-4xl font-normal leading-[1.05] tracking-tight text-[#1F1917] sm:text-5xl lg:text-[62px]">
                 Timeless
               </h1>
+
               <span className="-mt-1 block font-script text-5xl font-normal leading-[0.9] text-[#A25345] sm:-mt-2.5 sm:text-6xl lg:text-[76px]">
                 Elegance
               </span>
             </motion.div>
-
-            {/* Tagline */}
 
             {/* CTAs */}
             <motion.div
@@ -166,10 +169,13 @@ export default function Hero() {
             >
               {/* WhatsApp */}
               <button
-                onClick={() => openWhatsApp('Hero WhatsApp Enquiry')}
+                onClick={() =>
+                  openWhatsApp('Hero WhatsApp Enquiry')
+                }
                 className="flex cursor-pointer items-center gap-2 rounded-full bg-[#A25345] px-6 py-2.5 text-xs font-medium text-white shadow-md shadow-[#A25345]/30 transition-all hover:bg-[#8D4437] hover:gap-2.5 active:scale-[0.98] sm:px-7 sm:py-3 sm:text-sm"
               >
                 <span>Book Appointment</span>
+
                 <ArrowRight className="h-3.5 w-3.5" />
               </button>
 
@@ -181,6 +187,7 @@ export default function Hero() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[#E8DCD1] bg-white shadow-sm transition-transform group-hover:scale-105 sm:h-9 sm:w-9">
                   <Play className="ml-0.5 h-3.5 w-3.5 fill-[#1F1917]" />
                 </div>
+
                 <span>View Portfolio</span>
               </button>
             </motion.div>
@@ -193,13 +200,25 @@ export default function Hero() {
               className="mt-8 flex items-center gap-6 border-t border-[#1F1917]/10 pt-5 sm:mt-10 sm:gap-8"
             >
               <div>
-                <p className="font-serif text-lg font-bold text-[#1F1917] sm:text-xl">800+</p>
-                <p className="text-[10px] uppercase tracking-wider text-[#786E66] sm:text-[11px]">Royal Brides</p>
+                <p className="font-serif text-lg font-bold text-[#1F1917] sm:text-xl">
+                  800+
+                </p>
+
+                <p className="text-[10px] uppercase tracking-wider text-[#786E66] sm:text-[11px]">
+                  Royal Brides
+                </p>
               </div>
+
               <div className="h-6 w-px bg-[#1F1917]/10" />
+
               <div>
-                <p className="font-serif text-lg font-bold text-[#1F1917] sm:text-xl">HD &amp; Airbrush</p>
-                <p className="text-[10px] uppercase tracking-wider text-[#786E66] sm:text-[11px]">Specialist</p>
+                <p className="font-serif text-lg font-bold text-[#1F1917] sm:text-xl">
+                  HD &amp; Airbrush
+                </p>
+
+                <p className="text-[10px] uppercase tracking-wider text-[#786E66] sm:text-[11px]">
+                  Specialist
+                </p>
               </div>
             </motion.div>
           </div>
@@ -212,11 +231,13 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="relative mx-auto flex aspect-[4/3] w-full items-center justify-center"
             >
+
               {/* Glowing Halo Ring */}
               <div className="pointer-events-none absolute z-0 aspect-square w-[86%] rounded-full border-[3px] border-white/95 shadow-[0_0_50px_rgba(255,225,185,0.9),0_0_100px_rgba(255,190,140,0.5),inset_0_0_30px_rgba(255,255,255,0.8)]" />
 
               {/* Slider Box */}
               <div className="group relative z-10 h-full w-full overflow-hidden rounded-[26px] border-4 border-white/90 bg-[#F4EBE3] shadow-2xl sm:rounded-[34px]">
+
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={BRIDAL_SLIDES[currentIndex].id}
@@ -225,7 +246,10 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 1.04 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.6, ease: 'easeInOut' }}
+                    transition={{
+                      duration: 0.6,
+                      ease: 'easeInOut',
+                    }}
                     className="absolute inset-0 h-full w-full object-cover object-center"
                     loading="eager"
                   />
@@ -288,17 +312,16 @@ export default function Hero() {
                 <div className="flex h-4 w-4 items-center justify-center rounded-full bg-[#A25345]/10">
                   <Award className="h-2.5 w-2.5 text-[#A25345]" />
                 </div>
+
                 <span className="text-[11px] font-semibold text-[#1F1917] sm:text-xs">
                   HD Certified
                 </span>
               </motion.div>
 
-
             </motion.div>
           </div>
-
         </div>
       </div>
-    </section >
+    </section>
   );
 }
