@@ -16,11 +16,10 @@ export function CourseCard({ course }) {
 
   return (
     <div
-      className={`relative flex flex-col rounded-xl sm:rounded-2xl overflow-hidden border transition-all duration-300 h-full justify-between bg-white ${
-        isPopular
-          ? 'border-2 border-[#C5A059] bg-gradient-to-b from-white via-[#FDFBF7] to-[#FAF8F5] shadow-xs'
-          : 'border border-[#ECE6DE] hover:border-[#C5A059]/50 hover:shadow-xs'
-      }`}
+      className={`relative flex flex-col rounded-xl sm:rounded-2xl overflow-hidden border transition-all duration-300 h-full justify-between bg-white ${isPopular
+        ? 'border-2 border-[#C5A059] bg-gradient-to-b from-white via-[#FDFBF7] to-[#FAF8F5] shadow-xs'
+        : 'border border-[#ECE6DE] hover:border-[#C5A059]/50 hover:shadow-xs'
+        }`}
     >
       {/* Top Academy Floating Badge */}
       <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full text-[7.5px] sm:text-[8.5px] font-bold uppercase tracking-widest flex items-center gap-1 bg-[#1F1917] text-[#E5D5BC] border border-[#C5A059]/40 shadow-xs">
@@ -123,9 +122,8 @@ export function CourseCard({ course }) {
         <div className="pt-2 border-t border-[#ECE6DE] mt-auto">
           <button
             onClick={() => openWhatsApp(`${course.title} Enquiry`)}
-            className={`btn w-full justify-center min-h-[32px] sm:min-h-[36px] py-1 px-2 text-[10px] sm:text-xs rounded-lg ${
-              isPopular ? 'btn-primary shadow-xs' : 'btn-secondary'
-            }`}
+            className={`btn w-full justify-center min-h-[32px] sm:min-h-[36px] py-1 px-2 text-[10px] sm:text-xs rounded-lg ${isPopular ? 'btn-primary shadow-xs' : 'btn-secondary'
+              }`}
           >
             <MessageCircle className={`w-3 h-3 ${isPopular ? 'fill-white' : 'text-[#1F1917]'}`} />
             <span>Enquire Course</span>
