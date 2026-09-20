@@ -9,14 +9,14 @@ const CATEGORY_STATS = [
     count: '500+',
     desc: 'Royal & Couture',
     icon: Crown,
-    image: '../public/hero-bride-makeup.jpg',
+    image: "/B3.png",
   },
   {
     label: 'Engagement',
     count: '350+',
     desc: 'Soft Romantic Glam',
     icon: Heart,
-    image: '../public/B4.png',
+    image: "/B14.png",
   },
   {
     label: 'Party',
