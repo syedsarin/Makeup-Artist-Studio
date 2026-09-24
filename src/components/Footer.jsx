@@ -8,35 +8,6 @@ export default function Footer() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Scroll to hash after navigating back to homepage
-  useEffect(() => {
-    if (location.pathname === '/' && location.hash) {
-      const scrollToTarget = () => {
-        const id = location.hash.replace('#', '');
-        const targetEl = document.getElementById(id);
-
-        if (targetEl) {
-          const navOffset = 70;
-
-          const offsetPosition =
-            targetEl.getBoundingClientRect().top +
-            window.pageYOffset -
-            navOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth',
-          });
-        }
-      };
-
-      // Wait for homepage sections to render
-      const timer = setTimeout(scrollToTarget, 100);
-
-      return () => clearTimeout(timer);
-    }
-  }, [location.pathname, location.hash]);
-
   const handleNavClick = (e, href) => {
     e.preventDefault();
 
@@ -61,8 +32,21 @@ export default function Footer() {
 
     // Homepage sections
     if (href.startsWith('#')) {
+      const sectionId = href.replace('#', '');
+
+      if (sectionId === 'hero') {
+        if (location.pathname === '/') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          navigate('/');
+        }
+        return;
+      }
+
       if (location.pathname === '/') {
-        const targetEl = document.querySelector(href);
+        const targetEl =
+          document.getElementById(sectionId) ||
+          (sectionId === 'contact' ? document.getElementById('location') : null);
 
         if (targetEl) {
           const navOffset = 70;
@@ -78,7 +62,11 @@ export default function Footer() {
           });
         }
       } else {
-        navigate(`/${href}`);
+        navigate('/', {
+          state: {
+            scrollTo: sectionId,
+          },
+        });
       }
 
       return;
@@ -97,7 +85,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-5">
             <a
-              href="/#hero"
+              href="/"
               onClick={(e) => handleNavClick(e, '#hero')}
               className="mb-2 inline-block"
             >
@@ -160,7 +148,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  href="/#hero"
+                  href="/"
                   onClick={(e) => handleNavClick(e, '#hero')}
                   className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
                 >
@@ -170,7 +158,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  href="/#bridal"
+                  href="/"
                   onClick={(e) => handleNavClick(e, '#bridal')}
                   className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
                 >
@@ -180,8 +168,8 @@ export default function Footer() {
 
               <li>
                 <a
-                  href="/#services"
-                  onClick={(e) => handleNavClick(e, '#services')}
+                  href="/"
+                  onClick={(e) => handleNavClick(e, '#bridal')}
                   className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
                 >
                   Occasion Services
@@ -210,7 +198,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  href="/#about"
+                  href="/"
                   onClick={(e) => handleNavClick(e, '#about')}
                   className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
                 >
@@ -220,7 +208,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  href="/#location"
+                  href="/"
                   onClick={(e) => handleNavClick(e, '#location')}
                   className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
                 >

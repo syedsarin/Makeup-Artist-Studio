@@ -10,6 +10,7 @@ export default function Location() {
 
   return (
     <section id="location" className="section bg-white border-b border-[#ECE6DE]">
+      <div id="contact" className="sr-only" aria-hidden="true" />
       <div className="container">
         
         {/* Section Header */}

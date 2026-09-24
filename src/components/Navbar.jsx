@@ -60,16 +60,14 @@ export default function Navbar() {
   }, [location.pathname]);
 
   /* =========================================
-     Reliable Section Navigation
+     Reliable Section Navigation (User Action Only)
   ========================================= */
   useEffect(() => {
     if (location.pathname !== '/') return;
 
-    const targetId =
-      location.state?.scrollTo ||
-      (location.hash
-        ? location.hash.replace('#', '')
-        : null);
+    // Only scroll if explicitly requested via in-app user navigation state
+    // NEVER auto-scroll from URL hash on initial page load / link open
+    const targetId = location.state?.scrollTo;
 
     if (!targetId) return;
 
@@ -79,7 +77,9 @@ export default function Navbar() {
     const scrollToTarget = () => {
       if (cancelled) return;
 
-      const target = document.getElementById(targetId);
+      const target =
+        document.getElementById(targetId) ||
+        (targetId === 'contact' ? document.getElementById('location') : null);
 
       if (target) {
         const navOffset = 70;
@@ -94,19 +94,11 @@ export default function Navbar() {
           behavior: 'smooth',
         });
 
-        // Remove navigation state after successful scroll
-        if (location.state?.scrollTo) {
-          navigate(
-            {
-              pathname: '/',
-              hash: `#${targetId}`,
-            },
-            {
-              replace: true,
-              state: {},
-            }
-          );
-        }
+        // Clean up navigation state completely WITHOUT setting hash in URL
+        navigate('/', {
+          replace: true,
+          state: {},
+        });
 
         return;
       }
@@ -122,7 +114,7 @@ export default function Navbar() {
     // Start after the route has rendered
     const timer = setTimeout(() => {
       requestAnimationFrame(scrollToTarget);
-    }, 50);
+    }, 60);
 
     return () => {
       cancelled = true;
@@ -130,7 +122,6 @@ export default function Navbar() {
     };
   }, [
     location.pathname,
-    location.hash,
     location.state,
     navigate,
   ]);
@@ -149,13 +140,13 @@ export default function Navbar() {
       name: 'About',
       type: 'scroll',
       hash: '#about',
-      route: '/#about',
+      route: '/',
     },
     {
       name: 'Services',
       type: 'scroll',
       hash: '#bridal',
-      route: '/#bridal',
+      route: '/',
     },
     {
       name: 'Gallery',
@@ -176,7 +167,7 @@ export default function Navbar() {
       name: 'Contact',
       type: 'scroll',
       hash: '#location',
-      route: '/#location',
+      route: '/',
     },
   ];
 
@@ -210,7 +201,9 @@ export default function Navbar() {
     /* Already on Homepage */
     if (location.pathname === '/') {
       const targetId = link.hash.replace('#', '');
-      const targetEl = document.getElementById(targetId);
+      const targetEl =
+        document.getElementById(targetId) ||
+        (targetId === 'contact' ? document.getElementById('location') : null);
 
       if (targetEl) {
         const navOffset = 70;
@@ -353,12 +346,12 @@ export default function Navbar() {
           <div className="hidden items-center gap-2 md:flex">
 
             <a
-              href="/#location"
+              href="/"
               onClick={(e) =>
                 handleNavAction(e, {
                   type: 'scroll',
                   hash: '#location',
-                  route: '/#location',
+                  route: '/',
                 })
               }
               className="btn btn-secondary btn-sm group flex cursor-pointer items-center gap-1.5"
@@ -449,12 +442,12 @@ export default function Navbar() {
 
                   {/* Contact */}
                   <a
-                    href="/#location"
+                    href="/"
                     onClick={(e) =>
                       handleNavAction(e, {
                         type: 'scroll',
                         hash: '#location',
-                        route: '/#location',
+                        route: '/',
                       })
                     }
                     className="btn btn-secondary flex min-h-[42px] w-full cursor-pointer justify-center text-xs font-semibold"
