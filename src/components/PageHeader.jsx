@@ -1,8 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronRight, Sparkles } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ChevronRight, Sparkles, ArrowLeft } from 'lucide-react';
 
 export default function PageHeader({ eyebrow, title, subtitle, breadcrumb }) {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
     <div className="relative overflow-hidden bg-[#FFF2F5] border-b border-[#ECE6DE] py-9 sm:py-12 lg:py-14 text-center">
       {/* Ambient Luxury Auras */}
@@ -11,14 +21,30 @@ export default function PageHeader({ eyebrow, title, subtitle, breadcrumb }) {
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/60 blur-[100px]" />
 
       <div className="container relative z-10 max-w-4xl mx-auto px-4">
-        {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-1.5 text-xs text-[#786E66] mb-3">
-          <Link to="/" className="hover:text-[#A25345] transition-colors">
-            Home
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-[#C5A059]" />
-          <span className="font-semibold text-[#1F1917]">{breadcrumb || title}</span>
-        </nav>
+        {/* Breadcrumb Navigation & Back Action */}
+        <div className="flex items-center justify-center gap-2.5 text-xs text-[#786E66] mb-3">
+          <button
+            onClick={handleBack}
+            className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[#ECE6DE] bg-white/90 px-3 py-1 text-[11px] font-semibold text-[#1F1917] shadow-2xs transition-all hover:border-[#A25345] hover:text-[#A25345] active:scale-95"
+            aria-label="Go Back"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 text-[#A25345]" />
+            <span>Back</span>
+          </button>
+
+          <span className="text-[#DDD5CB]">|</span>
+
+          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5">
+            <button
+              onClick={handleBack}
+              className="cursor-pointer hover:text-[#A25345] transition-colors"
+            >
+              Home
+            </button>
+            <ChevronRight className="w-3.5 h-3.5 text-[#C5A059]" />
+            <span className="font-semibold text-[#1F1917]">{breadcrumb || title}</span>
+          </nav>
+        </div>
 
         {/* Eyebrow */}
         {eyebrow && (

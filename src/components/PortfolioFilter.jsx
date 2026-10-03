@@ -11,11 +11,10 @@ export default function PortfolioFilter({ activeCategory, onSelectCategory }) {
             <button
               key={category}
               onClick={() => onSelectCategory(category)}
-              className={`min-h-[34px] sm:min-h-[36px] px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-medium tracking-wide transition-all duration-200 whitespace-nowrap active:scale-95 cursor-pointer border ${
-                isActive
+              className={`min-h-[34px] sm:min-h-[36px] px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-[13px] font-medium tracking-wide transition-all duration-200 whitespace-nowrap active:scale-95 cursor-pointer border ${isActive
                   ? 'bg-[#1F1917] text-white border-[#1F1917] shadow-sm font-semibold'
                   : 'bg-white text-[#655E59] hover:text-[#1F1917] border-[#ECE6DE] hover:border-[#C5A059]'
-              }`}
+                }`}
             >
               {category}
             </button>

@@ -16,10 +16,7 @@ export function CourseCard({ course }) {
 
   return (
     <div
-      className={`relative flex flex-col rounded-xl sm:rounded-2xl overflow-hidden border transition-all duration-300 h-full justify-between bg-white ${isPopular
-        ? 'border-2 border-[#C5A059] bg-gradient-to-b from-white via-[#FDFBF7] to-[#FAF8F5] shadow-xs'
-        : 'border border-[#ECE6DE] hover:border-[#C5A059]/50 hover:shadow-xs'
-        }`}
+      className="relative flex flex-col rounded-xl sm:rounded-2xl overflow-hidden border border-[#ECE6DE] transition-all duration-300 justify-between bg-white hover:border-[#C5A059]/50 hover:shadow-xs"
     >
       {/* Top Academy Floating Badge */}
       <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full text-[7.5px] sm:text-[8.5px] font-bold uppercase tracking-widest flex items-center gap-1 bg-[#1F1917] text-[#E5D5BC] border border-[#C5A059]/40 shadow-xs">
@@ -118,14 +115,13 @@ export function CourseCard({ course }) {
           </div>
         </div>
 
-        {/* WhatsApp Button */}
-        <div className="pt-2 border-t border-[#ECE6DE] mt-auto">
+        {/* Enquire Button - Fixed Controlled Width */}
+        <div className="pt-2 border-t border-[#ECE6DE] mt-auto flex justify-center">
           <button
             onClick={() => openWhatsApp(`${course.title} Enquiry`)}
-            className={`btn w-full justify-center min-h-[32px] sm:min-h-[36px] py-1 px-2 text-[10px] sm:text-xs rounded-lg ${isPopular ? 'btn-primary shadow-xs' : 'btn-secondary'
-              }`}
+            className="inline-flex items-center justify-center gap-1.5 w-full max-w-[180px] sm:w-[190px] min-h-[32px] sm:min-h-[36px] py-1.5 px-3 text-[10px] sm:text-xs font-semibold rounded-full normal-case tracking-normal cursor-pointer bg-[#A25345] hover:bg-[#8D4437] text-white shadow-sm shadow-[#A25345]/20 hover:shadow-md hover:shadow-[#A25345]/30 active:scale-98 transition-all mx-auto"
           >
-            <MessageCircle className={`w-3 h-3 ${isPopular ? 'fill-white' : 'text-[#1F1917]'}`} />
+            <MessageCircle className="w-3 h-3 fill-white text-white shrink-0" />
             <span>Enquire Course</span>
           </button>
         </div>
@@ -146,7 +142,7 @@ export default function MakeupClasses() {
         <div className="mb-5 sm:mb-8">
 
           {/* Centered Heading Block */}
-          <div className="text-center max-w-2xl mx-auto mb-3.5 sm:mb-5">
+          < div className="text-center max-w-2xl mx-auto mb-3.5 sm:mb-5">
             <div className="eyebrow justify-center"><span>ACADEMY & MASTERCLASSES</span></div>
             <h2 className="section-title text-xl sm:text-3xl lg:text-[34px] font-serif text-[#1F1917] leading-tight mb-1.5 sm:mb-2">
               Makeup Courses &{' '}
@@ -178,8 +174,8 @@ export default function MakeupClasses() {
 
         </div>
 
-        {/* Course Cards - Clean 2-Column Grid on Mobile, Responsive 3-col on Desktop */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-5 items-stretch">
+        {/* Course Cards - Clean 2-Column Grid on Mobile */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-5 items-start">
           {MAKEUP_CLASSES.map((course, index) => (
             <motion.div
               key={course.id}
@@ -187,7 +183,6 @@ export default function MakeupClasses() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: index * 0.05 }}
-              className="flex h-full w-full"
             >
               <CourseCard course={course} />
             </motion.div>

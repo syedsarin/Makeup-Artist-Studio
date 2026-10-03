@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, Sparkles, ChevronRight, ChevronLeft } from 'lucide-react';
 import MakeupClasses from '../components/MakeupClasses';
 import { openWhatsApp } from '../App';
 
@@ -13,18 +13,26 @@ const COURSE_HERO_IMAGES = [
   '/course/C1.png',
   '/course/C2.png',
   '/course/C3.png',
+  '/course/C4.png',
+  '/course/C5.png',
+  '/course/C6.png',
 ];
 
 export default function CoursesPage() {
   const [heroSlide, setHeroSlide] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setHeroSlide((prev) => (prev + 1) % COURSE_HERO_IMAGES.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
+  const nextSlide = useCallback(() => {
+    setHeroSlide((prev) => (prev + 1) % COURSE_HERO_IMAGES.length);
   }, []);
+
+  const prevSlide = useCallback(() => {
+    setHeroSlide((prev) => (prev - 1 + COURSE_HERO_IMAGES.length) % COURSE_HERO_IMAGES.length);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 3500);
+    return () => clearInterval(interval);
+  }, [nextSlide]);
 
   const trainingPhotos = [
     {
@@ -49,111 +57,109 @@ export default function CoursesPage() {
     <div className="bg-[#FAF8F5]">
 
       {/* =====================================================
-          ACADEMY HERO SLIDER
+          ACADEMY HERO SECTION (WIDE, THIN BORDERS, CLEAR IMAGES)
       ===================================================== */}
-      <section className="relative w-full min-h-[560px] overflow-hidden bg-[#1F1917] sm:min-h-[620px] lg:min-h-[680px]">
+      <section className="relative w-full bg-[#FAF8F5] py-5 sm:py-7 lg:py-9 border-b border-[#ECE6DE]">
+        <div className="w-full max-w-[1400px] mx-auto px-3.5 sm:px-6 lg:px-8">
 
-        {/* Background Images */}
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={COURSE_HERO_IMAGES[heroSlide]}
-            src={COURSE_HERO_IMAGES[heroSlide]}
-            alt="Ayesha Malik Makeup Academy"
-            initial={{
-              opacity: 0,
-              scale: 1.02,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            transition={{
-              opacity: {
-                duration: 0.8,
-              },
-              scale: {
-                duration: 1.2,
-                ease: 'easeOut',
-              },
-            }}
-            className="absolute inset-0 h-full w-full object-cover object-center"
-          />
-        </AnimatePresence>
+          {/* Framed Hero Card with Thin Luxury Borders */}
+          <div className="rounded-2xl sm:rounded-3xl border border-[#ECE6DE] bg-white p-4 sm:p-7 lg:p-9 shadow-xs">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
 
-        {/* Left Readability Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/10" />
+              {/* LEFT COLUMN: Organized Typography & Action */}
+              <div className="lg:col-span-5 text-left flex flex-col justify-center">
+                {/* Eyebrow Badge with Thin Border */}
+                <div className="mb-2.5 sm:mb-3">
+                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FAF5EB] border border-[#A25345]/20 text-[#A25345] text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] shadow-2xs">
+                    <Sparkles className="w-3 h-3 text-[#A25345]" />
+                    <span>ACADEMY &amp; MASTERCLASSES</span>
+                  </span>
+                </div>
 
-        {/* Bottom Readability Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
+                {/* Main Heading */}
+                <h1 className="font-serif text-3xl sm:text-4xl lg:text-[44px] font-semibold text-[#1F1917] tracking-tight leading-[1.12]">
+                  Makeup Courses &amp;
+                  <span className="block italic font-normal text-[#A25345] mt-1 sm:mt-1.5">
+                    Professional Certification
+                  </span>
+                </h1>
 
-        {/* Hero Content */}
-        <div className="relative z-10 flex min-h-[560px] items-center sm:min-h-[620px] lg:min-h-[680px]">
+                {/* Concise Description */}
+                <p className="mt-3.5 sm:mt-4 text-xs sm:text-sm text-[#655E59] leading-relaxed max-w-md">
+                  Master the art of <span className="font-semibold text-[#1F1917]">luxury bridal makeup</span> under the personal mentorship of <span className="font-semibold text-[#A25345]">Ayesha Malik</span>.
+                </p>
 
-          <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-24">
-
-            <div className="max-w-xl text-left">
-
-              {/* Eyebrow */}
-              <div className="mb-5 flex items-center gap-3">
-                <span className="h-px w-10 bg-[#E5C98A]" />
-
-                <span className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#F3DFAE] drop-shadow-md sm:text-[11px]">
-                  ACADEMY COURSES
-                </span>
+                {/* Enquire CTA Button with Controlled Width & Thin Border */}
+                <div className="mt-5 sm:mt-6">
+                  <button
+                    onClick={() => openWhatsApp('Academy Course Enrollment Enquiry')}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#A25345] hover:bg-[#8D4437] text-white px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-[13px] font-semibold shadow-md shadow-[#A25345]/25 border border-[#A25345] hover:border-[#8D4437] active:scale-98 transition-all cursor-pointer"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-white text-white shrink-0" />
+                    <span>Enquire About Courses</span>
+                  </button>
+                </div>
               </div>
 
-              {/* Small Label */}
-              <p className="mb-3 text-[9px] font-semibold uppercase tracking-[0.3em] text-white/90 drop-shadow-lg sm:text-xs">
-                PROFESSIONAL CERTIFICATION
-              </p>
+              {/* RIGHT COLUMN: Wider Crystal-Clear Image Showcase with Thin Border */}
+              <div className="lg:col-span-7 w-full">
+                <div className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full min-h-[260px] sm:min-h-[360px] lg:min-h-[440px] overflow-hidden rounded-xl sm:rounded-2xl border border-[#ECE6DE] shadow-xs bg-[#FAF8F5]">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={COURSE_HERO_IMAGES[heroSlide]}
+                      src={COURSE_HERO_IMAGES[heroSlide]}
+                      alt="Ayesha Malik Makeup Academy Live Session"
+                      initial={{ opacity: 0, scale: 1.02 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        opacity: { duration: 0.5 },
+                        scale: { duration: 0.7, ease: 'easeOut' },
+                      }}
+                      className="absolute inset-0 h-full w-full object-cover object-center filter brightness-105 contrast-[1.02]"
+                    />
+                  </AnimatePresence>
 
-              {/* Main Heading */}
-              <h1 className="font-serif text-4xl font-semibold leading-[1.05] text-white drop-shadow-[0_4px_14px_rgba(0,0,0,0.9)] sm:text-5xl lg:text-6xl xl:text-7xl">
-                Ayesha Malik
+                  {/* Bottom Controls Bar with Clean Thin Border Styling */}
+                  <div className="absolute inset-x-3 bottom-3 z-20 flex items-center justify-between">
+                    {/* Slide Dots */}
+                    <div className="flex items-center gap-1.5 bg-black/45 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-white/20 shadow-xs">
+                      {COURSE_HERO_IMAGES.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setHeroSlide(index)}
+                          aria-label={`Show academy slide ${index + 1}`}
+                          className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${heroSlide === index ? 'w-6 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'
+                            }`}
+                        />
+                      ))}
+                    </div>
 
-                <span className="mt-2 block italic font-normal text-[#F3DFAE] drop-shadow-[0_4px_14px_rgba(0,0,0,0.9)]">
-                  Makeup Academy
-                </span>
-              </h1>
-
-              {/* Description */}
-              <p className="mt-5 max-w-md text-sm font-medium leading-relaxed text-white/95 drop-shadow-[0_2px_9px_rgba(0,0,0,0.9)] sm:text-base">
-                Hands-on bridal makeup masterclasses with personal mentorship.
-              </p>
-
-              {/* CTA */}
-              <button
-                onClick={() =>
-                  openWhatsApp('Academy Course Enrollment Enquiry')
-                }
-                className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-xs font-semibold tracking-wide text-[#1F1917] shadow-xl transition-all duration-300 hover:scale-[1.02] hover:bg-[#F3DFAE]"
-              >
-                <MessageCircle className="h-4 w-4" />
-                Enquire About Courses
-              </button>
+                    {/* Prev / Next Arrows with Thin Border */}
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={prevSlide}
+                        aria-label="Previous slide"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/95 hover:bg-white text-[#1F1917] hover:text-[#A25345] border border-[#ECE6DE] shadow-xs flex items-center justify-center cursor-pointer transition-colors active:scale-95"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={nextSlide}
+                        aria-label="Next slide"
+                        className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/95 hover:bg-white text-[#1F1917] hover:text-[#A25345] border border-[#ECE6DE] shadow-xs flex items-center justify-center cursor-pointer transition-colors active:scale-95"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             </div>
           </div>
-        </div>
 
-        {/* Slider Indicators */}
-        <div className="absolute bottom-7 left-6 z-20 flex items-center gap-2 sm:left-10 lg:left-16 xl:left-24">
-          {COURSE_HERO_IMAGES.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setHeroSlide(index)}
-              aria-label={`Show academy image ${index + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-500 ${heroSlide === index
-                  ? 'w-10 bg-white shadow-md'
-                  : 'w-2 bg-white/50 hover:bg-white/80'
-                }`}
-            />
-          ))}
         </div>
-
       </section>
 
       {/* =====================================================

@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ABOUT_ARTIST, ARTIST_INFO } from '../data/bridalData';
-import { Sparkles, Wand2, Clock, MessageCircle } from 'lucide-react';
-import { openWhatsApp } from '../App';
+import { Sparkles, Wand2, Clock } from 'lucide-react';
 
 export default function AboutArtist() {
   const THREE_PILLARS = [
@@ -24,12 +23,29 @@ export default function AboutArtist() {
   ];
 
   return (
-    <section id="about" className="py-12 sm:py-16 lg:py-20 bg-[#FAF8F5] border-b border-[#ECE6DE]">
+    <section id="about" className="py-10 sm:py-16 lg:py-20 bg-[#FAF8F5] border-b border-[#ECE6DE]">
       <div className="container">
+
+        {/* =====================================================
+            MOBILE HEADER: First Heading "THE ARTIST" & "Beauty, Personalised."
+            Displayed before image on mobile view (< lg)
+        ====================================================== */}
+        <div className="block lg:hidden text-center mb-6">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF5EB] border border-[#C5A059]/30 mb-2">
+            <Sparkles className="w-3 h-3 text-[#C5A059]" />
+            <span className="text-[10px] font-semibold tracking-[0.22em] text-[#C5A059] uppercase">
+              THE ARTIST
+            </span>
+          </div>
+          <h2 className="font-serif text-3xl font-normal text-[#1F1917] tracking-tight leading-[1.1]">
+            Beauty, Personalised.
+          </h2>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
           {/* =====================================================
-              LEFT COLUMN: ARTIST PORTRAIT (IMAGE FIRST ON MOBILE)
+              LEFT COLUMN: ARTIST PORTRAIT
               Preserved exact existing photo design
           ====================================================== */}
           <motion.div
@@ -59,7 +75,7 @@ export default function AboutArtist() {
                     {ARTIST_INFO.name}
                   </span>
                   <span className="text-[8.5px] sm:text-[9.5px] font-bold uppercase tracking-widest text-[#9B4B5A]">
-                    Lead Bridal Stylist & Founder
+                    Lead Bridal Stylist &amp; Founder
                   </span>
                 </div>
               </div>
@@ -67,7 +83,7 @@ export default function AboutArtist() {
           </motion.div>
 
           {/* =====================================================
-              RIGHT COLUMN: EDITORIAL CONTENT
+              RIGHT COLUMN: EDITORIAL CONTENT & PILLARS
           ====================================================== */}
           <motion.div
             className="lg:col-span-7 text-left"
@@ -76,30 +92,49 @@ export default function AboutArtist() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {/* Small Eyebrow: THE ARTIST */}
-            <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.22em] text-[#C5A059] uppercase">
-                THE ARTIST
-              </span>
+            {/* Desktop Heading (Hidden on mobile since mobile header is rendered first above image) */}
+            <div className="hidden lg:block">
+              <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
+                <span className="text-[10px] sm:text-xs font-semibold tracking-[0.22em] text-[#C5A059] uppercase">
+                  THE ARTIST
+                </span>
+              </div>
+
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#1F1917] tracking-tight leading-[1.1] mb-3 sm:mb-4">
+                Beauty, Personalised.
+              </h2>
             </div>
 
-            {/* Heading: Beauty, Personalised. */}
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#1F1917] tracking-tight leading-[1.1] mb-3 sm:mb-4">
-              Beauty, Personalised.
-            </h2>
-
-            {/* Editorial Paragraph */}
-            <p className="text-xs sm:text-sm text-[#655E59] leading-relaxed mb-5 sm:mb-6 font-normal max-w-xl">
+            {/* Desktop / Tablet View: Editorial Paragraph */}
+            <p className="hidden sm:block text-xs sm:text-sm text-[#655E59] leading-relaxed mb-5 sm:mb-6 font-normal max-w-xl">
               {ABOUT_ARTIST.description}
             </p>
+
+            {/* Mobile View: All Points in ONE Badge */}
+            <div className="sm:hidden p-3.5 rounded-2xl bg-white border border-[#ECE6DE] shadow-2xs mb-5 text-left space-y-2.5">
+              {(ABOUT_ARTIST.points || [ABOUT_ARTIST.description]).map((point, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start gap-2.5"
+                >
+                  <div className="w-4 h-4 rounded-full bg-[#FAF5EB] border border-[#C5A059]/40 flex items-center justify-center shrink-0 mt-0.5 text-[#C5A059]">
+                    <span className="text-[9px] leading-none">✦</span>
+                  </div>
+                  <p className="text-[11px] text-[#524B46] leading-relaxed font-normal">
+                    {point}
+                  </p>
+                </div>
+              ))}
+            </div>
 
             {/* Existing Stats Row */}
             <div className="grid grid-cols-3 gap-2 sm:gap-3 p-3 sm:p-3.5 rounded-xl bg-white border border-[#ECE6DE] shadow-2xs mb-5 sm:mb-6 max-w-lg">
               {ABOUT_ARTIST.stats.map((stat, idx) => (
                 <div
                   key={idx}
-                  className={`text-center px-1 sm:px-2 ${idx !== ABOUT_ARTIST.stats.length - 1 ? 'border-r border-[#ECE6DE]' : ''
-                    }`}
+                  className={`text-center px-1 sm:px-2 ${
+                    idx !== ABOUT_ARTIST.stats.length - 1 ? 'border-r border-[#ECE6DE]' : ''
+                  }`}
                 >
                   <div className="font-serif text-lg sm:text-2xl font-bold text-[#1F1917] leading-none">
                     {stat.value}
@@ -111,22 +146,24 @@ export default function AboutArtist() {
               ))}
             </div>
 
-            {/* 3 Compact Editorial Pillars */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 mb-6 sm:mb-7">
+            {/* 3 Pillars: Fits in ONE SCREEN on mobile without slider */}
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-3 mb-6 sm:mb-7">
               {THREE_PILLARS.map((pillar, idx) => {
                 const Icon = pillar.icon;
                 return (
                   <div
                     key={idx}
-                    className="p-3 sm:p-3.5 rounded-xl bg-white border border-[#ECE6DE] hover:border-[#C5A059]/50 transition-colors shadow-2xs"
+                    className="p-2 sm:p-3.5 rounded-xl bg-white border border-[#ECE6DE] hover:border-[#C5A059]/50 transition-colors shadow-2xs flex flex-col justify-between"
                   >
-                    <div className="w-7 h-7 rounded-full bg-[#FAF5EB] border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] mb-2">
-                      <Icon className="w-3.5 h-3.5 stroke-[2]" />
+                    <div>
+                      <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-[#FAF5EB] border border-[#C5A059]/30 flex items-center justify-center text-[#C5A059] mb-1.5 shrink-0">
+                        <Icon className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 stroke-[2]" />
+                      </div>
+                      <h4 className="font-serif text-[10.5px] sm:text-sm font-semibold text-[#1F1917] mb-0.5 sm:mb-1 leading-tight line-clamp-2">
+                        {pillar.title}
+                      </h4>
                     </div>
-                    <h4 className="font-serif text-sm font-semibold text-[#1F1917] mb-1 leading-tight">
-                      {pillar.title}
-                    </h4>
-                    <p className="text-[10.5px] sm:text-[11px] text-[#655E59] leading-snug">
+                    <p className="text-[8px] sm:text-[11px] text-[#655E59] leading-tight line-clamp-3 sm:line-clamp-none">
                       {pillar.desc}
                     </p>
                   </div>
@@ -134,26 +171,14 @@ export default function AboutArtist() {
               })}
             </div>
 
-            {/* Signature & Consultation Action */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-3 border-t border-[#ECE6DE]">
-              {/* Subtle Signature-Style Ayesha Malik */}
-              <div>
-                <span className="text-[10px] text-[#958D86] uppercase tracking-wider block font-sans">
-                  Master Bridal Artist
-                </span>
-                <span className="font-script text-3xl sm:text-4xl text-[#1F1917] leading-tight block -mt-1">
-                  Ayesha Malik
-                </span>
-              </div>
-
-              {/* Consultation CTA */}
-              <button
-                onClick={() => openWhatsApp('Personal Bridal Consultation with Ayesha')}
-                className="btn btn-primary btn-md rounded-full px-6 py-2.5 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-xs cursor-pointer"
-              >
-                <MessageCircle className="w-4 h-4 fill-white" />
-                <span>WhatsApp for Consultation</span>
-              </button>
+            {/* Signature */}
+            <div className="pt-3 border-t border-[#ECE6DE]">
+              <span className="text-[10px] text-[#958D86] uppercase tracking-wider block font-sans">
+                Master Bridal Artist
+              </span>
+              <span className="font-script text-3xl sm:text-4xl text-[#1F1917] leading-tight block -mt-1">
+                Ayesha Malik
+              </span>
             </div>
 
           </motion.div>

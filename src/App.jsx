@@ -4,12 +4,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import MobileBottomBar from './components/MobileBottomBar';
 import ScrollToTop from './components/ScrollToTop';
 
 import HomePage from './pages/HomePage';
 import PortfolioPage from './pages/PortfolioPage';
-import PackagesPage from './pages/PackagesPage';
+import ServicesPage from './pages/ServicesPage';
 import CoursesPage from './pages/CoursesPage';
 
 import { ARTIST_INFO } from './data/bridalData';
@@ -37,7 +36,8 @@ function AnimatedRoutes() {
         <Routes location={location}>
           <Route path="/" element={<HomePage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/packages" element={<PackagesPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/packages" element={<Navigate to="/services" replace />} />
           <Route path="/courses" element={<CoursesPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
@@ -56,7 +56,6 @@ export default function App() {
           <AnimatedRoutes />
         </main>
         <Footer />
-        <MobileBottomBar />
       </div>
     </BrowserRouter>
   );

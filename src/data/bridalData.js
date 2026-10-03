@@ -408,7 +408,11 @@ export const ABOUT_ARTIST = {
   eyebrow: "MEET YOUR MAKEUP ARTIST",
   statement: "Creating Bridal Looks That Feel Like You.",
   description:
-    "With over 5+ years of experience in high-fashion and luxury bridal artistry, my approach blends modern precision techniques with timeless elegance. Every bride possesses a unique aura; my signature style is designed to amplify your authentic beauty so you feel confident, radiant, and completely yourself on your special day.",
+    "With 5+ years of experience in luxury bridal artistry, I blend modern techniques with timeless elegance to create personalized looks that enhance your natural beauty and confidence. Every look is thoughtfully crafted to make you feel radiant, comfortable, and truly yourself on your special day.",
+  points: [
+    "With 5+ years of experience in luxury bridal artistry, I blend modern techniques with timeless elegance to create personalized looks that enhance your natural beauty and confidence.",
+    "Every look is thoughtfully crafted to make you feel radiant, comfortable, and truly yourself on your special day."
+  ],
   portrait:
     "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=85",
   contactEmail: "ayesha@ayeshamalikbridal.com",

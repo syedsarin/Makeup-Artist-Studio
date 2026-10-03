@@ -284,8 +284,8 @@ export default function Portfolio() {
                     setLightboxIndex(null);
                   }}
                   className={`min-h-[34px] sm:min-h-[38px] px-4 sm:px-5 py-1.5 rounded-full text-xs sm:text-[13px] font-medium tracking-wide transition-all duration-200 whitespace-nowrap active:scale-95 cursor-pointer border ${isActive
-                      ? 'bg-[#1F1917] text-white border-[#1F1917] shadow-xs font-semibold'
-                      : 'bg-white text-[#655E59] hover:text-[#1F1917] border-[#ECE6DE] hover:border-[#C5A059]'
+                    ? 'bg-[#A25345] text-white border-[#A25345] shadow-xs font-semibold'
+                    : 'bg-white text-[#655E59] hover:text-[#1F1917] border-[#ECE6DE] hover:border-[#A25345]'
                     }`}
                 >
                   {category}

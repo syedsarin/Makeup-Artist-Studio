@@ -138,101 +138,96 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="md:col-span-3">
-            <h4 className="mb-2 font-serif text-sm font-semibold text-[#7D4F57] sm:text-base">
-              Quick Navigation
-            </h4>
+          {/* Quick Links and Signature Services (In one row on mobile view) */}
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:col-span-7 md:gap-8">
+            {/* Quick Links */}
+            <div>
+              <h4 className="mb-2 font-serif text-sm font-semibold text-[#7D4F57] sm:text-base">
+                Quick Links
+              </h4>
 
-            <ul className="space-y-1 text-[11px] text-[#766B68] sm:text-xs">
+              <ul className="space-y-1 text-[11px] text-[#766B68] sm:text-xs">
+                <li>
+                  <a
+                    href="/"
+                    onClick={(e) => handleNavClick(e, '#hero')}
+                    className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/"
+                    onClick={(e) => handleNavClick(e, '#bridal')}
+                    className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
+                  >
+                    Bridal Makeup
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/"
+                    onClick={(e) => handleNavClick(e, '#bridal')}
+                    className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
+                  >
+                    Occasion Services
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/portfolio"
+                    onClick={(e) => handleNavClick(e, '/portfolio')}
+                    className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
+                  >
+                    Bridal Portfolio
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/packages"
+                    onClick={(e) => handleNavClick(e, '/packages')}
+                    className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
+                  >
+                    Pricing & Packages
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/"
+                    onClick={(e) => handleNavClick(e, '#about')}
+                    className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
+                  >
+                    About The Artist
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/"
+                    onClick={(e) => handleNavClick(e, '#location')}
+                    className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
+                  >
+                    Studio Location
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-              <li>
-                <a
-                  href="/"
-                  onClick={(e) => handleNavClick(e, '#hero')}
-                  className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
-                >
-                  Home
-                </a>
-              </li>
+            {/* Services */}
+            <div>
+              <h4 className="mb-2 font-serif text-sm font-semibold text-[#7D4F57] sm:text-base">
+                Signature Services
+              </h4>
 
-              <li>
-                <a
-                  href="/"
-                  onClick={(e) => handleNavClick(e, '#bridal')}
-                  className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
-                >
-                  Bridal Makeup
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="/"
-                  onClick={(e) => handleNavClick(e, '#bridal')}
-                  className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
-                >
-                  Occasion Services
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="/portfolio"
-                  onClick={(e) => handleNavClick(e, '/portfolio')}
-                  className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
-                >
-                  Bridal Portfolio
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="/packages"
-                  onClick={(e) => handleNavClick(e, '/packages')}
-                  className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
-                >
-                  Pricing & Packages
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="/"
-                  onClick={(e) => handleNavClick(e, '#about')}
-                  className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
-                >
-                  About The Artist
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="/"
-                  onClick={(e) => handleNavClick(e, '#location')}
-                  className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
-                >
-                  Studio Location
-                </a>
-              </li>
-
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div className="md:col-span-4">
-            <h4 className="mb-2 font-serif text-sm font-semibold text-[#7D4F57] sm:text-base">
-              Signature Services
-            </h4>
-
-            <ul className="space-y-1 text-[11px] text-[#766B68] sm:text-xs">
-              <li>• HD & Airbrush Bridal Makeover</li>
-              <li>• Pre-Wedding Mehendi & Sangeet Looks</li>
-              <li>• Soft Glam Engagement & Sagan Styling</li>
-              <li>• Reception & Evening Party Glam</li>
-              <li>• Advanced Dupatta Draping & Hair Extensions</li>
-              <li>• Pre-Bridal Skin Consultation & Facial Prep</li>
-            </ul>
+              <ul className="space-y-1 text-[11px] text-[#766B68] sm:text-xs">
+                <li>• HD & Airbrush Bridal</li>
+                <li>• Pre-Wedding Mehendi & Sangeet</li>
+                <li>• Soft Glam Engagement & Sagan</li>
+                <li>• Reception & Evening Party</li>
+                <li>• Dupatta Draping & Hair</li>
+                <li>• Pre-Bridal Consultation & Prep</li>
+              </ul>
+            </div>
           </div>
 
         </div>

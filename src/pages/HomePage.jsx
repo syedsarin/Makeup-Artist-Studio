@@ -61,25 +61,27 @@ export default function HomePage() {
       {/* 5. PORTFOLIO GALLERY PREVIEW (Home preview with option 'See Full Portfolio') */}
       <section id="portfolio" className="py-12 sm:py-16 bg-white border-b border-[#ECE6DE]">
         <div className="container">
+          {/* Centered Section Badge: PORTFOLIO HIGHLIGHTS */}
+          <div className="flex justify-center mb-3 sm:mb-4">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FAF5EB] border border-[#A25345]/20 text-[#A25345] text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] shadow-2xs">
+              <Sparkles className="w-3 h-3 text-[#A25345]" />
+              <span>PORTFOLIO HIGHLIGHTS</span>
+            </div>
+          </div>
+
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10 text-left">
             <div>
-              <div className="eyebrow mb-1">
-                <span>PORTFOLIO HIGHLIGHTS</span>
-              </div>
               <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-[#1F1917]">
                 Real Brides Gallery
               </h2>
-              <p className="text-xs sm:text-sm text-[#655E59] mt-1">
-                A glimpse of our signature bridal transformations, soft glam engagements, and festive looks.
-              </p>
             </div>
 
             <Link
               to="/portfolio"
-              className="btn btn-secondary btn-sm flex items-center gap-1.5 self-start sm:self-end font-semibold text-xs"
+              className="shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#A25345] hover:bg-[#8D4437] text-white text-[11px] sm:text-xs font-semibold shadow-md shadow-[#A25345]/25 transition-all duration-200 normal-case tracking-normal self-start sm:self-end active:scale-98"
             >
               <span>See Full Portfolio</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3.5 h-3.5 shrink-0" />
             </Link>
           </div>
 
@@ -120,36 +122,46 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Option: See Full Portfolio Button */}
-          <div className="mt-8 sm:mt-10 text-center">
-            <Link
-              to="/portfolio"
-              className="btn btn-primary btn-md inline-flex items-center gap-2 shadow-xs"
-            >
-              <span>See Full Portfolio &amp; Fullscreen Viewer</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* 6. PACKAGES PREVIEW (3 Packages with option 'View All Packages') */}
+      {/* 6. PACKAGES PREVIEW */}
       <section id="packages" className="py-12 sm:py-16 bg-[#FAF8F5] border-b border-[#ECE6DE]">
         <div className="container">
-          <div className="section-header">
-            <div className="eyebrow">
+          {/* Centered Section Badge: PRICING & PACKAGES */}
+          <div className="flex justify-center mb-3 sm:mb-4">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FAF5EB] border border-[#A25345]/20 text-[#A25345] text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] shadow-2xs">
+              <Sparkles className="w-3 h-3 text-[#A25345]" />
               <span>PRICING &amp; PACKAGES</span>
             </div>
-            <h2 className="section-title">
-              Curated Makeup Packages
-            </h2>
-            <p className="section-subtitle">
-              Choose from our most popular bridal, engagement, and wedding packages crafted for every celebration.
-            </p>
           </div>
 
+          {/* Header with top-right button */}
+          <div className="flex items-center justify-between gap-3 mb-6 sm:mb-8">
+            <div className="text-left">
+              <h2 className="font-serif text-xl sm:text-3xl lg:text-4xl font-normal text-[#1F1917]">
+                Curated Makeup Packages
+              </h2>
+              <p className="text-xs sm:text-sm text-[#655E59] mt-1 max-w-xl hidden sm:block">
+                Choose from our most popular bridal, engagement, and wedding packages crafted for every celebration.
+              </p>
+            </div>
+            <Link
+              to="/services"
+              className="shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#A25345] hover:bg-[#8D4437] text-white text-[11px] sm:text-xs font-semibold shadow-md shadow-[#A25345]/25 transition-all duration-200 normal-case tracking-normal active:scale-98"
+            >
+              <span>View All Packages</span>
+              <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+            </Link>
+          </div>
+
+          {/* Mobile subtitle */}
+          <p className="text-xs text-[#655E59] -mt-4 mb-5 sm:hidden">
+            Crafted bridal, engagement &amp; wedding packages for every celebration.
+          </p>
+
           {/* Clean 3-Package Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 items-stretch max-w-5xl mx-auto pt-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 items-start max-w-5xl mx-auto pt-2">
             {homeFeaturedPackages.map((pkg, idx) => (
               <motion.div
                 key={pkg.id}
@@ -157,48 +169,49 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: idx * 0.08 }}
-                className="flex h-full w-full"
+                className="w-full"
               >
                 <PackageCard pkg={pkg} />
               </motion.div>
             ))}
           </div>
-
-          {/* Option: View All Packages Button */}
-          <div className="mt-8 sm:mt-10 text-center flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <Link
-              to="/packages"
-              className="btn btn-primary btn-md inline-flex items-center gap-2 shadow-xs"
-            >
-              <span>View All Packages &amp; Pricing</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-
-            <button
-              onClick={() => openWhatsApp('Package Consultation')}
-              className="btn btn-secondary btn-md inline-flex items-center gap-2"
-            >
-              <MessageCircle className="w-4 h-4 text-[#A25345]" />
-              <span>WhatsApp for Custom Quote</span>
-            </button>
-          </div>
         </div>
       </section>
 
-      {/* 7. COURSES PREVIEW (Courses on Home with option 'View All Courses') */}
+      {/* 7. COURSES PREVIEW */}
       <section id="classes" className="py-12 sm:py-16 bg-white border-b border-[#ECE6DE]">
         <div className="container max-w-5xl">
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <div className="eyebrow justify-center mb-1">
+          {/* Centered Section Badge: ACADEMY & MASTERCLASSES */}
+          <div className="flex justify-center mb-3 sm:mb-4">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FAF5EB] border border-[#A25345]/20 text-[#A25345] text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] shadow-2xs">
+              <Sparkles className="w-3 h-3 text-[#A25345]" />
               <span>ACADEMY &amp; MASTERCLASSES</span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-[#1F1917] mb-2">
-              Professional Makeup Courses
-            </h2>
-            <p className="text-xs sm:text-sm text-[#655E59] leading-relaxed">
-              Learn luxury bridal makeup, product formulation, and business mastery under the personal mentorship of <span className="font-semibold text-[#1F1917]">Ayesha Malik</span>.
-            </p>
           </div>
+
+          {/* Header with top-right button */}
+          <div className="flex items-center justify-between gap-3 mb-6 sm:mb-8">
+            <div className="text-left">
+              <h2 className="font-serif text-xl sm:text-3xl lg:text-4xl font-normal text-[#1F1917]">
+                Professional Makeup Courses
+              </h2>
+              <p className="text-xs sm:text-sm text-[#655E59] mt-1 max-w-xl hidden sm:block">
+                Learn luxury bridal makeup under the personal mentorship of <span className="font-semibold text-[#1F1917]">Ayesha Malik</span>.
+              </p>
+            </div>
+            <Link
+              to="/courses"
+              className="shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#A25345] hover:bg-[#8D4437] text-white text-[11px] sm:text-xs font-semibold shadow-md shadow-[#A25345]/25 transition-all duration-200 normal-case tracking-normal active:scale-98"
+            >
+              <span>View All Courses</span>
+              <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+            </Link>
+          </div>
+
+          {/* Mobile subtitle */}
+          <p className="text-xs text-[#655E59] -mt-4 mb-5 sm:hidden">
+            Mentored by Ayesha Malik — professional certification courses.
+          </p>
 
           {/* Academy Highlights Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-8 max-w-4xl mx-auto">
@@ -206,7 +219,7 @@ export default function HomePage() {
               { label: 'Live Model Practice', icon: Users },
               { label: 'Max 6 Per Batch', icon: GraduationCap },
               { label: 'Accredited Diploma', icon: Sparkles },
-              { label: 'Kit & Product Guide', icon: Check },
+              { label: 'Kit &amp; Product Guide', icon: Check },
             ].map(({ label, icon: Icon }, idx) => (
               <div
                 key={idx}
@@ -221,7 +234,7 @@ export default function HomePage() {
           </div>
 
           {/* Courses Preview Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-stretch max-w-3xl mx-auto">
+          <div className="grid grid-cols-2 gap-2 sm:gap-6 items-start max-w-3xl mx-auto">
             {homeCourses.map((course, idx) => (
               <motion.div
                 key={course.id}
@@ -229,30 +242,10 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: idx * 0.08 }}
-                className="flex h-full w-full"
               >
                 <CourseCard course={course} />
               </motion.div>
             ))}
-          </div>
-
-          {/* Option: View All Courses Button */}
-          <div className="mt-8 sm:mt-10 text-center flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <Link
-              to="/courses"
-              className="btn btn-primary btn-md inline-flex items-center gap-2 shadow-xs"
-            >
-              <span>View All Courses &amp; Full Syllabus</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-
-            <button
-              onClick={() => openWhatsApp('Academy Course Syllabus')}
-              className="btn btn-secondary btn-md inline-flex items-center gap-2"
-            >
-              <MessageCircle className="w-4 h-4 text-[#A25345]" />
-              <span>Enquire for Next Batch</span>
-            </button>
           </div>
         </div>
       </section>

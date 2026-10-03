@@ -35,21 +35,21 @@ export default function FinalCTA() {
             Tell us your wedding date and let's create your perfect bridal look. Message us on WhatsApp for instant availability confirmation.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3.5">
+          <div className="flex flex-row items-center justify-center gap-2 sm:gap-3.5 max-w-md mx-auto w-full">
             <button
               onClick={() => openWhatsApp()}
-              className="btn btn-md w-full sm:w-auto sm:min-w-[200px] justify-center min-h-[40px] text-xs sm:text-sm bg-[#C5A059] hover:bg-[#B08D46] text-[#1F1917] font-bold border border-[#C5A059] shadow-gold hover:shadow-lg transition-all rounded-full"
+              className="btn btn-md flex-1 sm:flex-initial sm:min-w-[200px] justify-center min-h-[40px] text-xs sm:text-sm bg-[#C5A059] hover:bg-[#B08D46] text-[#1F1917] font-bold border border-[#C5A059] shadow-gold hover:shadow-lg transition-all rounded-full px-3 sm:px-6 py-2.5"
             >
-              <MessageCircle className="w-4 h-4 fill-[#1F1917]" />
-              <span>WhatsApp Us Now</span>
+              <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#1F1917] shrink-0" />
+              <span className="whitespace-nowrap">WhatsApp Us Now</span>
             </button>
 
             <button
               onClick={handleCallDirect}
-              className="btn btn-md w-full sm:w-auto sm:min-w-[160px] border border-white/30 text-white bg-white/5 hover:bg-white/15 backdrop-blur-xs justify-center min-h-[40px] text-xs sm:text-sm rounded-full transition-all"
+              className="btn btn-md flex-1 sm:flex-initial sm:min-w-[160px] border border-white/30 text-white bg-white/5 hover:bg-white/15 backdrop-blur-xs justify-center min-h-[40px] text-xs sm:text-sm rounded-full transition-all px-3 sm:px-6 py-2.5"
             >
-              <Phone className="w-4 h-4" />
-              <span>Call Now</span>
+              <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span className="whitespace-nowrap">Call Now</span>
             </button>
           </div>
 

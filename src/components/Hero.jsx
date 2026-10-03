@@ -36,13 +36,13 @@ const BRIDAL_SLIDES = [
 
   {
     id: 5,
-    image: makeupToolkitImg,
+    image: '/B11.png',
     alt: 'Soft Romantic Pastel Engagement Glam',
     title: 'Romantic Pastel Glam',
   },
   {
     id: 6,
-    image: '/B11.png',
+    image: makeupToolkitImg,
     alt: 'Intricate Bridal Hair Styling & Dupatta Draping',
     title: 'Couture Hair & Dupatta Draping',
   },
@@ -160,12 +160,12 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* CTAs */}
+            {/* CTAs (Desktop Only in Left Column) */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="mt-6 flex flex-wrap items-center gap-3.5 sm:mt-8 sm:gap-5"
+              className="mt-6 hidden lg:flex flex-wrap items-center gap-3.5 sm:mt-8 sm:gap-5"
             >
               {/* WhatsApp */}
               <button
@@ -192,12 +192,12 @@ export default function Hero() {
               </button>
             </motion.div>
 
-            {/* Trust Mini Counter */}
+            {/* Trust Mini Counter (Desktop Only in Left Column) */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-8 flex items-center gap-6 border-t border-[#1F1917]/10 pt-5 sm:mt-10 sm:gap-8"
+              className="mt-8 hidden lg:flex items-center gap-6 border-t border-[#1F1917]/10 pt-5 sm:mt-10 sm:gap-8"
             >
               <div>
                 <p className="font-serif text-lg font-bold text-[#1F1917] sm:text-xl">
@@ -223,8 +223,8 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT SIDE: IMAGE SLIDER */}
-          <div className="flex w-full items-center justify-center lg:col-span-7">
+          {/* RIGHT SIDE: IMAGE SLIDER & MOBILE CTAS */}
+          <div className="flex flex-col w-full items-center justify-center lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -319,6 +319,44 @@ export default function Hero() {
               </motion.div>
 
             </motion.div>
+
+            {/* MOBILE ONLY: Book Appointment & View Portfolio badges at the bottom side of the hero image */}
+            <div className="mt-5 w-full flex flex-col items-center lg:hidden">
+              <div className="flex flex-wrap items-center justify-center gap-3 w-full">
+                {/* Book Appointment Badge */}
+                <button
+                  onClick={() => openWhatsApp('Hero WhatsApp Enquiry')}
+                  className="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-[#A25345] px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-[#A25345]/30 transition-all hover:bg-[#8D4437] active:scale-[0.98]"
+                >
+                  <span>Book Appointment</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+
+                {/* View Portfolio Badge */}
+                <button
+                  onClick={handlePortfolioClick}
+                  className="group flex cursor-pointer items-center justify-center gap-2.5 rounded-full border border-[#E8DCD1] bg-white/95 px-4 py-2 text-xs font-semibold text-[#1F1917] shadow-xs backdrop-blur-sm transition-all hover:text-[#A25345] hover:border-[#A25345]/40"
+                >
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-[#E8DCD1] bg-white shadow-2xs transition-transform group-hover:scale-105">
+                    <Play className="ml-0.5 h-3 w-3 fill-[#1F1917]" />
+                  </div>
+                  <span>View Portfolio</span>
+                </button>
+              </div>
+
+              {/* Mobile Trust Mini Counter */}
+              <div className="mt-4 flex items-center justify-center gap-6 border-t border-[#1F1917]/10 pt-3.5 w-full max-w-xs">
+                <div className="text-center">
+                  <p className="font-serif text-base font-bold text-[#1F1917]">800+</p>
+                  <p className="text-[9.5px] uppercase tracking-wider text-[#786E66]">Royal Brides</p>
+                </div>
+                <div className="h-5 w-px bg-[#1F1917]/10" />
+                <div className="text-center">
+                  <p className="font-serif text-base font-bold text-[#1F1917]">HD &amp; Airbrush</p>
+                  <p className="text-[9.5px] uppercase tracking-wider text-[#786E66]">Specialist</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

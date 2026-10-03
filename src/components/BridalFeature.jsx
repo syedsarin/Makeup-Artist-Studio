@@ -1,7 +1,6 @@
 import React from 'react';
-import { Sparkles, Crown, Heart, Camera, Check, MessageCircle, Gem, Palette } from 'lucide-react';
-import { BRIDAL_FEATURE } from '../data/bridalData';
-import { openWhatsApp } from '../App';
+import { Link } from 'react-router-dom';
+import { Sparkles, Crown, Heart, Camera, Check, Gem, Palette, ArrowRight } from 'lucide-react';
 
 const CATEGORY_STATS = [
   {
@@ -53,110 +52,117 @@ const INCLUDES = [
 ];
 
 export default function BridalFeature() {
-  const image =
-    BRIDAL_FEATURE?.image ||
-    'https://images.unsplash.com/photo-1595959183082-7b570b7e08e2?auto=format&fit=crop&w=800&q=80';
-  const price = BRIDAL_FEATURE?.startingPrice || '₹15,000';
-
-  const sendWhatsApp = () => {
-    const msg = 'Hi, I want to check bridal makeup availability and packages.';
-    typeof openWhatsApp === 'function'
-      ? openWhatsApp(msg)
-      : window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
-  };
-
   return (
     <section id="bridal" className="bg-[#FAF8F5] py-10 sm:py-12 border-b border-[#ECE6DE]">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
 
-        {/* 0. CATEGORY STATS CARDS WITH IMAGES (Top, non-clickable) */}
-        <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {/* Centered Section Badge: WHAT WE OFFER */}
+        <div className="flex justify-center mb-3 sm:mb-4">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FAF5EB] border border-[#A25345]/20 text-[#A25345] text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] shadow-2xs">
+            <Sparkles className="w-3 h-3 text-[#A25345]" />
+            <span>WHAT WE OFFER</span>
+          </div>
+        </div>
+
+        {/* Section Header: Left Content & Right Button */}
+        <div className="mb-4 sm:mb-8 flex items-center justify-between gap-3">
+          <div className="text-left">
+            <h2 className="font-serif text-xl sm:text-3xl lg:text-4xl font-normal text-[#1F1917]">
+              Our Signature Services
+            </h2>
+            <p className="text-xs sm:text-sm text-[#655E59] mt-1 max-w-xl hidden sm:block">
+              Luxury bridal, engagement, and occasion artistry tailored to your style.
+            </p>
+          </div>
+
+          <Link
+            to="/services"
+            className="shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#A25345] hover:bg-[#8D4437] text-white text-[11px] sm:text-xs font-semibold shadow-md shadow-[#A25345]/25 transition-all duration-200 normal-case tracking-normal active:scale-98"
+          >
+            <span>View All Services</span>
+            <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+          </Link>
+        </div>
+
+        {/* Mobile Subtitle */}
+        <p className="text-xs text-[#655E59] -mt-2 mb-5 sm:hidden text-left">
+          Luxury bridal, engagement, and occasion artistry tailored to your style.
+        </p>
+
+        {/* 0. CATEGORY STATS CARDS WITH IMAGES (2-Column Grid on Mobile, 4-Column on Desktop) */}
+        <div className="mb-8 grid grid-cols-2 gap-2.5 sm:gap-4 sm:grid-cols-4">
           {CATEGORY_STATS.map(({ label, count, desc, icon: Icon, image }) => (
             <div
               key={label}
-              className="relative h-44 sm:h-48 overflow-hidden rounded-2xl border border-[#ECE6DE] bg-neutral-900 text-left shadow-xs flex flex-col justify-between p-3.5 sm:p-4"
+              className="group relative h-44 sm:h-52 overflow-hidden rounded-2xl border border-[#ECE6DE] bg-[#FAF8F5] text-left shadow-xs flex flex-col justify-between p-3 sm:p-4 hover:shadow-md transition-all duration-300"
             >
-              {/* Background Image & Gradient */}
+              {/* Crisp, Vibrant Bridal Photo */}
               <img
                 src={image}
                 alt={label}
-                className="absolute inset-0 h-full w-full object-cover object-center"
+                className="absolute inset-0 h-full w-full object-cover object-top filter brightness-105 contrast-[1.03] group-hover:scale-105 transition-transform duration-500 ease-out"
+                loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/25" />
 
-              {/* Top Row: Label & Icon */}
-              <div className="relative z-10 flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#FFD6E7]">
+              {/* Soft Bottom-Only Gradient Scrim (Leaves face & makeup bright, protects text readability) */}
+              <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-black/80 via-black/35 to-transparent pointer-events-none" />
+
+              {/* Top Row: Floating Frosted Badge & Mini Icon */}
+              <div className="relative z-10 flex items-center justify-between gap-1">
+                <span className="px-2 py-0.5 rounded-md bg-black/45 backdrop-blur-md border border-white/20 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white shadow-xs">
                   {label}
                 </span>
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20 backdrop-blur-xs text-white">
-                  <Icon className="h-3.5 w-3.5" />
+                <div className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[#E5D5BC] shrink-0 shadow-xs">
+                  <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                 </div>
               </div>
 
-              {/* Bottom: Count & Description */}
+              {/* Bottom: Count & Description with Drop Shadow for 100% Crisp Legibility */}
               <div className="relative z-10">
-                <p className="font-serif text-2xl font-bold text-white leading-tight">
+                <p className="font-serif text-xl sm:text-2xl font-bold text-white leading-tight drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
                   {count}
                 </p>
-                <p className="text-[11px] text-white/80">{desc}</p>
+                <p className="text-[10px] sm:text-[11px] text-white/95 font-medium leading-tight line-clamp-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] mt-0.5">
+                  {desc}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* 1. PHOTO & PRICING CARD */}
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="h-64 sm:h-72 overflow-hidden rounded-2xl border border-[#ECE6DE] bg-white">
-            <img src={image} alt="Bridal Makeup" className="h-full w-full object-cover" />
-          </div>
-
-          <div className="flex flex-col justify-between rounded-2xl border border-[#ECE6DE] bg-white p-5 text-left">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#9B4B5A]">Bridal Package</span>
-              <p className="mt-1 font-serif text-3xl font-bold text-[#1F1917]">{price}</p>
-              <p className="mt-1 text-xs text-[#655E59]">Complete bridal makeover for your wedding ceremony.</p>
-            </div>
-
-            <button
-              onClick={sendWhatsApp}
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#A25345] py-3 text-xs font-semibold text-white transition hover:bg-[#8D4437]"
-            >
-              <MessageCircle className="h-4 w-4 fill-white" />
-              Check Availability
-            </button>
-          </div>
-        </div>
-
-        {/* 2. SERVICES CARDS */}
+        {/* 2. SERVICES CARDS (One line in mobile view) */}
         <div className="mt-8">
-          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <div className="grid grid-cols-4 gap-1.5 sm:gap-3">
             {SERVICES.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-xl border border-[#ECE6DE] bg-white p-3.5 text-left">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FAF5EB] text-[#C5A059]">
-                  <Icon className="h-4 w-4" />
+              <div key={title} className="rounded-xl border border-[#ECE6DE] bg-white p-2 sm:p-3.5 text-left flex flex-col justify-between">
+                <div>
+                  <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#FAF5EB] text-[#C5A059] mb-1.5">
+                    <Icon className="h-3 w-3 sm:h-4 sm:w-4" />
+                  </div>
+                  <h4 className="text-[10px] sm:text-xs font-semibold text-[#1F1917] leading-tight line-clamp-1">{title}</h4>
                 </div>
-                <h4 className="mt-2 text-xs font-semibold text-[#1F1917]">{title}</h4>
-                <p className="mt-1 text-[11px] text-[#655E59]">{desc}</p>
+                <p className="mt-1 text-[8px] sm:text-[11px] text-[#655E59] leading-tight line-clamp-3 sm:line-clamp-none">{desc}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* 3. WHAT'S INCLUDED CARDS */}
+        {/* 3. WHAT'S INCLUDED CARDS (Two lines in mobile view: 1st row 4, 2nd row 4) */}
         <div className="mt-8">
           <h3 className="mb-3 text-left font-serif text-lg font-semibold text-[#1F1917]">
             What's Included
           </h3>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="grid grid-cols-4 gap-1 sm:gap-2">
             {INCLUDES.map((item) => (
-              <div key={item} className="flex items-center gap-2 rounded-xl border border-[#ECE6DE] bg-white p-2.5 text-left">
-                <Check className="h-3.5 w-3.5 shrink-0 text-[#C5A059]" />
-                <span className="text-xs font-medium text-[#1F1917]">{item}</span>
+              <div key={item} className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-1 sm:gap-2 rounded-lg sm:rounded-xl border border-[#ECE6DE] bg-white p-1.5 sm:p-2.5">
+                <Check className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0 text-[#C5A059]" />
+                <span className="text-[8px] sm:text-xs font-medium text-[#1F1917] leading-tight line-clamp-2">{item}</span>
               </div>
             ))}
           </div>
         </div>
+
+
 
       </div>
     </section>
