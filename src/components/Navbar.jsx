@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, MessageCircle, Phone } from 'lucide-react';
+import { Menu, X, MessageCircle, Phone, ChevronRight } from 'lucide-react';
 import { ARTIST_INFO } from '../data/bridalData';
 import { openWhatsApp } from '../App';
 
@@ -25,9 +25,9 @@ export default function Navbar() {
         'hero',
         'about',
         'bridal',
-        'home-portfolio',
-        'home-packages',
-        'home-courses',
+        'packages',
+        'classes',
+        'portfolio',
         'location',
       ];
 
@@ -404,7 +404,7 @@ export default function Navbar() {
               onClick={() =>
                 openWhatsApp('Mobile Navbar Booking')
               }
-              className="inline-flex cursor-pointer items-center gap-1 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white px-2 py-1 text-[10.5px] font-semibold shadow-2xs shadow-[#25D366]/20 whitespace-nowrap leading-none transition-all active:scale-95"
+              className="inline-flex cursor-pointer items-center gap-1 rounded-full bg-gradient-to-b from-[#2CDD6F] to-[#1EBD58] border border-[#1BA84E] text-white px-2.5 py-1 text-[10.5px] font-semibold shadow-[0_2px_6px_rgba(37,211,102,0.3),inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(0,0,0,0.12)] whitespace-nowrap leading-none transition-all active:scale-95"
             >
               <MessageCircle className="h-2.5 w-2.5 fill-white shrink-0" />
               <span>WhatsApp</span>
@@ -415,13 +415,13 @@ export default function Navbar() {
               onClick={() =>
                 setMobileMenuOpen(!mobileMenuOpen)
               }
-              className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-[#1F1917] transition-colors hover:bg-[#FAF8F5] hover:text-[#A25345]"
+              className="flex h-8.5 w-8.5 cursor-pointer items-center justify-center text-[#1F1917] hover:text-[#A25345] transition-colors active:scale-95"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? (
-                <X className="h-4.5 w-4.5" />
+                <X className="h-5 w-5" />
               ) : (
-                <Menu className="h-4.5 w-4.5" />
+                <Menu className="h-5 w-5" />
               )}
             </button>
 
@@ -429,20 +429,20 @@ export default function Navbar() {
         </div>
 
         {/* =========================================
-            MOBILE MENU
+            MOBILE MENU (3D Floating Card)
         ========================================= */}
         {mobileMenuOpen && (
           <>
             <div
-              className="fixed inset-0 top-[58px] z-40 bg-black/40 backdrop-blur-xs md:hidden"
+              className="fixed inset-0 top-[58px] z-40 bg-black/35 backdrop-blur-xs md:hidden"
               onClick={() =>
                 setMobileMenuOpen(false)
               }
             />
 
-            <div className="relative z-50 max-h-[calc(100vh-58px)] overflow-y-auto border-b border-[#ECE6DE] bg-white/98 px-5 py-5 shadow-xl backdrop-blur-xl md:hidden">
+            <div className="relative z-50 mx-3 mt-2 max-h-[calc(100vh-80px)] overflow-y-auto rounded-2xl border border-[#E8DFD8] bg-gradient-to-b from-[#FFF9F6] via-[#FAF5F0] to-[#F5EDE6] p-4 shadow-[0_20px_45px_-12px_rgba(162,83,69,0.18),0_8px_18px_-4px_rgba(0,0,0,0.07),inset_0_1px_1px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.02)] backdrop-blur-xl md:hidden">
 
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
 
                 {navLinks.map((link) => {
                   const active = isLinkActive(link);
@@ -454,35 +454,43 @@ export default function Navbar() {
                       onClick={(e) =>
                         handleNavAction(e, link)
                       }
-                      className={`flex min-h-[44px] cursor-pointer items-center rounded-xl px-3 py-3 text-sm font-medium transition-colors ${active
-                        ? 'border-l-3 border-[#A25345] bg-[#FAF5EB] font-semibold text-[#1F1917]'
-                        : 'text-[#1F1917] hover:bg-[#FAF8F5]'
+                      className={`group flex min-h-[46px] cursor-pointer items-center justify-between rounded-xl px-4 py-2.5 text-sm transition-all duration-200 ${active
+                        ? 'bg-gradient-to-r from-[#A25345] to-[#8E4437] font-semibold text-white shadow-[0_4px_12px_rgba(162,83,69,0.32),inset_0_1px_0_rgba(255,255,255,0.35),inset_0_-2px_0_rgba(0,0,0,0.15)]'
+                        : 'border border-[#ECE4DC]/80 bg-white/75 font-medium text-[#1F1917] shadow-[0_2px_4px_rgba(0,0,0,0.02),inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-1px_0_rgba(0,0,0,0.03)] hover:border-[#D9CBC0] hover:bg-white active:translate-y-[1px] active:shadow-xs'
                         }`}
                     >
-                      {link.name}
+                      <span className="tracking-wide">{link.name}</span>
+
+                      <ChevronRight
+                        className={`h-4 w-4 transition-transform duration-200 ${active
+                          ? 'text-white'
+                          : 'text-[#A25345]/50 group-hover:translate-x-0.5 group-hover:text-[#A25345]'
+                          }`}
+                      />
                     </a>
                   );
                 })}
 
-                <div className="mt-2 flex flex-col gap-2.5 border-t border-[#ECE6DE] pt-3">
+                <div className="mt-2.5 flex flex-col gap-2.5 border-t border-[#E8DDD4] pt-3.5">
 
-                  {/* Call & WhatsApp Row: Call first then WhatsApp */}
-                  <div className="grid grid-cols-2 gap-2">
-                    {/* Liquid Glass Call Now Button */}
+                  {/* Call & WhatsApp Row: 3D Buttons */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* 3D Pearl Call Button */}
                     <a
                       href={`tel:${ARTIST_INFO.phone.replace(/\s+/g, '')}`}
-                      className="inline-flex items-center justify-center gap-1.5 rounded-full bg-white/50 hover:bg-white/80 backdrop-blur-md border border-[#1F1917]/15 hover:border-[#A25345]/50 text-[#1F1917] hover:text-[#A25345] min-h-[42px] w-full text-xs font-semibold shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_6px_rgba(0,0,0,0.04)] transition-all active:scale-95"
+                      className="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-[#E2D4C8] bg-gradient-to-b from-white via-[#FCFAF8] to-[#F3EBE4] text-xs font-semibold text-[#1F1917] shadow-[0_3px_8px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1),inset_0_-2px_0_rgba(0,0,0,0.05)] transition-all hover:text-[#A25345] active:translate-y-[1px] active:shadow-xs"
                     >
                       <Phone className="h-4 w-4 text-[#A25345]" />
                       <span>Call Now</span>
                     </a>
 
+                    {/* 3D Emerald WhatsApp Button */}
                     <button
                       onClick={() => {
                         setMobileMenuOpen(false);
                         openWhatsApp('Mobile Menu Booking');
                       }}
-                      className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white min-h-[42px] w-full text-xs font-semibold shadow-xs shadow-[#25D366]/25 transition-all active:scale-95"
+                      className="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-[#1BA84E] bg-gradient-to-b from-[#2CDD6F] to-[#1EBD58] text-xs font-semibold text-white shadow-[0_4px_12px_rgba(37,211,102,0.35),inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-2px_0_rgba(0,0,0,0.15)] transition-all active:translate-y-[1px] active:shadow-xs"
                     >
                       <MessageCircle className="h-4 w-4 fill-white" />
                       <span>WhatsApp Us</span>

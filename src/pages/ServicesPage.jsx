@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { MessageCircle, Sparkles, ChevronLeft, ChevronRight, Crown, Heart, Camera } from 'lucide-react';
 import Packages from '../components/Packages';
 import { openWhatsApp } from '../App';
 
@@ -19,8 +20,33 @@ const SERVICES_HERO_IMAGES = [
   },
 ];
 
+const SERVICE_BADGES = [
+  {
+    icon: Sparkles,
+    title: 'HD & Airbrush',
+    desc: 'Flawless, featherlight 4K camera finish.',
+  },
+  {
+    icon: Crown,
+    title: 'Hair Styling',
+    desc: 'Custom bridal hairdos & dupatta setting.',
+  },
+  {
+    icon: Heart,
+    title: 'Draping',
+    desc: 'Saree & lehenga pleating with secure pinning.',
+  },
+  {
+    icon: Camera,
+    title: 'Photo-Ready',
+    desc: 'Flash-safe glam built to last 16+ hours.',
+  },
+];
+
 export default function ServicesPage() {
   const [slideIndex, setSlideIndex] = useState(0);
+  const location = useLocation();
+  const lastScrolledKeyRef = useRef(null);
 
   const nextSlide = useCallback(() => {
     setSlideIndex((prev) => (prev + 1) % SERVICES_HERO_IMAGES.length);
@@ -34,6 +60,105 @@ export default function ServicesPage() {
     const timer = setInterval(nextSlide, 3500);
     return () => clearInterval(timer);
   }, [nextSlide]);
+
+  // Handle direct scroll to Packages section when navigated from Home "View All Packages"
+  useEffect(() => {
+    const targetId =
+      location.state?.scrollTo ||
+      (location.hash ? location.hash.replace('#', '') : null);
+
+    if (!targetId) return;
+
+    if (
+      targetId !== 'service-packages' &&
+      targetId !== 'services' &&
+      targetId !== 'packages'
+    ) {
+      return;
+    }
+
+    const scrollKey = `${location.key || 'init'}_${targetId}`;
+    if (lastScrolledKeyRef.current === scrollKey) return;
+    lastScrolledKeyRef.current = scrollKey;
+
+    let cancelled = false;
+    let attempts = 0;
+
+    const performScroll = (behavior = 'instant') => {
+      if (cancelled) return false;
+
+      const target =
+        document.getElementById('service-packages') ||
+        document.getElementById('services') ||
+        document.getElementById('packages');
+
+      if (target) {
+        const navOffset = 70;
+        const targetTop = Math.max(
+          0,
+          target.getBoundingClientRect().top + window.pageYOffset - navOffset
+        );
+
+        window.scrollTo({
+          top: targetTop,
+          behavior,
+        });
+
+        // Clean up navigation state completely WITHOUT setting hash in URL
+        try {
+          window.history.replaceState(null, '', location.pathname);
+        } catch {
+          // ignore
+        }
+
+        return true;
+      }
+      return false;
+    };
+
+    // 1. Immediately position to show directly from packages section
+    performScroll('instant');
+
+    // 2. Poll briefly via requestAnimationFrame until target is rendered
+    const intervalFrame = () => {
+      if (cancelled) return;
+      if (!performScroll('instant') && attempts < 40) {
+        attempts++;
+        requestAnimationFrame(intervalFrame);
+      }
+    };
+    requestAnimationFrame(intervalFrame);
+
+    // 3. Post-transition checks after Framer Motion page entrance settles
+    const t1 = setTimeout(() => performScroll('instant'), 80);
+    const t2 = setTimeout(() => performScroll('instant'), 220);
+    const t3 = setTimeout(() => performScroll('instant'), 360);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [location.pathname, location.key, location.state, location.hash]);
+
+  const handleScrollToPackages = (e) => {
+    if (e) e.preventDefault();
+    const target =
+      document.getElementById('service-packages') ||
+      document.getElementById('services');
+    if (target) {
+      const navOffset = 70;
+      const targetTop = Math.max(
+        0,
+        target.getBoundingClientRect().top + window.pageYOffset - navOffset
+      );
+      window.scrollTo({
+        top: targetTop,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
     <div className="bg-[#FAF8F5]">
@@ -149,11 +274,36 @@ export default function ServicesPage() {
 
                 <a
                   href="#service-packages"
+                  onClick={handleScrollToPackages}
                   className="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-full bg-white hover:bg-[#FAF8F5] text-[#1F1917] hover:text-[#A25345] px-4 sm:px-6 py-2.5 sm:py-3 text-[11px] sm:text-[13px] font-semibold border border-[#ECE6DE] hover:border-[#A25345]/40 shadow-xs active:scale-98 transition-all cursor-pointer whitespace-nowrap"
                 >
                   <span className="hidden min-[380px]:inline">Explore Packages</span>
                   <span className="min-[380px]:hidden">Packages</span>
                 </a>
+              </div>
+
+              {/* 4 Service Feature Badges at Bottom of Service Hero (One Line) */}
+              <div className="mt-5 sm:mt-8 pt-4 sm:pt-6 border-t border-[#ECE6DE]/80">
+                <div className="grid grid-cols-4 gap-1.5 sm:gap-3 text-left">
+                  {SERVICE_BADGES.map(({ icon: Icon, title, desc }) => (
+                    <div
+                      key={title}
+                      className="rounded-xl border border-[#ECE6DE] bg-[#FAF8F5] p-2 sm:p-3 flex flex-col justify-between shadow-2xs hover:border-[#C5A059]/40 hover:shadow-xs transition-all duration-200"
+                    >
+                      <div>
+                        <div className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-lg bg-[#FAF5EB] text-[#C5A059] border border-[#C5A059]/30 mb-1 sm:mb-1.5 shrink-0">
+                          <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                        </div>
+                        <h4 className="text-[10px] sm:text-xs font-semibold text-[#1F1917] leading-tight line-clamp-1">
+                          {title}
+                        </h4>
+                      </div>
+                      <p className="mt-0.5 sm:mt-1 text-[8px] sm:text-[10.5px] text-[#655E59] leading-tight line-clamp-3 sm:line-clamp-none">
+                        {desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 

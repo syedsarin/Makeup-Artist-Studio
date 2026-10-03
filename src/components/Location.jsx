@@ -83,7 +83,7 @@ export default function Location() {
   };
 
   return (
-    <section id="location" className="section bg-[#FAF8F5] border-b border-[#ECE6DE]">
+    <section id="location" className="section bg-white border-b border-[#ECE6DE]">
       <div id="contact" className="sr-only" aria-hidden="true" />
       <div className="container">
 

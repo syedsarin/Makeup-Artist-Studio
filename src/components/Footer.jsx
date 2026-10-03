@@ -18,9 +18,14 @@ export default function Footer() {
       return;
     }
 
-    if (href === '/packages') {
-      navigate('/packages');
+    if (href === '/services') {
+      navigate('/services');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (href === '/packages') {
+      navigate('/services', { state: { scrollTo: 'service-packages' } });
       return;
     }
 
@@ -139,14 +144,14 @@ export default function Footer() {
           </div>
 
           {/* Quick Links and Signature Services (In one row on mobile view) */}
-          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:col-span-7 md:gap-8">
+          <div className="grid grid-cols-12 gap-3 sm:gap-6 md:col-span-7 md:gap-8">
             {/* Quick Links */}
-            <div>
-              <h4 className="mb-2 font-serif text-sm font-semibold text-[#7D4F57] sm:text-base">
+            <div className="col-span-5 sm:col-span-6">
+              <h4 className="mb-2.5 font-serif text-sm font-semibold text-[#7D4F57] sm:text-base">
                 Quick Links
               </h4>
 
-              <ul className="space-y-1 text-[11px] text-[#766B68] sm:text-xs">
+              <ul className="space-y-1.5 text-[11px] text-[#766B68] sm:text-xs">
                 <li>
                   <a
                     href="/"
@@ -185,11 +190,11 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/packages"
+                    href="/services"
                     onClick={(e) => handleNavClick(e, '/packages')}
                     className="inline-block py-0.5 transition-colors hover:text-[#A25345]"
                   >
-                    Pricing & Packages
+                    Pricing &amp; Packages
                   </a>
                 </li>
                 <li>
@@ -213,19 +218,32 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Services */}
-            <div>
-              <h4 className="mb-2 font-serif text-sm font-semibold text-[#7D4F57] sm:text-base">
+            {/* Signature Services */}
+            <div className="col-span-7 sm:col-span-6">
+              <h4 className="mb-2.5 font-serif text-sm font-semibold text-[#7D4F57] sm:text-base">
                 Signature Services
               </h4>
 
-              <ul className="space-y-1 text-[11px] text-[#766B68] sm:text-xs">
-                <li>• HD & Airbrush Bridal</li>
-                <li>• Pre-Wedding Mehendi & Sangeet</li>
-                <li>• Soft Glam Engagement & Sagan</li>
-                <li>• Reception & Evening Party</li>
-                <li>• Dupatta Draping & Hair</li>
-                <li>• Pre-Bridal Consultation & Prep</li>
+              <ul className="space-y-1.5 text-[11px] text-[#766B68] sm:text-xs">
+                {[
+                  'HD & Airbrush Bridal',
+                  'Pre-Wedding Mehendi & Sangeet',
+                  'Soft Glam Engagement & Sagan',
+                  'Reception & Evening Party',
+                  'Dupatta Draping & Hair',
+                  'Pre-Bridal Consultation & Prep',
+                ].map((service, idx) => (
+                  <li key={idx}>
+                    <a
+                      href="/services"
+                      onClick={(e) => handleNavClick(e, '/services')}
+                      className="group flex items-start gap-1.5 py-0.5 transition-colors hover:text-[#A25345]"
+                    >
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#A25345]/50 transition-colors group-hover:bg-[#A25345]" />
+                      <span className="leading-snug">{service}</span>
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

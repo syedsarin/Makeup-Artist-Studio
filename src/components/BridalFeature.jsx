@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Crown, Heart, Camera, Check, Gem, Palette, ArrowRight } from 'lucide-react';
+import { Sparkles, Crown, Heart, Check, Gem, Palette, ArrowRight } from 'lucide-react';
 
 const CATEGORY_STATS = [
   {
@@ -33,12 +33,6 @@ const CATEGORY_STATS = [
   },
 ];
 
-const SERVICES = [
-  { icon: Sparkles, title: 'HD & Airbrush', desc: 'Flawless, featherlight 4K camera finish.' },
-  { icon: Crown, title: 'Hair Styling', desc: 'Custom bridal hairdos & dupatta setting.' },
-  { icon: Heart, title: 'Draping', desc: 'Saree & lehenga pleating with secure pinning.' },
-  { icon: Camera, title: 'Photo-Ready', desc: 'Flash-safe glam built to last 16+ hours.' },
-];
 
 const INCLUDES = [
   'Skin prep & hydration',
@@ -53,7 +47,7 @@ const INCLUDES = [
 
 export default function BridalFeature() {
   return (
-    <section id="bridal" className="bg-[#FAF8F5] py-10 sm:py-12 border-b border-[#ECE6DE]">
+    <section id="bridal" className="bg-white py-10 sm:py-12 border-b border-[#ECE6DE]">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
 
         {/* Centered Section Badge: WHAT WE OFFER */}
@@ -130,22 +124,6 @@ export default function BridalFeature() {
           ))}
         </div>
 
-        {/* 2. SERVICES CARDS (One line in mobile view) */}
-        <div className="mt-8">
-          <div className="grid grid-cols-4 gap-1.5 sm:gap-3">
-            {SERVICES.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-xl border border-[#ECE6DE] bg-white p-2 sm:p-3.5 text-left flex flex-col justify-between">
-                <div>
-                  <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-[#FAF5EB] text-[#C5A059] mb-1.5">
-                    <Icon className="h-3 w-3 sm:h-4 sm:w-4" />
-                  </div>
-                  <h4 className="text-[10px] sm:text-xs font-semibold text-[#1F1917] leading-tight line-clamp-1">{title}</h4>
-                </div>
-                <p className="mt-1 text-[8px] sm:text-[11px] text-[#655E59] leading-tight line-clamp-3 sm:line-clamp-none">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* 3. WHAT'S INCLUDED CARDS (Two lines in mobile view: 1st row 4, 2nd row 4) */}
         <div className="mt-8">
