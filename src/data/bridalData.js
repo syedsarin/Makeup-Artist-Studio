@@ -33,9 +33,9 @@ export const ARTIST_INFO = {
   happyBrides: "500+",
   rating: "4.9",
   reviewsCount: "280+",
-  phone: "+91 98765 43210",
-  whatsappNumber: "919876543210",
-  email: "ayeshamalik1@gmail.com",
+  phone: "0000****",
+  whatsappNumber: "*****12345",
+  email: "*****@gamil.com",
   studioName: "Ayesha Malik Bridal Studio",
   address:
     "Suite 402, Luxury Promenade, Bandra West, Mumbai, Maharashtra 400050",
@@ -415,7 +415,7 @@ export const ABOUT_ARTIST = {
   ],
   portrait:
     "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=85",
-  contactEmail: "ayesha@ayeshamalikbridal.com",
+  contactEmail: "*****@gamil.com",
   stats: [
     { value: "5+", label: "Years Experience" },
     { value: "500+", label: "Happy Brides" },
@@ -508,7 +508,7 @@ export const MAKEUP_CLASSES = [
 // ─── WHATSAPP ────────────────────────────────────────────────────────────────
 
 export function openWhatsApp(context = '') {
-  const phone = ARTIST_INFO.phone.replace(/[^0-9]/g, '');
+  const phone = (ARTIST_INFO.whatsappNumber || ARTIST_INFO.phone || '').replace(/[^0-9*]/g, '');
 
   const message = context
     ? `Hi Ayesha, I would like to inquire about ${context}. Could you please share availability and details?`

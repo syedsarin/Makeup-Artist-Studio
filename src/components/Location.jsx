@@ -120,7 +120,7 @@ export default function Location() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: idx * 0.04 }}
                     className={`group flex flex-col justify-between gap-1.5 p-2 sm:p-3 lg:p-3.5 rounded-xl sm:rounded-2xl border ${border} ${color} hover:shadow-md transition-all duration-200 cursor-pointer active:scale-[0.98] ${isAction ? 'hover:brightness-95' : ''}`}
-                    onClick={isAction ? () => openWhatsApp('Studio Contact') : href ? () => window.open(href, '_blank') : undefined}
+                    onClick={isAction ? () => openWhatsApp('Studio Contact') : href ? () => { window.location.href = href; } : undefined}
                   >
                     {/* Icon */}
                     <div className={`w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 rounded-lg sm:rounded-xl ${iconBg} ${iconColor} flex items-center justify-center shadow-xs shrink-0`}>
